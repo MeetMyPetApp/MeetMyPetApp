@@ -1,0 +1,22 @@
+<nav>
+    <ul>
+        <li><a href="/about">Springfield University</a></li>
+        {{#if currentUser}}
+            <li><a href="/projects">Home</a></li>
+        {{else}}
+            <li><a href="/">Home</a></li>
+        {{/if}}
+        <li><a href="/newproject">Submit your project</a></li>
+    </ul>
+    {{#if currentUser}}
+        <ul>
+            <li>Hola, {{currentUser.name}}</li>
+            <li><a href="/user/{{currentUser._id}}">Profile</a></li>
+            <li><a href="/logout">Logout</a></li>
+        </ul>
+    {{else}}
+        <ul>
+            <li><a href="/login">Login</a></li>
+        </ul>
+    {{/if}}
+</nav>

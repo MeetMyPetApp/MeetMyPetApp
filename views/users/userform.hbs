@@ -1,0 +1,91 @@
+<div id="signup-page-container">
+    <h2>Sign up</h2>
+    <p>Create your account, so that you can submit your own project or vote for others.</p>
+
+    {{#if user }}
+    <form action="/user/{{user._id}}/edit" method="POST" enctype="multipart/form-data">
+    {{else}}
+    <form action="/signup" method="POST" enctype="multipart/form-data">
+    {{/if}}
+        <div class="form-group">
+            <label for="name">Name:</label>
+            <input name="name" type="text" class="form-control {{#if error.name }}is-invalid{{/if}}" id="name"
+            placeholder="Enter name" value="{{ user.name }}">
+
+            {{#if error.name}}
+                <div class="invalid-feedback">
+                    {{error.name.message}}
+                </div>
+            {{/if}}
+        </div>
+
+        <div class="form-group">
+            <label for="username">Username:</label>
+            <input name="username" type="text" class="form-control {{#if error.username }}is-invalid{{/if}}" id="username"
+            placeholder="Enter username" value="{{ user.username }}">
+
+            {{#if error.username}}
+                <div class="invalid-feedback">
+                    {{error.username.message}}
+                </div>
+            {{/if}}
+        </div>
+
+        <div class="form-group">
+            <label for="email">E-mail:</label>
+            <input name="email" type="email" class="form-control {{#if error.email }}is-invalid{{/if}}" id="email"
+            placeholder="Enter email" value="{{ user.email }}">
+
+            {{#if error.email}}
+                <div class="invalid-feedback">
+                    {{error.email.message}}
+                </div>
+            {{/if}}
+        </div>
+
+        <div class="form-group">
+            <label for="avatar">Profile image:</label>
+            <input name="avatar" type="file" class="form-control {{#if error.avatar }}is-invalid{{/if}}" id="avatar"
+            placeholder="Enter profile foto" value="{{ user.avatar }}">
+        
+            {{#if error.avatar}}
+                <div class="invalid-feedback">
+                    {{error.avatar.message}}
+                </div>
+            {{/if}}
+        </div>
+
+        <div class="form-group">
+            <label for="password">Password:</label>
+            <input name="password" type="password" class="form-control {{#if error.password }}is-invalid{{/if}}" id="password"
+            placeholder="Create your password" value="{{ user.password }}">
+
+            {{#if error.password}}
+                <div class="invalid-feedback">
+                    {{error.password.message}}
+                </div>
+            {{/if}}
+        </div>
+
+        <div class="form-group">
+            <label for="bio">Provide a short description of yourself:</label>
+            <textarea name="bio" type="text" class="form-control {{#if error.bio }}is-invalid{{/if}}" id="bio"
+            placeholder="Enter description" value="{{ user.bio }}" rows="4">{{ user.bio }}</textarea>
+
+            {{#if error.bio}}
+                <div class="invalid-feedback">
+                    {{error.bio.message}}
+                </div>
+            {{/if}}
+        </div>
+
+        <div id="signup-btn-area">
+            {{#if user }}
+                <button type="submit"> Save </button>
+            {{else}}
+                <button type="submit"> Sign up </button>
+            {{/if}}
+        </div>
+
+    </form>
+</div>

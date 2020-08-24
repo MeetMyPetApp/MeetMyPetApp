@@ -7,5 +7,26 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Mateo and Johanna",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.0.0",
+    "cloudinary": "^1.22.0",
+    "connect-mongo": "^3.2.0",
+    "cookie-parser": "^1.4.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "express-session": "^1.17.1",
+    "faker": "^4.1.0",
+    "hbs": "^4.1.1",
+    "mongoose": "^5.9.21",
+    "morgan": "^1.10.0",
+    "multer": "^1.4.2",
+    "multer-storage-cloudinary": "^4.0.0",
+    "nodemailer": "^6.4.10",
+    "passport": "^0.4.1",
+    "passport-slack": "0.0.7"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  }
 }
