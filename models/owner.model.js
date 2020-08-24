@@ -12,7 +12,7 @@ const generateRandomToken = () => {
   return token;
 }
 
-const userSchema = new mongoose.Schema({
+const ownerSchema = new mongoose.Schema({
   name: {
     type: String,
     required: [true, "Name is required"],
@@ -27,9 +27,9 @@ const userSchema = new mongoose.Schema({
     lowercase: true,
     match: [EMAIL_PATTERN, "Email is invalid"],
   },
-  username: {
+  ownername: {
     type: String,
-    required: [true, "Username is required"],
+    required: [true, "ownername is required"],
     unique: true,
     trim: true,
     lowercase: true,
@@ -40,6 +40,11 @@ const userSchema = new mongoose.Schema({
   password: {
     type: String,
     minlength: [8, "password min length is 8"]
+  },
+  status: {
+    type: String, 
+    enum : ['Pet looking for pet','Owner looking for friends', 'Owner looking for soulmate', 'Owner expanding network', 'Hey, I am using MeetMyPet'], 
+    default: 'Hey, I am using MeetMyPet' 
   },
   bio: {
     type: String,
@@ -62,14 +67,14 @@ const userSchema = new mongoose.Schema({
   googleID: String
 });
 
-userSchema.virtual('projects', {
-  ref: 'Project',
+ownerSchema.virtual('pets', {
+  ref: 'Pet',
   localField: '_id',
-  foreignField: 'user',
+  foreignField: 'owner',
   justOne: false,
 });
 
-userSchema.pre('save', function (next) {
+ownerSchema.pre('save', function (next) {
   if (this.isModified('password')) {
     bcrypt.hash(this.password, 10).then((hash) => {
       this.password = hash;
@@ -80,10 +85,10 @@ userSchema.pre('save', function (next) {
   }
 })
 
-userSchema.methods.checkPassword = function (password) {
+ownerSchema.methods.checkPassword = function (password) {
   return bcrypt.compare(password, this.password);
 }
 
-const User = mongoose.model("User", userSchema);
+const Owner = mongoose.model("Owner", ownerSchema);
 
-module.exports = User;
+module.exports = Owner;

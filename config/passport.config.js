@@ -1,5 +1,5 @@
 const passport = require("passport");
-const User = require("../models/user.model");
+const Owner = require("../models/owner.model");
 const SlackStrategy = require("passport-slack").Strategy;
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
 
@@ -10,27 +10,28 @@ const slack = new SlackStrategy(
     callbackUrl: "/auth/slack",
   },
   (accessToken, refreshToken, profile, next) => {
-    User.findOne({ "social.slack": profile.id })
-      .then((user) => {
-        if (user) {
-          next(null, user);
+    Owner.findOne({ "social.slack": profile.id })
+      .then((owner) => {
+        if (owner) {
+          next(null, owner);
         } else {
-          const newUser = new User({
+          const newOwner = new Owner({
             name: profile.displayName,
-            email: profile.user.email,
-            username: profile.user.email.split("@")[0],
-            avatar: profile.user.image_1024,
+            email: profile.owner.email,
+            ownername: profile.owner.email.split("@")[0],
+            avatar: profile.owner.image_1024,
             password: profile.provider + Math.random().toString(36).substring(7),
+            status: 'Hey, I am using MeetMyPet',
             bio: '',
             social: {
               slack: profile.id,
             },
           });
 
-          newUser
+          newOwner
             .save()
-            .then((user) => {
-              next(null, user);
+            .then((owner) => {
+              next(null, owner);
             })
             .catch((err) => next(err));
         }
@@ -47,29 +48,31 @@ const google = new GoogleStrategy(
   },
 
   (accessToken, refreshToken, profile, next) => {
-    User.findOne({ email: profile.emails[0].value })
-      .then(user => {
-        if (user) {
-          next(null, user);
+    Owner.findOne({ email: profile.emails[0].value })
+      .then(owner => {
+        if (owner) {
+          next(null, owner);
           return;
         } else {
 
-          const newUser = new User({
+          const newOwner = new Owner({
             name: profile.displayName,
             email: profile.emails[0].value,
-            username: profile.emails[0].value.split("@")[0],
+            ownername: profile.emails[0].value.split("@")[0],
             avatar: profile._json.picture,
             password: profile.provider + Math.random().toString(36).substring(7),
+            status: 'Hey, I am using MeetMyPet',
+            bio: '',
             social: {
               google: profile.id,
             },
             googleID: profile.id,
           });
 
-          newUser
+          newOwner
               .save()
-              .then((user) => {
-                next(null, user);
+              .then((owner) => {
+                next(null, owner);
               })
               .catch((err) => next(err));
         }

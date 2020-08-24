@@ -1,11 +1,11 @@
-const User = require('../models/user.model')
+const Owner = require('../models/owner.model')
 
 module.exports.isAuthenticated = (req, res, next) => {
-  User.findById(req.session.userId)
-    .then(user => {
-      if (user) {
-        req.currentUser = user;
-        res.locals.currentUser = user; 
+  Owner.findById(req.session.ownerId)
+    .then(owner => {
+      if (owner) {
+        req.currentOwner = owner;
+        res.locals.currentOwner = owner; 
         next()
       } else {
         res.redirect('/login')
@@ -15,9 +15,9 @@ module.exports.isAuthenticated = (req, res, next) => {
 }
 
 module.exports.isNotAuthenticated = (req, res, next) => {
-  User.findById(req.session.userId)
-    .then((user) => {
-      if (user) {
+  Owner.findById(req.session.ownerId)
+    .then((owner) => {
+      if (owner) {
         res.redirect('/projects');
       } else {
         next();
