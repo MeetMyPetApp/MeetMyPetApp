@@ -1,14 +1,14 @@
 const express = require('express');
 const router = express.Router();
 const multer = require('multer');
-const usersController = require('../controllers/user.controller');
-const commentController = require('../controllers/comment.controller');
+const userController = require('../controllers/user.controller');
+const commentController = require('../controllers/user.controller');
 const sessionMiddleware = require('../middlewares/session.middleware');
 const upload = require('../config/multer.config');
 
 const passport = require('passport');
 
-router.get('/', sessionMiddleware.isAuthenticated);
+router.get('/', userController.showLogin);
 
 module.exports = router;
 

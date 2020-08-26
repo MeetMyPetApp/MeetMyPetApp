@@ -1,10 +1,16 @@
 const mongoose = require('mongoose');
 
+require('./owner.model');
+require('./post.model');
+require('./like.model');
+require('./comment.model');
+
 const postSchema = new mongoose.Schema(
   {
     body: {
       type: String,
-      required: true
+      required: true,
+      maxlength: 500
     },
     image: String,
     visibility: {

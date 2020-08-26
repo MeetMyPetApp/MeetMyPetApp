@@ -1,10 +1,14 @@
 const mongoose = require('mongoose');
 
+require('./owner.model');
+require('./post.model');
+
 const commentSchema = new mongoose.Schema(
   {
     body: {
       type: String,
-      required: true
+      required: true,
+      maxlength: 300
     },
     owner: {
       type: mongoose.Schema.Types.ObjectId,

@@ -1,5 +1,8 @@
 const mongoose = require('mongoose');
 
+require('./owner.model');
+require('./post.model');
+
 const likeSchema = new mongoose.Schema(
   {
     owner: {

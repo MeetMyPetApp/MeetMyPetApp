@@ -1,19 +1,21 @@
 const mongoose = require('mongoose');
 
+require('./message.model');
+
 const chatSchema = new mongoose.Schema(
-  {
-    message: {
-      type: String,
-      required: true
+    {
+        members: [ owner._id, owner._id ],
     },
-    sender: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'Owner',
-      required: true,
-    }
-  },
-  { timestamps: true }
+    { timestamps: true }
 );
+
+postSchema.virtual('messages', {
+    ref: 'Message',
+    localField: '_id',
+    foreignField: 'chat',
+    justOne: false,
+});
+
 
 const Chat = mongoose.model('Chat', chatSchema);
 

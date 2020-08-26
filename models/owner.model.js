@@ -1,6 +1,10 @@
 const bcrypt = require("bcrypt");
 const mongoose = require("mongoose");
 
+require('./pet.model');
+require('./chat.model');
+require('./match.model');
+
 const EMAIL_PATTERN = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
 
 const generateRandomToken = () => {
@@ -16,7 +20,7 @@ const ownerSchema = new mongoose.Schema({
     name: {
       type: String,
       required: [true, "Name is required"],
-      minlength: [3, "Name needs at last 3 chars"],
+      minlength: [2, "Name needs at least 2 characters"],
       trim: true,
     },
     email: {
@@ -48,7 +52,7 @@ const ownerSchema = new mongoose.Schema({
     },
     bio: {
       type: String,
-      maxlength: 200
+      maxlength: 300
     },
     activation: {
       active: {
@@ -83,6 +87,13 @@ ownerSchema.virtual('chats', {
   justOne: false,
 });
 
+ownerSchema.virtual('matches', {
+  ref: 'Match',
+  localField: '_id',
+  foreignField: 'sender',
+  justOne: false,
+});
+
 ownerSchema.pre('save', function (next) {
   if (this.isModified('password')) {
     bcrypt.hash(this.password, 10).then((hash) => {
@@ -92,6 +103,15 @@ ownerSchema.pre('save', function (next) {
   } else {
     next();
   }
+})
+
+ownerSchema.post('remove', function (next) {
+  Promise.all([
+    Project.deleteMany({ author: this._id }),
+    Like.deleteMany({ user: this._id }),
+    Comment.deleteMany({ user: this._id })
+  ])
+    .then(next)
 })
 
 ownerSchema.methods.checkPassword = function (password) {

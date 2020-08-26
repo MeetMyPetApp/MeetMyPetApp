@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
 
+require('./owner.model');
+
 const petSchema = new mongoose.Schema(
   {
     name: {
