@@ -20,10 +20,7 @@ module.exports.doLogin = (req, res, next) => {
                         if (match) {
                             if (user.activation.active) {
                                 req.session.userId = user._id;
-                                res.redirect(`user/${user._id}/edit`);
-                               /*  res.redirect(`/user/${user._id}/edit`, {
-                                    message: "Don't forget to update your status and create your pet to optimize your search results."
-                                }); */
+                                res.redirect(`user/${user._id}`);
                         } else {
                             res.render('users/login', {
                                 error: {
@@ -62,7 +59,7 @@ module.exports.loginWithSlack = (req, res, next) => {
         next(error);
       } else {
         req.session.userId = user._id;
-        res.redirect(`/user/${user._id}/edit`, {
+        res.redirect(`/user/${user._id}`, {
 
             message: "Don't forget to update your status and create your pet to optimize your search results."
         });
@@ -88,7 +85,7 @@ module.exports.getLoginWithGmail = (req, res, next) => {
             next(error);
         } else {
             req.session.userId = user._id;
-            res.redirect(`/user/${user._id}/edit`, {
+            res.redirect(`/user/${user._id}`, {
                 user,
                 message: "Don't forget to update your status and create your pet to optimize your search results."
             });

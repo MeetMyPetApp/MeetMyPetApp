@@ -78,7 +78,7 @@ const google = new GoogleStrategy(
         }
 
       })
-      .catch(err => done(err));
+      .catch(err => next(err));
   }
 );
 
