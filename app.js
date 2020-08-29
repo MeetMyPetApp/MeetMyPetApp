@@ -10,6 +10,14 @@ require('./config/hbs.config');
 const passport = require('./config/passport.config');
 const session = require('./config/session.config');
 
+
+const Handlebars = require('handlebars');
+
+Handlebars.registerHelper('ifeq', function (a, b, options) {
+    if (a == b) { return options.fn(this); }
+    return options.inverse(this);
+});
+
 const app = express();
 
 app.use(express.urlencoded({ extended: false }));

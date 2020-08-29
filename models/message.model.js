@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-require('./owner.model');
+require('./user.model');
 require('./chat.model');
 
 const messageSchema = new mongoose.Schema(
@@ -12,7 +12,7 @@ const messageSchema = new mongoose.Schema(
     },
     sender: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'Owner',
+      ref: 'User',
       required: true,
     },
     chat: {

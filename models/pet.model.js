@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-require('./owner.model');
+require('./user.model');
 
 const petSchema = new mongoose.Schema(
   {
@@ -12,9 +12,9 @@ const petSchema = new mongoose.Schema(
         type: String,
         lowercase: true,
     },
-    owner: {
+    user: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'Owner',
+      ref: 'User',
       required: true,
     },
     available: Boolean //available for match

@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-require('./owner.model');
+require('./user.model');
 require('./post.model');
 
 const commentSchema = new mongoose.Schema(
@@ -10,9 +10,9 @@ const commentSchema = new mongoose.Schema(
       required: true,
       maxlength: 300
     },
-    owner: {
+    user: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'Owner',
+      ref: 'User',
       required: true,
     },
     post: {

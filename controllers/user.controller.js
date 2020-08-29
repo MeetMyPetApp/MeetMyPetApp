@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const User = require('../models/owner.model');
+const User = require('../models/user.model');
 const nodemailer = require('../config/mailer.config');
 const passport = require('passport');
 
@@ -20,7 +20,10 @@ module.exports.doLogin = (req, res, next) => {
                         if (match) {
                             if (user.activation.active) {
                                 req.session.userId = user._id;
-                                res.redirect('/index')
+                                res.redirect(`user/${user._id}/edit`);
+                               /*  res.redirect(`/user/${user._id}/edit`, {
+                                    message: "Don't forget to update your status and create your pet to optimize your search results."
+                                }); */
                         } else {
                             res.render('users/login', {
                                 error: {
@@ -59,7 +62,10 @@ module.exports.loginWithSlack = (req, res, next) => {
         next(error);
       } else {
         req.session.userId = user._id;
-        res.redirect('/projects');
+        res.redirect(`/user/${user._id}/edit`, {
+
+            message: "Don't forget to update your status and create your pet to optimize your search results."
+        });
       }
     })
     
@@ -82,7 +88,10 @@ module.exports.getLoginWithGmail = (req, res, next) => {
             next(error);
         } else {
             req.session.userId = user._id;
-            res.redirect('/projects');
+            res.redirect(`/user/${user._id}/edit`, {
+                user,
+                message: "Don't forget to update your status and create your pet to optimize your search results."
+            });
         }
     })
     passportGoogleController(req, res, next)
@@ -154,23 +163,23 @@ module.exports.logout = (req, res, next) => {
 module.exports.showUserProfilePage = (req, res, next) => {
     const { id } = req.params;
     User.findById(id)
-        .populate('projects')
         .then(user => {
             res.render('users/user', { user })
         })
         .catch(err => next(err))
 }
 
-module.exports.showEditProfile = (req, res, next) => {
-    const { id } = req.params;
-    User.findById(id)
+module.exports.showEditProfileForm = (req, res, next) => {
+
+    User.findById(req.params.id)
         .then(user => {
-            res.render('users/userform', { user })
+            res.render('users/edituserform', { user })
         })
         .catch(err => next(err))
 }
 
-module.exports.updateProfile = (req, res, next) => {
+
+module.exports.updateUser = (req, res, next) => {
     const userParams = req.body;
 
     if( req.file ) {
@@ -182,7 +191,7 @@ module.exports.updateProfile = (req, res, next) => {
             if (user) {
                 res.redirect(`/user/${user._id}`)
             } else {
-                res.redirect('/projects')
+                res.redirect('/login')
             }
         })
         .catch(err => next(err))
