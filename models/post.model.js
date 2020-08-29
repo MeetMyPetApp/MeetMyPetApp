@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-require('./owner.model');
+require('./user.model');
 require('./post.model');
 require('./like.model');
 require('./comment.model');
@@ -18,9 +18,9 @@ const postSchema = new mongoose.Schema(
         enum : ['private','public'], 
         default: 'public' 
     },
-    owner: {
+    user: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'Owner',
+      ref: 'User',
       required: true,
     },
     post: {

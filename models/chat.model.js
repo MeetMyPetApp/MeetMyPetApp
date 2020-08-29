@@ -2,26 +2,17 @@ const mongoose = require('mongoose');
 
 require('./message.model');
 require('./chat.model');
+require('./user.model');
 
 const chatSchema = new mongoose.Schema(
     {
         members: [ 
             {
-                owner: {
-                    type: mongoose.Schema.Types.ObjectId,
-                    ref: 'Owner',
-                    required: true,
-                }
-            },
-            {
-                owner: {
-                    type: mongoose.Schema.Types.ObjectId,
-                    ref: 'Owner',
-                    required: true,
-                }
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'User',
+                required: true,
             }
         ]
-        //members: [ owner._id, owner._id ],
     },
     { timestamps: true }
 );

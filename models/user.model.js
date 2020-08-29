@@ -16,7 +16,7 @@ const generateRandomToken = () => {
   return token;
 }
 
-const ownerSchema = new mongoose.Schema({
+const userSchema = new mongoose.Schema({
     name: {
       type: String,
       required: [true, "Name is required"],
@@ -31,15 +31,16 @@ const ownerSchema = new mongoose.Schema({
       lowercase: true,
       match: [EMAIL_PATTERN, "Email is invalid"],
     },
-    ownername: {
+    username: {
       type: String,
-      required: [true, "ownername is required"],
+      required: [true, "Username is required"],
       unique: true,
       trim: true,
       lowercase: true,
     },
     avatar: {
       type: String,
+      default: 'https://via.placeholder.com/150'
     },
     password: {
       type: String,
@@ -73,28 +74,28 @@ const ownerSchema = new mongoose.Schema({
   { timestamps: true }
 );
 
-ownerSchema.virtual('pets', {
+userSchema.virtual('pets', {
   ref: 'Pet',
   localField: '_id',
-  foreignField: 'owner',
+  foreignField: 'user',
   justOne: false,
 });
 
-ownerSchema.virtual('chats', {
+userSchema.virtual('chats', {
   ref: 'Chat',
   localField: '_id',
   foreignField: 'sender',
   justOne: false,
 });
 
-ownerSchema.virtual('matches', {
+userSchema.virtual('matches', {
   ref: 'Match',
   localField: '_id',
   foreignField: 'sender',
   justOne: false,
 });
 
-ownerSchema.pre('save', function (next) {
+userSchema.pre('save', function (next) {
   if (this.isModified('password')) {
     bcrypt.hash(this.password, 10).then((hash) => {
       this.password = hash;
@@ -105,7 +106,7 @@ ownerSchema.pre('save', function (next) {
   }
 })
 
-ownerSchema.post('remove', function (next) {
+userSchema.post('remove', function (next) {
   Promise.all([
     Project.deleteMany({ author: this._id }),
     Like.deleteMany({ user: this._id }),
@@ -114,10 +115,10 @@ ownerSchema.post('remove', function (next) {
     .then(next)
 })
 
-ownerSchema.methods.checkPassword = function (password) {
+userSchema.methods.checkPassword = function (password) {
   return bcrypt.compare(password, this.password);
 }
 
-const Owner = mongoose.model("Owner", ownerSchema);
+const User = mongoose.model("User", userSchema);
 
-module.exports = Owner;
+module.exports = User;

@@ -1,22 +1,17 @@
 <nav>
-    <ul>
-        <li><a href="/about">Springfield University</a></li>
-        {{#if currentUser}}
-            <li><a href="/projects">Home</a></li>
-        {{else}}
-            <li><a href="/">Home</a></li>
-        {{/if}}
-        <li><a href="/newproject">Submit your project</a></li>
+    <ul>    
+        <li><a href="/">Home</a></li>
+        <li><a href="/search">Search</a></li>
+        <li><a href="/network">Network</a></li>
+        <li><a href="/chats">Chats</a></li>
+       {{!--  <li><a href="/user/{{user._id}}"></a>Your profile</li> --}}
+        <li><a href="/user/{{currentUser._id}}/edit">Your profile</a></li>
     </ul>
-    {{#if currentUser}}
-        <ul>
-            <li>Hola, {{currentUser.name}}</li>
-            <li><a href="/user/{{currentUser._id}}">Profile</a></li>
-            <li><a href="/logout">Logout</a></li>
-        </ul>
-    {{else}}
-        <ul>
-            <li><a href="/login">Login</a></li>
-        </ul>
+    {{#if user.notifications}}
+        <div class="alert alert-primary" role="alert">
+            {{#each user.notifications as |notification|}}
+                <div >{{notification}}</div>
+            {{/each}}
+        </div>
     {{/if}}
 </nav>

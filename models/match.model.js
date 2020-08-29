@@ -1,17 +1,17 @@
 const mongoose = require('mongoose');
 
-require('./owner.model');
+require('./user.model');
 
 const matchSchema = new mongoose.Schema(
   {
     requester: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'Owner',
+      ref: 'User',
       required: true,
     },
     receiver: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Owner',
+        ref: 'User',
         required: true,
     },
     status: {
