@@ -35,7 +35,7 @@ Promise.all([
                 email: faker.internet.email(),
                 username: faker.internet.userName(),
                 avatar: faker.image.avatar(),
-                status: userStatus[Math.floor(Math.random * ownerStatus.length)],
+                status: userStatus[Math.floor(Math.random() * userStatus.length)],
                 bio: faker.lorem.sentence(),
                 createdAt: faker.date.past()
             });
@@ -69,7 +69,7 @@ Promise.all([
 
                             for (let j = 0; Math.floor(Math.random() * 10); j++) {
                                 const comment = new Comment({
-                                    body: faker.lorem.paragraphs(),
+                                    body: faker.lorem.paragraph(),
                                     user: userIds[Math.floor(Math.random() * userIds.length)],
                                     post: p._id,
                                     createdAt: faker.date.past()
@@ -88,12 +88,11 @@ Promise.all([
                                 like.save();
                             }
                         })
-                        .catch(err => next(err));
 
 
                 
                 })
-                .catch(err => next(err));
+                .catch(err => console.log(err));
                 
         }
 
@@ -113,6 +112,8 @@ Promise.all([
 
         testProfile.save()
             .then(profile => {
+                console.log('Test profile: e-mail = test@test.com , password = Test1234');
+
                 const pet = new Pet({
                     user: profile._id,
                     name: 'Test pet',
@@ -133,27 +134,30 @@ Promise.all([
                     });
 
                     post.save()
+                        .then(p => {
+                            for (let j = 0; Math.floor(Math.random() * 10); j++) {
+                                const comment = new Comment({
+                                    body: faker.lorem.paragraph(),
+                                    user: profile._id,
+                                    post: p._id,
+                                    createdAt: faker.date.past()
+                                });
+        
+                                comment.save();
+                            }
+        
+                            for (let k = 0; Math.floor(Math.random() * 50); k++) {
+                                const like = new Like({
+                                    user: profile._id,
+                                    post: p._id,
+                                    createdAt: faker.date.past()
+                                });
+        
+                                like.save();
+                            }   
+                        })
 
-                    for (let j = 0; Math.floor(Math.random() * 10); j++) {
-                        const comment = new Comment({
-                            body: faker.lorem.paragraphs(),
-                            user: profile._id,
-                            post: p._id,
-                            createdAt: faker.date.past()
-                        });
-
-                        comment.save();
-                    }
-
-                    for (let k = 0; Math.floor(Math.random() * 50); k++) {
-                        const like = new Like({
-                            user: profile._id,
-                            post: p._id,
-                            createdAt: faker.date.past()
-                        });
-
-                        like.save();
-                    }
+                   
                 }
 
                 for (let i = 0; i < 10; i++) {
