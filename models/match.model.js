@@ -23,6 +23,6 @@ const matchSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-const Match = mongoose.model('Like', matchSchema);
+const Match = mongoose.model('Match', matchSchema);
 
 module.exports = Match;
