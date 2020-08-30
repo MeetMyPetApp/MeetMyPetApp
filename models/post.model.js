@@ -10,7 +10,7 @@ const postSchema = new mongoose.Schema(
     body: {
       type: String,
       required: true,
-      maxlength: 500
+      maxlength: 1000
     },
     image: String,
     visibility: {
@@ -22,12 +22,7 @@ const postSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User',
       required: true,
-    },
-    post: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'Post',
-      required: true,
-    },
+    }
   },
   { timestamps: true }
 );
