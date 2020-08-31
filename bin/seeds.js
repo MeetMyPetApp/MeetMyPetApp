@@ -50,6 +50,7 @@ Promise.all([
                         user: user._id,
                         name: faker.lorem.word(),
                         breed: 'breed',
+                        available: true,
                         createdAt: faker.date.past()
                     });
 
@@ -118,6 +119,7 @@ Promise.all([
                     user: profile._id,
                     name: 'Test pet',
                     breed: 'breed',
+                    available: true,
                     createdAt: faker.date.past()
                 });
 
