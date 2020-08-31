@@ -182,9 +182,12 @@ module.exports.updateUser = (req, res, next) => {
         userParams.avatar = req.file.path;
     }
 
+    console.log('UserParams', userParams);
+
     User.findByIdAndUpdate(req.params.id, userParams, { runValidators: true, new: true })
         .then(user => {
             if (user) {
+                console.log('User', user);
                 res.redirect(`/user/${user._id}`)
             } else {
                 res.redirect('/login')

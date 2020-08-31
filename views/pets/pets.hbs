@@ -1,26 +1,26 @@
 <div id="pet-profile-page">
     <div class="row project-card">
         <div class="col-sm-12 col-lg-3 project-card-left">
-            <img class="profile-image" src="{{pet.avatar}}" alt="profile image"> 
+            <p>Owner: {{user.username}}</p>
+            <img class="" src="{{user.avatar}}" alt="profile image"> 
         </div>
         <div class="col-sm-12 col-lg-9 project-card-right">
-            <div>
-                <button onclick="history.back()">Back</button>
-            </div>
+
 			{{#if pets}}
-			{{#each pets as |pet|}}
-			<p>Name: {{pet.name}}</p>
-            <p>Breed: {{pet.breed}}</p>
-            <p>Owner: {{pet.user}}</p>
-            <p>Availability: {{pet.available}}</p>
-			<p>Short description of your pet:</p>
-            <p><i>{{pet.bio}}</i></p>
-            <br>
-			{{/each}}
+                {{#each pets as |pet|}}
+                    <img class="profile-image" src="{{pet.avatar}}" alt="profile image"> 
+                    <p>Name: {{pet.name}}</p>
+                    <p>Breed: {{pet.breed}}</p>
+                    <p>Availability: {{pet.available}}</p>
+                    <p>Short description of your pet:</p>
+                    <p><i>{{pet.bio}}</i></p>
+                     <a href="/pet/{{pet._id}}/editPet">Edit Pet</a>
+                     <a href="/pet/{{pet._id}}">View</a>
+                     <a href="/pet/{{pet._id}}/deletePet">Delete Pet</a>
+                    <br>
+                {{/each}}
 			{{/if}}
            
             <div id="user-profile-btn-area">
-                <a href="/user/{{pets.user._id}}/editPet">Edit Pet</a>
-				<a href="/user/{{pets.user._id}}/addNewPet">Add new Pet</a>
-                <a href="/user/{{pets.user._id}}/deletePet">Delete Pet</a>
+				<a href="/user/{{pets.[0].user}}/addNewPet">Add new Pet</a>
             </div>

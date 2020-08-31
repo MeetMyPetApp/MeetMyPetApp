@@ -44,6 +44,7 @@ module.exports.showPetProfilePage = (req, res, next) => {
 		.then(user => {
 			const pets = user.pets
 			res.render('pets/pets', {
+				user,
 				pets
 			})
 		})

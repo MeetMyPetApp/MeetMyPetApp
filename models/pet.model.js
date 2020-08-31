@@ -24,7 +24,7 @@ const petSchema = new mongoose.Schema(
     gallery: [String],
     bio: {
       type: String,
-      maxlength: 300
+      maxlength: 400
     },
     available: Boolean //available for match
   },

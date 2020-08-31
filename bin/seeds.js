@@ -51,6 +51,7 @@ Promise.all([
                         name: faker.lorem.word(),
                         breed: 'breed',
                         available: true,
+                        bio: faker.lorem.paragraph(),
                         createdAt: faker.date.past()
                     });
 
@@ -120,6 +121,7 @@ Promise.all([
                     name: 'Test pet',
                     breed: 'breed',
                     available: true,
+                    bio: faker.lorem.paragraph(),
                     createdAt: faker.date.past()
                 });
 

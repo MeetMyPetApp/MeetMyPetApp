@@ -4,9 +4,16 @@
             <img class="profile-image" src="{{user.avatar}}" alt="profile image"> 
         </div>
         <div class="col-sm-12 col-lg-9 project-card-right">
-            <div>
-                <button onclick="history.back()">Back</button>
-            </div>
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <a class="nav-link active" href="">Your profile</a>
+                    
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/user/{{ user._id }}/pets">Your pets</a>
+                </li>
+            </ul>
+
             <p>Name: {{user.name}}</p>
             <p>Username: {{user.username}}</p>
             <p>E-Mail: {{user.email}}</p>
