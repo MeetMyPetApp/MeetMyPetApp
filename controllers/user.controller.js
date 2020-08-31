@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const User = require('../models/user.model');
+//const Pets = require('../models/pet.model');
 const nodemailer = require('../config/mailer.config');
 const passport = require('passport');
 
@@ -210,4 +211,3 @@ module.exports.deleteProfile = (req, res, next) => {
         })
         .catch(err => next(err))
 }
-

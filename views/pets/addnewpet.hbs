@@ -1,0 +1,78 @@
+<div id="signup-page-container">
+	<h2>Add your pet here</h2>
+
+	{{#if pet }}
+	<form action="/user/{{user._id}}/edit" method="POST" enctype="multipart/form-data">
+		{{else}}
+		<form action="/signup" method="POST" enctype="multipart/form-data">
+			{{/if}}
+			<div class="form-group">
+				<label for="name">Name:</label>
+				<input name="name" type="text" class="form-control {{#if error.name }}is-invalid{{/if}}" id="name"
+					placeholder="Enter pet name" value="{{ pet.name }}">
+
+				{{#if error.name}}
+				<div class="invalid-feedback">
+					{{error.name.message}}
+				</div>
+				{{/if}}
+			</div>
+
+			<div class="form-group">
+				<label for="username">Breed:</label>
+				<input name="username" type="text" class="form-control {{#if error.breed }}is-invalid{{/if}}"
+					id="username" placeholder="Enter username" value="{{ pet.breed }}">
+
+				{{#if error.breed}}
+				<div class="invalid-feedback">
+					{{error.breed.message}}
+				</div>
+				{{/if}}
+			</div>
+
+			<div class="form-group">
+				<label for="pet-avatar">Pet image:</label>
+				<input name="pet-avatar" type="file" class="form-control {{#if error.avatar }}is-invalid{{/if}}"
+					id="pet-avatar" placeholder="Enter pet photo" value="{{ pet.avatar }}">
+
+				{{#if error.avatar}}
+				<div class="invalid-feedback">
+					{{error.avatar.message}}
+				</div>
+				{{/if}}
+			</div>
+
+			<div class="form-group">
+				<label for="bio">Provide a short description of your pet:</label>
+				<textarea name="bio" type="text" class="form-control {{#if error.bio }}is-invalid{{/if}}" id="bio"
+					placeholder="Enter description" value="{{ pet.bio }}" rows="4">{{ pet.bio }}</textarea>
+
+				{{#if error.bio}}
+				<div class="invalid-feedback">
+					{{error.bio.message}}
+				</div>
+				{{/if}}
+			</div>
+
+			<div class="form-group">
+
+				<label for="status">What´s your pet status?</label>
+				<select name="pet-status" id="pet-status">
+					<option class="form-control" value="{{ pet.available }}">Available</option>
+					<option class="form-control" value="{{ pet.available }}">Not Available</option>
+				</select>
+
+
+				{{#if error.available}}
+				<div class="invalid-feedback">
+					{{error.available.message}}
+				</div>
+				{{/if}}
+			</div>
+
+			<div id="signup-btn-area">
+				<button type="submit"> Save </button>
+			</div>
+
+		</form>
+</div>
