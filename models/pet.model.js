@@ -12,10 +12,19 @@ const petSchema = new mongoose.Schema(
         type: String,
         lowercase: true,
     },
+    avatar: {
+      type: String,
+      default: 'https://via.placeholder.com/150'
+    },
     user: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User',
       required: true,
+    },
+    gallery: [String],
+    bio: {
+      type: String,
+      maxlength: 300
     },
     available: Boolean //available for match
   },

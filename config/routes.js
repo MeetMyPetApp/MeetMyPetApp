@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const multer = require('multer');
 const usersController = require('../controllers/user.controller');
+const petsController = require('../controllers/pet.controller');
 const commentController = require('../controllers/user.controller');
 const sessionMiddleware = require('../middlewares/session.middleware');
 const upload = require('../config/multer.config');
@@ -22,6 +23,13 @@ router.get('/logout', sessionMiddleware.isAuthenticated, usersController.logout)
 router.get('/user/:id/edit', sessionMiddleware.isAuthenticated, usersController.showEditProfileForm)
 router.post('/user/:id/edit', sessionMiddleware.isAuthenticated, usersController.updateUser)
 router.get('/user/:id', sessionMiddleware.isAuthenticated, usersController.showUserProfilePage)
+
+router.get('/user/:id/addNewPet', sessionMiddleware.isAuthenticated, petsController.showAddPetPage)
+router.post('/pet/:id/addNewPet', sessionMiddleware.isAuthenticated, upload.single('petAvatar'), usersController.createPet);
+router.get('/pet/:id/editPet', sessionMiddleware.isAuthenticated, petsController.showEditPetForm)
+router.post('/pet/:id/editPet', sessionMiddleware.isAuthenticated, petsController.updatePet)
+router.get('/user/:id/pets', sessionMiddleware.isAuthenticated, petsController.showPetProfilePage)
+router.post('/pet/:id/deletePet', sessionMiddleware.isAuthenticated, petsController.deletePet)
 
 
 router.get('/', sessionMiddleware.isAuthenticated, (req, res, next) => {
