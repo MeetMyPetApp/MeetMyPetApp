@@ -1,17 +1,49 @@
-<nav>
-    <ul>    
-        <li><a href="/">Home</a></li>
-        <li><a href="/search">Search</a></li>
-        <li><a href="/network">Network</a></li>
-        <li><a href="/chats">Chats</a></li>
-       {{!--  <li><a href="/user/{{user._id}}"></a>Your profile</li> --}}
-        <li><a href="/user/{{currentUser._id}}/edit">Your profile</a></li>
-    </ul>
-    {{#if user.notifications}}
-        <div class="alert alert-primary" role="alert">
-            {{#each user.notifications as |notification|}}
-                <div >{{notification}}</div>
-            {{/each}}
+
+<nav class="navbar navbar-expand-xl navbar-dark bg-dark">
+    <!--Fixed Upper navbar-->
+    <a href="#" class="navbar-brand"><i class="fa fa-cube"></i>Meet My<b>Pet</b></a>
+    <!--<button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+        <span class="navbar-toggler-icon"></span>
+    </button>-->
+    <div id="navbarCollapse" class="collapse navbar-collapse justify-content-start">
+        <form class="navbar-form form-inline">
+            <div class="input-group search-box">
+                <input type="text" id="search" class="form-control" placeholder="Search here...">
+                <span class="input-group-addon"><i class="material-icons">&#xE8B6;</i></span>
+            </div>
+        </form>
+
+        
+
+        <!--Icon lower navbar for mobile-->
+        <div class="navbar-nav ml-auto ">
+            <a href="#" class="nav-item nav-link active"><i class="fa fa-home"></i><span>Home</span></a>
+            <a href="#" class="nav-item nav-link"><i class="fa fa-gears"></i><span>Network</span></a>
+            <a href="#" class="nav-item nav-link"><i class="fa fa-pie-chart"></i><span>Chats</span></a>
+            <a href="#" class="nav-item nav-link"><i class="fa fa-bell"></i><span>Notifications</span></a>
+
+
+            <!--User Dropdown-->
+            <div class="nav-item dropdown">
+                <a href="#" data-toggle="dropdown" class="nav-item nav-link dropdown-toggle user-action"><img
+                        src="{{ currentUser.avatar }}" class="avatar" alt="Avatar">
+                    {{ currentUser.name }} <b class="caret"></b></a>
+                <div class="dropdown-menu">
+                    <a href="#" class="dropdown-item"><i class="fa fa-user-o"></i> My profile</a>
+                    <a href="#" class="dropdown-item"><i class="fa fa-calendar-o"></i> My pets</a>
+                    <a href="#" class="dropdown-item"><i class="fa fa-sliders"></i> Edit profile</a>
+                    <div class="divider dropdown-divider"></div>
+                    <a href="#" class="dropdown-item"><i class="material-icons">&#xE8AC;</i> Logout</a>
+                </div>
+            </div>
         </div>
+    </div>
+
+    {{#if user.notifications}}
+    <div class="alert alert-primary" role="alert">
+        {{#each user.notifications as |notification|}}
+        <div>{{notification}}</div>
+        {{/each}}
+    </div>
     {{/if}}
 </nav>
