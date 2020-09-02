@@ -16,19 +16,19 @@ const userIds = [];
 //https://dog.ceo/api/breeds/list/all
 //https://dog.ceo/api/breed/<breed here>/images/random
 
-const axios = require('axios').default;
+/* const axios = require('axios').default;
 
-// Make a request for a user with a given ID
+
 axios.get('https://dog.ceo/api/breeds/list/all')
   .then(function (response) {
     console.log(response);
   })
   .catch(function (error) {
     console.log(error);
-  })
+  }) */
   
 
-/* Promise.all([
+Promise.all([
     User.deleteMany(),
     Pet.deleteMany(),
     Post.deleteMany(),
@@ -209,4 +209,3 @@ axios.get('https://dog.ceo/api/breeds/list/all')
                 }
             })
     })
- */
