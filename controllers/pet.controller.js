@@ -66,6 +66,7 @@ module.exports.showEditPetForm = (req, res, next) => {
 //dudas con update y delete pet
 module.exports.updatePet = (req, res, next) => {
 	const petParams = req.body;
+	console.log('petParams', petParams);
 
 	if (req.file) {
 		petParams.avatar = req.file.path;
@@ -77,6 +78,7 @@ module.exports.updatePet = (req, res, next) => {
 		})
 		.then(pet => {
 			if (pet) {
+				console.log('saved Pet', pet);
 				res.redirect(`/user/${pet.user._id}/pets`)
 			} else {
 				res.redirect(`/pet/${pet._id}/editPet`)
