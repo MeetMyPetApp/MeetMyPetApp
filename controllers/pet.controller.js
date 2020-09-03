@@ -66,11 +66,11 @@ module.exports.showEditPetForm = (req, res, next) => {
 //dudas con update y delete pet
 module.exports.updatePet = (req, res, next) => {
 	const petParams = req.body;
-	console.log('petParams', petParams);
-
+	
 	if (req.file) {
 		petParams.avatar = req.file.path;
 	}
+	console.log('petParams', petParams);
 
 	Pets.findByIdAndUpdate(req.params.id, petParams, {
 			runValidators: true,

@@ -26,7 +26,11 @@ const petSchema = new mongoose.Schema(
       type: String,
       maxlength: 400
     },
-    available: Boolean //available for match
+    available: {
+      type: String, 
+      enum: ['Available','Not available'],
+      default: 'Not available'
+    }
   },
   { timestamps: true }
 );

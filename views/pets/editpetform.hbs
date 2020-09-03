@@ -48,10 +48,10 @@
                 <div class="form-group">
                     <div>Pet status: {{ pet.available }} </div>
                     
-                    <label for="status">Change your pet status:</label>
-                     <select name="pet-status" id="pet-status">
+                    <label for="available">Change your pet status:</label>
+                     <select name="available" id="available">
                         <option class="form-control" value="Available">Available</option>
-                        <option class="form-control" value="Not Available">Not Available</option>
+                        <option class="form-control" value="Not available">Not available</option>
                     </select>
 
 
@@ -63,8 +63,8 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="pet-bio">Tell the community something about your pet:</label>
-                    <textarea name="pet-bio" type="text" class="form-control {{#if error.bio }}is-invalid{{/if}}" id="pet-bio"
+                    <label for="bio">Tell the community something about your pet:</label>
+                    <textarea name="bio" type="text" class="form-control {{#if error.bio }}is-invalid{{/if}}" id="pet-bio"
                     placeholder="Enter description" value="{{ pet.bio }}" rows="4">{{ pet.bio }}</textarea>
 
                     {{#if error.petBio}}

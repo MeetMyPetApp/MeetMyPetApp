@@ -65,7 +65,7 @@ Promise.all([
                         user: user._id,
                         name: faker.lorem.word(),
                         breed: 'breed',
-                        available: true,
+                        available: 'Available',
                         bio: faker.lorem.paragraph(),
                         createdAt: faker.date.past()
                     });
@@ -135,7 +135,7 @@ Promise.all([
                     user: profile._id,
                     name: 'Test pet',
                     breed: 'breed',
-                    available: true,
+                    available: 'Available',
                     bio: faker.lorem.paragraph(),
                     createdAt: faker.date.past()
                 });
