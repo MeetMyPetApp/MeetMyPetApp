@@ -8,7 +8,7 @@ const messageSchema = new mongoose.Schema(
     message: {
       type: String,
       required: true,
-      maxlength: 400
+      maxlength: 500
     },
     sender: {
       type: mongoose.Schema.Types.ObjectId,

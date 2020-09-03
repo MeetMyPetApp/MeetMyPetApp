@@ -1,8 +1,13 @@
 const bcrypt = require("bcrypt");
 const mongoose = require("mongoose");
 
-require('./pet.model');
-require('./chat.model');
+const Pet = require('./pet.model');
+const Chat = require('./chat.model');
+const Like = require('./like.model');
+const Post = require('./post.model');
+const Comment = require('./comment.model');
+const Match = require('./match.model');
+
 require('./match.model');
 
 const EMAIL_PATTERN = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
@@ -108,7 +113,8 @@ userSchema.pre('save', function (next) {
 
 userSchema.post('remove', function (next) {
   Promise.all([
-    Project.deleteMany({ author: this._id }),
+    Pet.deleteMany({ user: this._id }),
+    Post.deleteMany({ user: this._id }),
     Like.deleteMany({ user: this._id }),
     Comment.deleteMany({ user: this._id })
   ])

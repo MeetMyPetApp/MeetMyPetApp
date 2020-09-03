@@ -196,7 +196,7 @@ module.exports.updateUser = (req, res, next) => {
         .catch(err => next(err))
 }
 
-module.exports.deleteProfile = (req, res, next) => {
+module.exports.deleteUser = (req, res, next) => {
     User.findByIdAndDelete(req.params.id)
         .then(() => {
             req.currentUser.remove()

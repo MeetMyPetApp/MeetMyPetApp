@@ -10,21 +10,24 @@ module.exports.showAddPetPage = (req, res, next) => {
 
 module.exports.createPet = (req, res, next) => {
 	const petParams = req.body;
-	userParams.avatar = req.file ? req.file.path : undefined;
+	petParams.user = req.currentUser.id;
+	petParams.avatar = req.file ? req.file.path : undefined;
 	const pet = new Pets(petParams);
 
+	console.log('petParams', petParams);
 
 	pet.save()
-		.then(pet => {
-			res.render('pets/pets', {
-				pet,
-				message: 'Your pet (name) has been sucessfully added!'
-			})
-			console.log(pet);
+		.then(p => {
+			console.log('Created pet', p);
+
+			res.render('pets/pets', p)
+				/* 
+				message: 'Your pet (name) has been sucessfully added!' */
+			
 		})
 		.catch((error) => {
 			if (error instanceof mongoose.Error.ValidationError) {
-				res.render("pet/addnewpet", {
+				res.render("pets/addnewpet", {
 					error: error.errors,
 					pet
 				});
@@ -70,7 +73,6 @@ module.exports.updatePet = (req, res, next) => {
 	if (req.file) {
 		petParams.avatar = req.file.path;
 	}
-	console.log('petParams', petParams);
 
 	Pets.findByIdAndUpdate(req.params.id, petParams, {
 			runValidators: true,
@@ -78,7 +80,6 @@ module.exports.updatePet = (req, res, next) => {
 		})
 		.then(pet => {
 			if (pet) {
-				console.log('saved Pet', pet);
 				res.redirect(`/user/${pet.user._id}/pets`)
 			} else {
 				res.redirect(`/pet/${pet._id}/editPet`)
@@ -90,9 +91,7 @@ module.exports.updatePet = (req, res, next) => {
 module.exports.deletePet = (req, res, next) => {
 	Pets.findByIdAndDelete(req.params.id)
 		.then(() => {
-			const userId = req.currentUser.id
-
-			res.redirect(`/user/${userId}`)
+			res.redirect(`/user/${req.currentUser.id}`)
 		})
 		.catch(err => next(err))
 }

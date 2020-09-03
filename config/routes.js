@@ -23,13 +23,14 @@ router.get('/logout', sessionMiddleware.isAuthenticated, usersController.logout)
 router.get('/user/:id/edit', sessionMiddleware.isAuthenticated, usersController.showEditProfileForm)
 router.post('/user/:id/edit', sessionMiddleware.isAuthenticated, upload.single('avatar'),usersController.updateUser)
 router.get('/user/:id', sessionMiddleware.isAuthenticated, usersController.showUserProfilePage)
+router.get('/user/:id/delete', sessionMiddleware.isAuthenticated, usersController.deleteUser)
 
 router.get('/user/:id/addNewPet', sessionMiddleware.isAuthenticated, petsController.showAddPetPage)
-router.post('/pet/:id/addNewPet', sessionMiddleware.isAuthenticated, upload.single('avatar'), petsController.createPet);
+router.post('/pets/addNewPet', sessionMiddleware.isAuthenticated, upload.single('avatar'), petsController.createPet);
 router.get('/pet/:id/editPet', sessionMiddleware.isAuthenticated, petsController.showEditPetForm)
 router.post('/pet/:id/editPet', sessionMiddleware.isAuthenticated, upload.single('avatar'),  petsController.updatePet)
 router.get('/user/:id/pets', sessionMiddleware.isAuthenticated, petsController.showPetProfilePage)
-router.post('/pet/:id/deletePet', sessionMiddleware.isAuthenticated, petsController.deletePet)
+router.get('/pet/:id/deletePet', sessionMiddleware.isAuthenticated, petsController.deletePet)
 
 
 router.get('/', sessionMiddleware.isAuthenticated, (req, res, next) => {
