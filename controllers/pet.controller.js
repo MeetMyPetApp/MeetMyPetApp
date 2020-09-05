@@ -21,9 +21,9 @@ module.exports.createPet = (req, res, next) => {
 			console.log('Created pet', p);
 
 			res.render('pets/pets', p)
-				/* 
-				message: 'Your pet (name) has been sucessfully added!' */
-			
+			/* 
+			message: 'Your pet (name) has been sucessfully added!' */
+
 		})
 		.catch((error) => {
 			if (error instanceof mongoose.Error.ValidationError) {
@@ -38,18 +38,49 @@ module.exports.createPet = (req, res, next) => {
 		.catch(next)
 }
 
-module.exports.showPetProfilePage = (req, res, next) => {
+module.exports.showPetsList = (req, res, next) => {
 	const {
 		id
 	} = req.params;
-	User.findById(id)
-		.populate("pets")
-		.then(user => {
-			const pets = user.pets
-			res.render('pets/pets', {
-				user,
-				pets
+	if (id === req.currentUser.id) {
+		User.findById(id)
+			.populate("pets")
+			.then(user => {
+				const pets = user.pets
+				res.render('pets/pets', {
+					user,
+					pets
+				})
 			})
+			.catch(err => next(err))
+	} else {
+		User.findById(id)
+			.populate("pets")
+			.then(user => {
+				const pets = user.pets
+				res.render('pets/externalpets', {
+					user,
+					pets
+				})
+			})
+			.catch(err => next(err))
+	}
+
+}
+
+module.exports.showPetProfilePage = (req, res, next) => {
+
+	Pets.findById(req.params.id)
+		.then(pet => {
+			if (pet.user === req.currentUser.id) {
+				res.render('pets/pet', {
+					pet
+				})
+			} else {
+				res.render('pets/externalpetprofile', {
+					pet
+				})
+			}	
 		})
 		.catch(err => next(err))
 }
@@ -69,7 +100,7 @@ module.exports.showEditPetForm = (req, res, next) => {
 //dudas con update y delete pet
 module.exports.updatePet = (req, res, next) => {
 	const petParams = req.body;
-	
+
 	if (req.file) {
 		petParams.avatar = req.file.path;
 	}
@@ -95,3 +126,21 @@ module.exports.deletePet = (req, res, next) => {
 		})
 		.catch(err => next(err))
 }
+
+//EXTERNAL VIEW
+
+/* module.exports.showExternalPets = (req, res, next) => {
+	const {
+		id
+	} = req.params;
+	User.findById(id)
+		.populate("pets")
+		.then(user => {
+			const pets = user.pets
+			res.render('pets/externalpets', {
+				user,
+				pets
+			})
+		})
+		.catch(err => next(err))
+} */
