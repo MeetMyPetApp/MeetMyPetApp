@@ -15,9 +15,6 @@ const { replaceOne } = require('../models/message.model');
 
 const userIds = [];
 
-//https://dog.ceo/api/breeds/list/all
-//https://dog.ceo/api/breed/weimaraner/images/random
-
 const breedsArr = [];
 const dogsImages = {};
 
@@ -32,10 +29,10 @@ function getDogBreeds() {
             Object.keys(breeds).forEach( br => {
                 dogImagesPromises.push(getDogImages(br))
                 dogImagesPromises.push(getDogImages(br))
-            /*     dogImagesPromises.push(getDogImages(br))
                 dogImagesPromises.push(getDogImages(br))
                 dogImagesPromises.push(getDogImages(br))
-                dogImagesPromises.push(getDogImages(br)) */
+                dogImagesPromises.push(getDogImages(br))
+                dogImagesPromises.push(getDogImages(br))
             })
 
             return Promise.all(dogImagesPromises)
@@ -82,7 +79,6 @@ Promise.all([
 ])
     .then(resp => {
         const breedsWithImages = resp[8];
-      /*   console.log( 'breedsWithImages ', breedsWithImages) */
         console.log('Database deleted!')
 
         for (let i = 0; i < 20; i++) {
@@ -182,7 +178,7 @@ Promise.all([
     
                     const pet = new Pet({
                         user: user._id,
-                        name: 'Test pet',
+                        name: 'Test pet ' + faker.lorem.word(),
                         avatar: dogRandomImages[0],
                         breed: dogBreed,
                         gallery: dogRandomImages,
