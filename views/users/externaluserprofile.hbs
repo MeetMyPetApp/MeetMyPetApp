@@ -1,0 +1,57 @@
+<div id="user-profile-page">
+	<div class="row project-card">
+		<div class="col-sm-12 col-lg-3 project-card-left">
+			<img class="profile-image" src="{{user.avatar}}" alt="profile image">
+		</div>
+		<div class="col-sm-12 col-lg-9 project-card-right">
+			<ul class="nav nav-tabs">
+				<li class="nav-item">
+					<a class="nav-link active" href="">{{user.name}}`s profile</a>
+
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="/user/{{ user._id }}/externalpets">{{user.name}}`s pets</a>
+				</li>
+			</ul>
+
+			<p>Name: {{user.name}}</p>
+			<p>Username: {{user.username}}</p>
+			<p>E-Mail: {{user.email}}</p>
+			<p>Short description of yourself:</p>
+			<p><i>{{user.bio}}</i></p>
+			<br>
+
+			<h4> {{user}} Feed:</h4>
+			{{#if user.posts}}
+			{{#each posts as |post|}}
+			<div class="row project-card">
+				<div class="col-12 project-card-right">
+
+					<div class="cardbox shadow-lg bg-white">
+						<div class="media m-0">
+							<div class="d-flex mr-3">
+								<a href=""><img class="img-fluid rounded-circle"
+										src="{{user.avatar}}"
+										alt="User Avatar"></a>
+							</div>
+							<div class="media-body">
+								<p class="m-0">{{user.name}}</p>
+								<small><span><i class="icon ion-md-pin"></i> Nairobi, Kenya</span></small>
+								<small><span><i class="icon ion-md-time"></i> 10 hours ago</span></small>
+							</div>
+						</div>
+					</div>
+
+					<p>{{post.body}}</p>
+					<p>{{post.image}}</p>
+					<div class="comments-likes-area">
+						<span>Likes: {{post.likes.length}}</span>
+						<span>- Comments: {{post.comments.length}}</span>
+					</div>
+				</div>
+			</div>
+			{{/each}}
+			{{/if}}
+		</div>
+	</div>
+</div>

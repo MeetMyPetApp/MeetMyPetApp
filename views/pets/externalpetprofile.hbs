@@ -1,0 +1,27 @@
+<div class="main panel panel-default z-depth-4">
+	<div class="panel-body">
+
+		<div class="media">
+			<div class="media-left">
+				<img src="{{pet.avatar}}"
+					class="media-object circle">
+			</div>
+			<div class="media-body">
+				<p>{{pet.name}}</p>
+				<p>{{pet.breed}}</p>
+				<p>{{pet.available}}</p>
+				<p><i>{{pet.bio}}</i></p>
+			</div>
+		</div>
+
+		<div class="post">
+
+			{{#each gallery as |image|}}
+
+			<img class="not" src="{{image}}">
+
+			{{/each}}
+
+		</div>
+	</div>
+</div>
