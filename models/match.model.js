@@ -4,16 +4,11 @@ require('./user.model');
 
 const matchSchema = new mongoose.Schema(
   {
-    requester: {
+    users: [{
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User',
       required: true,
-    },
-    receiver: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User',
-        required: true,
-    },
+    }],
     status: {
         type: String, 
         enum : ['no request yet','pending', 'accepted', 'denied'], 

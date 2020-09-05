@@ -231,7 +231,7 @@ module.exports.deleteUser = (req, res, next) => {
 }
 
 module.exports.showFeedPage = (req, res, next) => {
-    const matches = [];
+    /* const matches = [];
 
     Match.find({
             'requester': req.currentUser.id
@@ -269,7 +269,8 @@ module.exports.showFeedPage = (req, res, next) => {
                 })
         })
 
-
+ */
+    
 }
 
 module.exports.showExternalProfile = (req, res, next) => {
@@ -300,3 +301,4 @@ module.exports.showExternalProfile = (req, res, next) => {
         })
         .catch(error => console.log(error))
 }
+
