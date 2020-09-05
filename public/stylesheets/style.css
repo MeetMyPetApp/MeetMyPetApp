@@ -155,16 +155,20 @@ html, body {
 
   .navbar-bottom {
     position: fixed;
-    bottom: 0;
-    
+    bottom: 0;  
   }
+
+  .hidden-nav-part {
+	display: none;
+}
+
 
   .navbar-low {
     display: flex;
     flex-wrap: wrap;
   }
 
-	/*.navbar .navbar-nav > a > i {
+	/* .navbar .navbar-nav > a > i {
 		display: flex;			
 		text-align: left;
 		min-width: 30px;
@@ -190,8 +194,9 @@ html, body {
 	}
 	.input-group {
 		width: 100%;
-	}*/
+	} */
 }
+
 
 .main{
 	width: 	25vw;
@@ -268,7 +273,7 @@ body{
 	font-size: 2vw;
 	color: #d32f2f;
 }
-@media only screen and (max-width: 425px){
+@media only screen and (max-width: 540px){
 	.main{
 		width: 100vw;
 	}

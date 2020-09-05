@@ -24,16 +24,23 @@ router.get('/user/:id/edit', sessionMiddleware.isAuthenticated, usersController.
 router.post('/user/:id/edit', sessionMiddleware.isAuthenticated, upload.single('avatar'),usersController.updateUser)
 router.get('/user/:id', sessionMiddleware.isAuthenticated, usersController.showUserProfilePage)
 router.get('/user/:id/delete', sessionMiddleware.isAuthenticated, usersController.deleteUser)
+router.get('/user/:id/profilefeed', sessionMiddleware.isAuthenticated, usersController.showExternalProfile)
 
 router.get('/user/:id/addNewPet', sessionMiddleware.isAuthenticated, petsController.showAddPetPage)
 router.post('/pets/addNewPet', sessionMiddleware.isAuthenticated, upload.single('avatar'), petsController.createPet);
 router.get('/pet/:id/editPet', sessionMiddleware.isAuthenticated, petsController.showEditPetForm)
 router.post('/pet/:id/editPet', sessionMiddleware.isAuthenticated, upload.single('avatar'),  petsController.updatePet)
-router.get('/user/:id/pets', sessionMiddleware.isAuthenticated, petsController.showPetProfilePage)
+router.get('/user/:id/pets', sessionMiddleware.isAuthenticated, petsController.showPetsList)
 router.get('/pet/:id/deletePet', sessionMiddleware.isAuthenticated, petsController.deletePet)
+router.get('/pet/:id/profile', sessionMiddleware.isAuthenticated, petsController.showPetProfilePage)
 
 
 router.get('/', sessionMiddleware.isAuthenticated, usersController.showFeedPage);
+
+router.get('user/:id/', sessionMiddleware.isAuthenticated, usersController.showFeedPage);
+
+
+
 
 module.exports = router;
 
