@@ -18,21 +18,55 @@ const userIds = [];
 //https://dog.ceo/api/breeds/list/all
 //https://dog.ceo/api/breed/weimaraner/images/random
 
+const breedsArr = [];
+const dogsImages = {};
 
-async function dogBreeds() {
-    const data = await axios.get('https://dog.ceo/api/breeds/list/all')
-      .then(function (response) {
-        const breeds = response.data.message;
-        return Object.keys(breeds);
-      })
-      .catch(function (error) {
-        console.log(error);
-      })
+function getDogBreeds() {
+    return axios.get('https://dog.ceo/api/breeds/list/all')
+        .then(function (response) {
+            const breeds = response.data.message;
+            breedsArr.push(Object.keys(breeds));
 
-    return data
+            const dogImagesPromises = [];
+            
+            Object.keys(breeds).forEach( br => {
+                dogImagesPromises.push(getDogImages(br))
+                dogImagesPromises.push(getDogImages(br))
+            /*     dogImagesPromises.push(getDogImages(br))
+                dogImagesPromises.push(getDogImages(br))
+                dogImagesPromises.push(getDogImages(br))
+                dogImagesPromises.push(getDogImages(br)) */
+            })
+
+            return Promise.all(dogImagesPromises)
+                .then(() => {
+                    return dogsImages
+                }) 
+
+        })
+        .catch(error => console.log(error))
+
 }
 
-const breedsArr = [];
+function getDogImages(breed) {
+    const dogBreed = breed;
+   
+    return axios.get(`https://dog.ceo/api/breed/${dogBreed}/images/random`)
+        .then( function (response) {
+            if (response.data.message) {
+                    if (dogsImages[dogBreed]) {
+                        dogsImages[dogBreed].push(response.data.message)
+                    } else {
+                        dogsImages[dogBreed] = [];
+                        dogsImages[dogBreed].push(response.data.message)
+                    }
+            }
+            
+        })
+        .catch(error => console.log(error))
+
+}
+
   
 
 Promise.all([
@@ -44,14 +78,11 @@ Promise.all([
     Match.deleteMany(),
     Chat.deleteMany(),
     Message.deleteMany(),
-    dogBreeds().then(resp => {
-        breedsArr.push(resp)
-        return resp
-    })
-    .catch(error => console.log(error))
-    
+    getDogBreeds()
 ])
-    .then(() => {
+    .then(resp => {
+        const breedsWithImages = resp[8];
+      /*   console.log( 'breedsWithImages ', breedsWithImages) */
         console.log('Database deleted!')
 
         for (let i = 0; i < 20; i++) {
@@ -73,62 +104,54 @@ Promise.all([
                     userIds.push(user._id);
 
                     const dogBreed = breedsArr[0][Math.floor(Math.random() * breedsArr[0].length)];
+                    const dogRandomImages = dogsImages[dogBreed];
 
-                    axios.get(`https://dog.ceo/api/breed/${dogBreed}/images/random`)
-                            .then(resp => {
-                                const dogImage = resp.data.message;
+                    const pet = new Pet({
+                        user: user._id,
+                        name: faker.lorem.word(),
+                        avatar: dogRandomImages[0],
+                        breed: dogBreed,
+                        gallery: dogRandomImages,
+                        available: 'Available',
+                        bio: faker.lorem.paragraph(),
+                        createdAt: faker.date.past()
+                    });
 
-                                const pet = new Pet({
-                                    user: user._id,
-                                    name: faker.lorem.word(),
-                                    avatar: dogImage,
-                                    breed: dogBreed,
-                                    available: 'Available',
-                                    bio: faker.lorem.paragraph(),
+                    pet.save()
+            
+                    const visibility = ['private','public'];
+
+                    const post = new Post({
+                        user: user._id,
+                        visibility: visibility[Math.floor(Math.random() * 2)],
+                        body: faker.lorem.text(),
+                        createdAt: faker.date.past()
+                    });
+            
+                    post.save()
+                        .then(p => {
+
+                            for (let j = 0; Math.floor(Math.random() * 10); j++) {
+                                const comment = new Comment({
+                                    body: faker.lorem.paragraph(),
+                                    user: userIds[Math.floor(Math.random() * userIds.length)],
+                                    post: p._id,
                                     createdAt: faker.date.past()
                                 });
-            
-                                pet.save()
-            
-                                const visibility = ['private','public'];
-            
-                                const post = new Post({
-                                    user: user._id,
-                                    visibility: visibility[Math.floor(Math.random() * 2)],
-                                    body: faker.lorem.text(),
+
+                                comment.save();
+                            }
+
+                            for (let k = 0; Math.floor(Math.random() * 50); k++) {
+                                const like = new Like({
+                                    user: userIds[Math.floor(Math.random() * userIds.length)],
+                                    post: p._id,
                                     createdAt: faker.date.past()
                                 });
-            
-                                post.save()
-                                    .then(p => {
-            
-                                        for (let j = 0; Math.floor(Math.random() * 10); j++) {
-                                            const comment = new Comment({
-                                                body: faker.lorem.paragraph(),
-                                                user: userIds[Math.floor(Math.random() * userIds.length)],
-                                                post: p._id,
-                                                createdAt: faker.date.past()
-                                            });
-            
-                                            comment.save();
-                                        }
-            
-                                        for (let k = 0; Math.floor(Math.random() * 50); k++) {
-                                            const like = new Like({
-                                                user: userIds[Math.floor(Math.random() * userIds.length)],
-                                                post: p._id,
-                                                createdAt: faker.date.past()
-                                            });
-                    
-                                            like.save();
-                                        }
-                                    })
-
-                            })
-                            .catch(function (error) {
-                                console.log(error);
-                            })
-
+        
+                                like.save();
+                            }
+                        })
         
                 })
                 .catch(err => console.log(err));
@@ -153,92 +176,88 @@ Promise.all([
             .then(user => {
                 console.log('Test profile: e-mail = test@test.com , password = Test1234');
 
-                const dogBreed = breedsArr[0][Math.floor(Math.random() * breedsArr[0].length)];
-
-                axios.get(`https://dog.ceo/api/breed/${dogBreed}/images/random`)
-                    .then(resp => {
-                        const dogImage = resp.data.message;
-
-                        const pet = new Pet({
-                            user: user._id,
-                            name: 'Test pet',
-                            avatar: dogImage,
-                            breed: dogBreed,
-                            available: 'Available',
-                            bio: faker.lorem.paragraph(),
-                            createdAt: faker.date.past()
-                        });
+                for (let i = 0; i < 2 ; i++) {
+                    const dogBreed = breedsArr[0][Math.floor(Math.random() * breedsArr[0].length)];
+                    const dogRandomImages = dogsImages[dogBreed];
     
-                        pet.save().then(p  =>  console.log('Test pet saved: ', p))
-                       
-
-                        const visibility = ['private','public'];
-
-                        for (let i = 0; i < 20; i++) {
-                            const post = new Post({
-                                user: profile._id,
-                                visibility: visibility[Math.floor(Math.random() * 2)],
-                                body: faker.lorem.text(),
-                                createdAt: faker.date.past()
-                            });
-
-                            post.save()
-                                .then(p => {
-                                    for (let j = 0; Math.floor(Math.random() * 10); j++) {
-                                        const comment = new Comment({
-                                            body: faker.lorem.paragraph(),
-                                            user: profile._id,
-                                            post: p._id,
-                                            createdAt: faker.date.past()
-                                        });
+                    const pet = new Pet({
+                        user: user._id,
+                        name: 'Test pet',
+                        avatar: dogRandomImages[0],
+                        breed: dogBreed,
+                        gallery: dogRandomImages,
+                        available: 'Available',
+                        bio: faker.lorem.paragraph(),
+                        createdAt: faker.date.past()
+                    });
+    
+                    pet.save().then(p  =>  console.log('Test pet saved: ', p))
+                }
                 
-                                        comment.save();
-                                    }
-                
-                                    for (let k = 0; Math.floor(Math.random() * 50); k++) {
-                                        const like = new Like({
-                                            user: profile._id,
-                                            post: p._id,
-                                            createdAt: faker.date.past()
-                                        });
-                
-                                        like.save();
-                                    }   
-                                })
-                        }
+                const visibility = ['private','public'];
 
-                        for (let i = 0; i < 10; i++) {
-                            const match = new Match({
-                                requester: profile._id,
-                                receiver: userIds[i],
-                                status: 'accepted',
-                                createdAt: faker.date.past()
-                            })
+                for (let i = 0; i < 20; i++) {
+                    const post = new Post({
+                        user: user._id,
+                        visibility: visibility[Math.floor(Math.random() * 2)],
+                        body: faker.lorem.text(),
+                        createdAt: faker.date.past()
+                    });
 
-                            match.save()
-
-                            const chat = new Chat({
-                                members: [profile._id, userIds[i]],
-                                createdAt: faker.date.past()
-                            })
-
-                            chat.save()
-
-                            for (let j = 0; j < 20; j++) {
-                                const message = new Message({
-                                    message: faker.lorem.paragraph(),
-                                    sender: j % 2 === 0 ? profile._id : userIds[i],
-                                    chat: chat._id,
+                    post.save()
+                        .then(p => {
+                            for (let j = 0; Math.floor(Math.random() * 10); j++) {
+                                const comment = new Comment({
+                                    body: faker.lorem.paragraph(),
+                                    user: user._id,
+                                    post: p._id,
                                     createdAt: faker.date.past()
-                                })
-
-                                message.save()
+                                });
+        
+                                comment.save();
                             }
-                        }
+        
+                            for (let k = 0; Math.floor(Math.random() * 50); k++) {
+                                const like = new Like({
+                                    user: user._id,
+                                    post: p._id,
+                                    createdAt: faker.date.past()
+                                });
+        
+                                like.save();
+                            }   
+                        })
+                }
 
+                for (let i = 0; i < 10; i++) {
+                    const match = new Match({
+                        requester: user._id,
+                        receiver: userIds[i],
+                        status: 'accepted',
+                        createdAt: faker.date.past()
                     })
 
+                    match.save()
 
-                
+                    const chat = new Chat({
+                        members: [user._id, userIds[i]],
+                        createdAt: faker.date.past()
+                    })
+
+                    chat.save()
+
+                    for (let j = 0; j < 20; j++) {
+                        const message = new Message({
+                            message: faker.lorem.paragraph(),
+                            sender: j % 2 === 0 ? user._id : userIds[i],
+                            chat: chat._id,
+                            createdAt: faker.date.past()
+                        })
+
+                        message.save()
+                    }
+                }
+
             })
+
     })
