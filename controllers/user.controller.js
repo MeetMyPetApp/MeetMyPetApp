@@ -246,21 +246,3 @@ module.exports.showFeedPage = (req, res, next) => {
  */
     
 }
-/* 
-/user/:id/feed
-
-const { id } = req.params
-
-Post.find({ user: id })
-    .then(posts => {
-        Like.find({ 'user': id })
-            .populate({
-                path: 'posts',
-                populate: { path: 'user' }
-            })
-            .then(likes => {
-                res.render('xxx', {posts, likes})
-            })
-            .catch(error => console.log(error))
-    })
-    .catch(error => console.log(error)) */
