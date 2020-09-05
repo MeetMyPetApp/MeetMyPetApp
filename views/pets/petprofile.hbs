@@ -1,0 +1,31 @@
+<div class="main panel panel-default z-depth-4">
+	<div class="panel-body">
+
+		<div class="media">
+			<div class="media-left">
+				<img src="https://mms.businesswire.com/media/20190122005910/en/701785/5/Camila-x-MC.jpg"
+					class="media-object circle">
+			</div>
+			<div class="media-body">
+				{{#if pets}}
+				{{#each pets as |pet|}}
+				<img class="profile-image" src="{{pet.avatar}}" alt="profile image">
+				<p>Name: {{pet.name}}</p>
+				<p>Breed: {{pet.breed}}</p>
+				<p>Availability: {{pet.available}}</p>
+				<p>Short description of your pet:</p>
+				<p><i>{{pet.bio}}</i></p>
+			</div>
+		</div>
+
+		<div class="post">
+
+			{{#each gallery as |image|}}
+
+			<img class="not" src="{{image}}">
+
+			{{/each}}
+
+		</div>
+	</div>
+</div>
