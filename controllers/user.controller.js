@@ -3,6 +3,8 @@ const User = require('../models/user.model');
 //const Pets = require('../models/pet.model');
 const nodemailer = require('../config/mailer.config');
 const passport = require('passport');
+const Match = require('../models/match.model');
+const Post = require('../models/post.model');
 
 module.exports.showSignupPage = (req, res, next) => {
     res.render('users/userform')
@@ -207,4 +209,40 @@ module.exports.deleteUser = (req, res, next) => {
               .catch(err => next(err))
         })
         .catch(err => next(err))
+}
+
+module.exports.showFeedPage = (req, res, next) => {
+    const matches = [];
+
+    Match.find({'requester': req.currentUser.id})
+        .then( receiverMatches => {
+            receiverMatches.forEach(m => {
+                matches.push(m.receiver)
+            })
+
+            Match.find({'receiver': req.currentUser.id})
+            .then( requesterMatches => {
+                requesterMatches.forEach(m => {
+                    matches.push(m.requester)
+                })
+                console.log('found matches: ', matches);
+
+                Post.find()
+                    .then(posts => {
+                        const filteredPosts = [];
+                        
+                        posts.forEach( post => {
+                            if (matches.includes(post.user)) {
+                                filteredPosts.push(post)
+                            }
+                        })
+
+                        console.log('Posts: ', filteredPosts);
+                        res.render('feed', { filteredPosts });
+                    })
+
+            })
+        })
+
+    
 }

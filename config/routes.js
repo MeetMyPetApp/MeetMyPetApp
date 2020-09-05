@@ -33,9 +33,7 @@ router.get('/user/:id/pets', sessionMiddleware.isAuthenticated, petsController.s
 router.get('/pet/:id/deletePet', sessionMiddleware.isAuthenticated, petsController.deletePet)
 
 
-router.get('/', sessionMiddleware.isAuthenticated, (req, res, next) => {
-    res.render('feed');
-});
+router.get('/', sessionMiddleware.isAuthenticated, usersController.showFeedPage);
 
 module.exports = router;
 
