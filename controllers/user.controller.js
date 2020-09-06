@@ -6,6 +6,7 @@ const passport = require('passport');
 const Match = require('../models/match.model');
 const Post = require('../models/post.model');
 const Like = require('../models/like.model');
+const { post } = require('../config/routes');
 
 module.exports.showSignupPage = (req, res, next) => {
     res.render('users/userform')
@@ -231,45 +232,25 @@ module.exports.deleteUser = (req, res, next) => {
 }
 
 module.exports.showFeedPage = (req, res, next) => {
-    /* const matches = [];
 
-    Match.find({
-            'requester': req.currentUser.id
-        })
-        .then(receiverMatches => {
-            receiverMatches.forEach(m => {
-                matches.push(m.receiver)
-            })
+    Match.find({ 'users': req.currentUser.id})
+        .then(matches => {
 
-            Match.find({
-                    'receiver': req.currentUser.id
+            const matchIds = matches.reduce((acc, cur) => {
+                const filteredMatch = cur.users.filter(m => m !== req.currentUser.id)
+                acc.push(filteredMatch[0]._id)
+                return acc
+            }, []);
+
+            Post.find().where('user').in(matchIds)
+                .sort({ createdAt: -1 })
+                .populate('user')
+                .then( posts => {
+                    res.render('feed', { posts })
                 })
-                .then(requesterMatches => {
-                    requesterMatches.forEach(m => {
-                        matches.push(m.requester)
-                    })
-                    console.log('found matches: ', matches);
-
-                    Post.find()
-                        .then(posts => {
-                            const filteredPosts = [];
-
-                            posts.forEach(post => {
-                                if (matches.includes(post.user)) {
-                                    filteredPosts.push(post)
-                                }
-                            })
-
-                            console.log('Posts: ', filteredPosts);
-                            res.render('feed', {
-                                filteredPosts
-                            });
-                        })
-
-                })
+                .catch(err => next(err))
         })
-
- */
+        .catch(err => next(err))
     
 }
 

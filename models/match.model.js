@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 
 require('./user.model');
+const Post = require('./post.model');
 
 const matchSchema = new mongoose.Schema(
   {
