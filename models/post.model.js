@@ -1,9 +1,8 @@
 const mongoose = require('mongoose');
 
 require('./user.model');
-require('./post.model');
-require('./like.model');
-require('./comment.model');
+const Like = require('./like.model');
+const Comment = require('./comment.model');
 
 const postSchema = new mongoose.Schema(
   {

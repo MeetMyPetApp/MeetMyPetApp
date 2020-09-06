@@ -6,6 +6,8 @@ const passport = require('passport');
 const Match = require('../models/match.model');
 const Post = require('../models/post.model');
 const Like = require('../models/like.model');
+const Comment = require('../models/comment.model');
+
 const { post } = require('../config/routes');
 
 module.exports.showSignupPage = (req, res, next) => {
@@ -245,6 +247,8 @@ module.exports.showFeedPage = (req, res, next) => {
             Post.find().where('user').in(matchIds)
                 .sort({ createdAt: -1 })
                 .populate('user')
+                .populate('likes')
+                .populate('comments')
                 .then( posts => {
                     res.render('feed', { posts })
                 })
