@@ -3,7 +3,7 @@ const router = express.Router();
 const multer = require('multer');
 const usersController = require('../controllers/user.controller');
 const petsController = require('../controllers/pet.controller');
-const commentController = require('../controllers/user.controller');
+const postController = require('../controllers/post.controller');
 const sessionMiddleware = require('../middlewares/session.middleware');
 const upload = require('../config/multer.config');
 
@@ -35,10 +35,13 @@ router.get('/pet/:id/deletePet', sessionMiddleware.isAuthenticated, petsControll
 router.get('/pet/:id/profile', sessionMiddleware.isAuthenticated, petsController.showPetProfilePage)
 
 
-router.get('/', sessionMiddleware.isAuthenticated, usersController.showFeedPage);
+router.get('/', sessionMiddleware.isAuthenticated, postController.showFeedPage);
 
-router.get('user/:id/', sessionMiddleware.isAuthenticated, usersController.showFeedPage);
+router.get('user/:id/', sessionMiddleware.isAuthenticated, postController.showFeedPage);
 
+router.get('/post/:id/like', sessionMiddleware.isAuthenticated, postController.like);
+router.post('/post/:id/comment', sessionMiddleware.isAuthenticated, postController.createNewComment)
+router.get('/post/:id', sessionMiddleware.isAuthenticated, postController.showPostDetails);
 
 
 

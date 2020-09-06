@@ -1,0 +1,36 @@
+<div class="post-detail-page">
+    <div class="card mb-3">
+        <div class="card-header">
+            <img class="rounded-circle" src="{{ post.user.avatar }}" alt="author photo">
+            <span class="card-title">{{ post.user.name }}</span>
+            <div class="text-muted">Published on {{ post.createdAt }}</div>
+        </div>
+        <div class="card-body"> {{ post.body }} </div>
+        <div class="card-footer border-bottom">Comments:</div>
+
+        {{#if post.comments}}
+            {{#each post.comments as |comment|}}
+
+                <div class="row border-bottom">
+                    <div class="col-3">
+                        <img class="rounded-circle" src="{{comment.user.avatar}}" alt="author photo">
+                    </div>
+                    <div class="col-9">
+                        <h5>{{comment.user.name}}</h5>
+                        <p>{{comment.body}}</p>
+                        <br>
+                        <p class="text-muted">{{comment.createdAt}}</p>
+                    </div>
+                </div>
+
+            {{/each}}
+        {{/if}}
+        
+
+        <form action="/post/{{post._id}}/comment" method="POST">
+            <label for="comment">New comment:</label>
+            <textarea class="form-control" name="comment" id="comment" placeholder="Your message" required=""></textarea>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+      </div>
+</div>

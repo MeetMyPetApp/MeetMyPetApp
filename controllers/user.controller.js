@@ -233,31 +233,6 @@ module.exports.deleteUser = (req, res, next) => {
         .catch(err => next(err))
 }
 
-module.exports.showFeedPage = (req, res, next) => {
-
-    Match.find({ 'users': req.currentUser.id})
-        .then(matches => {
-
-            const matchIds = matches.reduce((acc, cur) => {
-                const filteredMatch = cur.users.filter(m => m !== req.currentUser.id)
-                acc.push(filteredMatch[0]._id)
-                return acc
-            }, []);
-
-            Post.find().where('user').in(matchIds)
-                .sort({ createdAt: -1 })
-                .populate('user')
-                .populate('likes')
-                .populate('comments')
-                .then( posts => {
-                    res.render('feed', { posts })
-                })
-                .catch(err => next(err))
-        })
-        .catch(err => next(err))
-    
-}
-
 module.exports.showExternalProfile = (req, res, next) => {
     const {
         id
