@@ -227,8 +227,7 @@ Promise.all([
 
                 for (let i = 0; i < 10; i++) {
                     const match = new Match({
-                        requester: user._id,
-                        receiver: userIds[i],
+                        users: [ userIds[i], user._id],
                         status: 'accepted',
                         createdAt: faker.date.past()
                     })

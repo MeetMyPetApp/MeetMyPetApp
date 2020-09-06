@@ -96,7 +96,7 @@ userSchema.virtual('chats', {
 userSchema.virtual('matches', {
   ref: 'Match',
   localField: '_id',
-  foreignField: 'sender',
+  foreignField: 'users',
   justOne: false,
 });
 
