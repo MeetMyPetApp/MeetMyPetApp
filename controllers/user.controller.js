@@ -29,7 +29,7 @@ module.exports.doLogin = (req, res, next) => {
                         if (match) {
                             if (user.activation.active) {
                                 req.session.userId = user._id;
-                                res.redirect(`user/${user._id}`);
+                                res.redirect('/');
                             } else {
                                 res.render('users/login', {
                                     error: {
@@ -68,7 +68,7 @@ module.exports.loginWithSlack = (req, res, next) => {
             next(error);
         } else {
             req.session.userId = user._id;
-            res.redirect(`/user/${user._id}`);
+            res.redirect('/');
         }
     })
 
@@ -93,7 +93,7 @@ module.exports.getLoginWithGmail = (req, res, next) => {
             next(error);
         } else {
             req.session.userId = user._id;
-            res.redirect(`/user/${user._id}`);
+            res.redirect('/');
         }
     })
     passportGoogleController(req, res, next)
@@ -264,3 +264,42 @@ module.exports.showExternalProfile = (req, res, next) => {
         .catch(error => console.log(error))
 }
 
+
+module.exports.showNetwork = (req, res, next) => {
+
+    Match.find({ 'users': req.currentUser.id})
+        .then(matches => {
+
+            const matchIds = matches.reduce((acc, cur) => {
+                acc.push(cur.users[0], cur.users[1])
+                return acc
+            }, []);
+
+            User.find().where('_id').nin(matchIds)
+                .then( users => {               
+                    res.render('network/generalnetwork', { users })
+                })
+                .catch(err => next(err)) 
+        })
+        .catch(err => next(err))
+}
+
+module.exports.showMatches = (req, res, next) => {
+
+    Match.find({ 'users': req.currentUser.id})
+        .then(matches => {
+
+            const matchIds = matches.reduce((acc, cur) => {
+                const filteredMatch = cur.users.filter(m => m !== req.currentUser.id)
+                acc.push(filteredMatch[0]._id)
+                return acc
+            }, []);
+
+            User.find().where('_id').in(matchIds)
+                .then( users => {               
+                    res.render('network/mynetwork', { users })
+                })
+                .catch(err => next(err)) 
+        })
+        .catch(err => next(err))
+}
