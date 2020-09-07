@@ -39,6 +39,7 @@ router.get('/', sessionMiddleware.isAuthenticated, postController.showFeedPage);
 
 router.get('user/:id/', sessionMiddleware.isAuthenticated, postController.showFeedPage);
 
+router.post('/post/new', sessionMiddleware.isAuthenticated, postController.createPost)
 router.get('/post/:id/like', sessionMiddleware.isAuthenticated, postController.like);
 router.post('/post/:id/comment', sessionMiddleware.isAuthenticated, postController.createNewComment)
 router.get('/post/:id', sessionMiddleware.isAuthenticated, postController.showPostDetails);

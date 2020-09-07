@@ -9,8 +9,10 @@ module.exports.showFeedPage = (req, res, next) => {
         .then(matches => {
 
             const matchIds = matches.reduce((acc, cur) => {
-                const filteredMatch = cur.users.filter(m => m !== req.currentUser.id)
-                acc.push(filteredMatch[0]._id)
+                //all posts without current user posts:
+                /* const filteredMatch = cur.users.filter(m => m !== req.currentUser.id)
+                acc.push(filteredMatch[0]._id) */
+                acc.push(cur.users[0], cur.users[1])
                 return acc
             }, []);
 
@@ -46,6 +48,22 @@ module.exports.showPostDetails = (req, res, next) => {
         })
         .catch(err => next(err))
 }
+
+module.exports.createPost = (req, res, next) => {
+    const params = {
+        body: req.body.body,
+        user: req.currentUser.id,
+        visibility: 'public'
+    }
+
+    const post = new Post(params)
+
+    post.save()
+        .then(() => {
+            res.redirect('/')
+        })
+}
+
 
 module.exports.createNewComment = (req, res, next) => {
     const postId = req.params.id; 
