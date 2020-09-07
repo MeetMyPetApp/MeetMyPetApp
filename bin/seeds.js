@@ -205,7 +205,7 @@ Promise.all([
                             for (let j = 0; Math.floor(Math.random() * 10); j++) {
                                 const comment = new Comment({
                                     body: faker.lorem.paragraph(),
-                                    user: user._id,
+                                    user: userIds[Math.floor(Math.random() * userIds.length)],
                                     post: p._id,
                                     createdAt: faker.date.past()
                                 });
