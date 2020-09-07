@@ -205,9 +205,7 @@ html, body {
 	position: relative;
 	top: 5vh;
 }
-body{
-	
-}
+
 .media-object{
 	width: 3.5vw;
 	height: 3.5vw;
@@ -328,5 +326,3 @@ body{
 	    color: #d32f2f;
     }
 }
-
-/*# sourceMappingURL=style.css.map */

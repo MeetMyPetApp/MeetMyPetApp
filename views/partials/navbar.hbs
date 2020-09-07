@@ -28,15 +28,16 @@
 
         <!--User Dropdown-->
         <div class="nav-item dropdown">
-            <a href="#" data-toggle="dropdown" class="nav-item nav-link dropdown-toggle user-action"><img
-                    src="{{ currentUser.avatar }}" class="avatar" alt="Avatar">
-                {{ currentUser.name }} <b class="caret"></b></a>
-            <div class="dropdown-menu">
-                <a href="#" class="dropdown-item"><i class="fa fa-user-o"></i> My profile</a>
-                <a href="#" class="dropdown-item"><i class="fa fa-calendar-o"></i> My pets</a>
-                <a href="#" class="dropdown-item"><i class="fa fa-sliders"></i> Edit profile</a>
+            <a href="#" data-toggle="dropdown" class="nav-item nav-link dropdown-toggle user-action" role="button" id="dropdownMenuLink" aria-haspopup="true" aria-expanded="false">
+                <img src="{{ currentUser.avatar }}" class="avatar" alt="Avatar">
+                {{ currentUser.name }} 
+                <b class="caret"></b>
+            </a>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <a href="/user/{{currentUser.id}}" class="dropdown-item"><i class="fa fa-user-o"></i> My profile</a>
+                <a href="/user/{{currentUser.id}}/pets" class="dropdown-item"><i class="fa fa-calendar-o"></i> My pets</a>
                 <div class="divider dropdown-divider"></div>
-                <a href="#" class="dropdown-item"><i class="material-icons">&#xE8AC;</i> Logout</a>
+                <a href="/logout" class="dropdown-item"><i class="material-icons">&#xE8AC;</i> Logout</a>
             </div>
         </div>
 
