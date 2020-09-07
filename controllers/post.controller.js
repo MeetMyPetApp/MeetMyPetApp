@@ -22,6 +22,13 @@ module.exports.showFeedPage = (req, res, next) => {
                 .populate('likes')
                 .populate('comments')
                 .then( posts => {
+                    //console.log('POSTS: ', posts);
+                   /*  const test = posts.forEach( p => {
+                        if (p.user._id == req.currentUser.id) {
+                            p['owner'] = true;
+                            console.log(p)
+                        }
+                    } ) */
                     res.render('feed', { posts })
                 })
                 .catch(err => next(err))

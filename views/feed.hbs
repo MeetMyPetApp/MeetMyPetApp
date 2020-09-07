@@ -23,16 +23,12 @@
          </div>
          <div class="card-body"> {{ post.body }} </div>
          <div class="card-footer">
-            {{#if post.likes}}
-               <span class="text-muted">
-                  <a href="/post/{{post._id}}/like"><i class="fa fa-heart"></i></a> 
-                  {{post.likes.length}} &nbsp;- 
-               </span>
-            {{/if}}
-            {{#if post.comments}}
-               <span class="text-muted">comments: {{post.comments.length}} | </span>
-               <a href="/post/{{post._id}}">View comments</a>
-            {{/if}}
+            <span class="text-muted">
+               <a href="/post/{{post._id}}/like"><i class="fa fa-heart"></i></a> 
+               {{post.likes.length}} &nbsp;- 
+            </span>
+            <span class="text-muted">comments: {{post.comments.length}} | </span>
+            <a href="/post/{{post._id}}">Comments</a>
          </div>
       </div>
    {{/each}}
