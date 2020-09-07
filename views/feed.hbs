@@ -1,6 +1,18 @@
 <div id="index-page-container">
    <h2>News feed</h2>
 
+   <form action="/post/new" method="POST">
+      <div class="form-group">
+         <label for="body">Any news?</label>
+         <textarea name="body" type="text" class="form-control {{#if error.body }}is-invalid{{/if}}" id="body"
+         placeholder="Write your post..." rows="4"></textarea>
+      </div>
+
+      <button type="submit" class="btn btn-primary">Submit post</button>
+   </form>
+
+   <hr class="style3">
+
    {{#if posts }}
    {{#each posts as |post| }}
       <div class="card mb-3">
