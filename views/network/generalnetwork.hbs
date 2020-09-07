@@ -6,28 +6,27 @@
 
 			</li>
 			<li class="nav-item">
-				<a class="nav-link" href="#">My matches</a>
+				<a class="nav-link" href="/user/{{ user._id }}/pets">My matches</a>
 			</li>
 		</ul>
 	</div>
+
 
 	<div class="row bootstrap snippets bootdey">
 		<div class="col-md-8 col-xs-12">
 			<div class="panel" id="followers">
 				<div class="panel-heading">
 					<h3 class="panel-title">
-						<i class="icon md-check" aria-hidden="true"></i> Current Matches
+						<i class="icon md-check" aria-hidden="true"></i> MeetMyPet Network
 					</h3>
 				</div>
-
 				{{#each users as |user|}}
 				<div class="panel-body">
 					<ul class="list-group list-group-dividered list-group-full">
-
 						<li class="list-group-item">
 							<div class="media">
 								<div class="media-left">
-									<a class="avatar avatar-away" href="javascript:void(0)">
+									<a class="avatar avatar-online" href="javascript:void(0)">
 										<img src="{{user.avatar}}" alt="">
 										<i></i>
 									</a>
@@ -35,20 +34,21 @@
 								<div class="media-body">
 									<div class="pull-right">
 										<button type="button"
-											class="btn btn-success btn-default btn-sm waves-effect waves-light"><i
-												class="icon md-check" aria-hidden="true"></i>Matching</button>
+											class="btn btn-info btn-sm waves-effect waves-light">Match</button>
 										<button type="button" class="btn btn-info btn-sm waves-effect waves-light">View
 											Profile</button>
 									</div>
 									<div><a class="name" href="javascript:void(0)">{{user.name}}</a></div>
 									<small>{{user.username}}</small>
+									<small>{{user.status}}</small>
 								</div>
 							</div>
 						</li>
 					</ul>
 				</div>
-				{{/each}}
+				{{#each}}
 			</div>
 		</div>
 	</div>
+
 </div>

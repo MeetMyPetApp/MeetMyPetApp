@@ -1,57 +1,84 @@
-<div id="user-profile-page">
+{{!-- <div id="user-profile-page">
 	<div class="row project-card">
 		<div class="col-sm-12 col-lg-3 project-card-left">
 			<img class="profile-image" src="{{user.avatar}}" alt="profile image">
 		</div>
-		<div class="col-sm-12 col-lg-9 project-card-right">
-			<ul class="nav nav-tabs">
-				<li class="nav-item">
-					<a class="nav-link active" href="">{{user.name}}`s profile</a>
+		<div class="col-sm-12 col-lg-9 project-card-right"> --}}
 
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="/user/{{ user._id }}/externalpets">{{user.name}}`s pets</a>
-				</li>
-			</ul>
-
-			<p>Name: {{user.name}}</p>
-			<p>Username: {{user.username}}</p>
-			<p>E-Mail: {{user.email}}</p>
-			<p>Short description of yourself:</p>
-			<p><i>{{user.bio}}</i></p>
-			<br>
-
-			<h4> {{user}} Feed:</h4>
-			{{#if user.posts}}
-			{{#each posts as |post|}}
-			<div class="row project-card">
-				<div class="col-12 project-card-right">
-
-					<div class="cardbox shadow-lg bg-white">
-						<div class="media m-0">
-							<div class="d-flex mr-3">
-								<a href=""><img class="img-fluid rounded-circle"
-										src="{{user.avatar}}"
-										alt="User Avatar"></a>
-							</div>
-							<div class="media-body">
-								<p class="m-0">{{user.name}}</p>
-								<small><span><i class="icon ion-md-pin"></i> Nairobi, Kenya</span></small>
-								<small><span><i class="icon ion-md-time"></i> 10 hours ago</span></small>
-							</div>
-						</div>
-					</div>
-
-					<p>{{post.body}}</p>
-					<p>{{post.image}}</p>
-					<div class="comments-likes-area">
-						<span>Likes: {{post.likes.length}}</span>
-						<span>- Comments: {{post.comments.length}}</span>
-					</div>
+<div class="row py-5 px-4">
+	<div class="col-md-5 mx-auto">
+		<!-- Profile widget -->
+		<div class="bg-white shadow rounded overflow-hidden">
+			<div class="media align-items-end profile-head">
+				<div class="profile mr-3"><img src="{{posts.[0].user.avatar}}" alt="user avatar" width="130"
+						class="rounded mb-2 img-thumbnail">{{!-- <a href="#"
+						class="btn btn-outline-dark btn-sm btn-block">Match</a> --}}</div>
+				<div class="media-body mb-5 text-white">
+					<h4 class="mt-0 mb-0">{{posts.[0].user.name}}</h4>
+					<p class="small mb-4"> <i class="fas fa-map-marker-alt mr-2"></i>{{posts.[0].user.username}}</p>
 				</div>
 			</div>
-			{{/each}}
-			{{/if}}
+
+
+
+			<div class="bg-light p-4 d-flex justify-content-end text-center">
+				<ul class="list-inline mb-0">
+					<li class="list-inline-item">
+						<h5 class="font-weight-bold mb-0 d-block">215</h5><small class="text-muted"> <i
+								class="fas fa-image mr-1"></i>Posts</small>
+					</li>
+					<li class="list-inline-item">
+						<h5 class="font-weight-bold mb-0 d-block">745</h5><small class="text-muted"> <i
+								class="fas fa-user mr-1"></i>Likes</small>
+					</li>
+					<li class="list-inline-item">
+						<h5 class="font-weight-bold mb-0 d-block">340</h5><small class="text-muted"> <i
+								class="fas fa-user mr-1"></i>Matching</small>
+					</li>
+				</ul>
+			</div>
+			<div class="px-4 py-3">
+				<h5 class="mb-0">About</h5>
+				<div class="p-4 rounded shadow-sm bg-light">
+					<p class="font-italic mb-0">{{posts.[0].user.bio}}</p>
+				</div>
+			</div>
+
+
+
+			<div class="py-4 px-4">
+				<div class="d-flex align-items-center justify-content-between mb-3">
+					<h5 class="mb-0">Recent posts</h5><a href="/user/{{user.id}}/pets"
+						class="btn btn-link text-muted">Show Pets</a>
+				</div>
+				<div class="row">
+					{{#if posts }}
+					{{#each posts as |post| }}
+					<div class="card mb-3">
+						<div class="card-header">
+							<img class="rounded-circle" src="{{ post.user.avatar }}" alt="author photo">
+							<span class="card-title">{{ post.user.name }}</span>
+							<div class="text-muted">Published on {{ post.createdAt }}</div>
+						</div>
+						<div class="card-body"> {{ post.body }} </div>
+						<div class="card-footer">
+							{{#if post.likes}}
+							<span class="text-muted">
+								<a href="/post/{{post._id}}/like"><i class="fa fa-heart"></i></a>
+								{{post.likes.length}} &nbsp;-
+							</span>
+							{{/if}}
+							{{#if post.comments}}
+							<span class="text-muted">comments: {{post.comments.length}} | </span>
+							<a href="/post/{{post._id}}">View comments</a>
+							{{/if}}
+						</div>
+					</div>
+					{{/each}}
+					{{/if}}
+
+				</div>
+			</div>
 		</div>
 	</div>
 </div>

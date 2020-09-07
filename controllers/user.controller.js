@@ -241,7 +241,9 @@ module.exports.showExternalProfile = (req, res, next) => {
     Post.find({
             user: id
         })
+        .populate('user')
         .then(posts => {
+            console.log(posts);
             Like.find({
                     'user': id
                 })
@@ -252,10 +254,10 @@ module.exports.showExternalProfile = (req, res, next) => {
                     }
                 })
                 .then(likes => {
-                    res.render('externaluserprofile', {
+                    res.render('users/externaluserprofile', {
                         posts,
                         likes
-                    })
+                    }) 
                 })
                 .catch(error => console.log(error))
         })
