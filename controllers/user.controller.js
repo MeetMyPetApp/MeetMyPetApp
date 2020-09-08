@@ -176,6 +176,15 @@ module.exports.showUserProfilePage = (req, res, next) => {
         id
     } = req.params;
     User.findById(id)
+        .populate({
+            path: 'posts',
+            options: {
+                sort: {
+                    createdAt: -1
+                }
+            },
+            populate: ['comments', 'likes']
+        }) 
         .then(user => {
             res.render('users/user', {
                 user

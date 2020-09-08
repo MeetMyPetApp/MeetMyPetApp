@@ -17,9 +17,11 @@
    {{#each posts as |post| }}
       <div class="card mb-3">
          <div class="card-header">
-            <img class="rounded-circle" src="{{ post.user.avatar }}" alt="author photo">
-            <span class="card-title">{{ post.user.name }}</span>
-            <div class="text-muted">Published on {{ post.createdAt }}</div>
+            <a href="/user/{{post.user._id}}">
+               <img class="rounded-circle" src="{{ post.user.avatar }}" alt="author photo">
+               <span class="card-title">{{ post.user.name }}</span>
+               <div class="text-muted">Published on {{ post.createdAt }}</div>
+            </a>
          </div>
          <div class="card-body"> {{ post.body }} </div>
 

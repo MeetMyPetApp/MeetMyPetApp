@@ -16,8 +16,11 @@
 
 			<div class="form-group">
 				<label for="breed">Breed:</label>
-				<input name="breed" type="text" class="form-control {{#if error.breed }}is-invalid{{/if}}"
-					id="breed" placeholder="Enter breed" value="{{ pet.breed }}">
+				<select name="breed" id="breed">
+					{{#each breeds}}
+						<option class="form-control" value="{{this}}">{{this}}</option>
+					{{/each}}
+				</select>
 
 				{{#if error.breed}}
 				<div class="invalid-feedback">

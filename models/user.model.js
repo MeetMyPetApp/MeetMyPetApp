@@ -86,6 +86,13 @@ userSchema.virtual('pets', {
   justOne: false,
 });
 
+userSchema.virtual('posts', {
+  ref: 'Post',
+  localField: '_id',
+  foreignField: 'user',
+  justOne: false,
+});
+
 userSchema.virtual('chats', {
   ref: 'Chat',
   localField: '_id',
