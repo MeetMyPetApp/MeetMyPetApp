@@ -93,24 +93,25 @@ module.exports.like = (req, res, next) => {
     const user = req.currentUser.id;
     const post = req.params.id;
     const params = { user , post };
-  
-    Like.findOne(params)
-      .then(like => {
-        if (like) {
-          Like.findByIdAndRemove(like._id)
-            .then(() => {
-                res.redirect('/')
-            })
-            .catch(err => next(err));
-        } else {
-          const newLike = new Like(params);
-          newLike.save()
-            .then(() => {
-                res.redirect('/')
-            })
-            .catch(err => next(err));;
-        }
-      })
-      .catch(err => next(err));
+
+      Like.findOne(params)
+        .then(like => {
+            if (like) {
+                Like.findByIdAndRemove(like._id)
+                .then(() => {
+                    res.json({ like: -1 });
+                })
+                .catch(err => next(err));
+            } else {
+                const newLike = new Like(params);
+
+                newLike.save()
+                .then(() => {
+                    res.json({ like: 1 });
+                })
+                .catch(err => next(err));
+            }
+        })
+        .catch(err => next(err));
   }
   

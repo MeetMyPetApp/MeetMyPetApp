@@ -6,7 +6,17 @@
             <div class="text-muted">Published on {{ post.createdAt }}</div>
         </div>
         <div class="card-body"> {{ post.body }} </div>
-        <div class="card-footer border-bottom">Comments:</div>
+
+        <div class="card-footer">
+            <button type="button" class="btn-sm btn btn-outline-danger" data-like-post="{{post._id}}">
+               <i class="fa fa-heart mr-1"></i>
+               <span class="likes-count">{{post.likes.length}}</span>
+               Likes
+            </button>
+            <span class="text-muted"> - {{post.comments.length}} comments </span>
+         </div>
+
+        <h3>Comments:</h3>
 
         {{#if post.comments}}
             {{#each post.comments as |comment|}}
