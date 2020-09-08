@@ -29,7 +29,9 @@ module.exports.showFeedPage = (req, res, next) => {
                             console.log(p)
                         }
                     } ) */
-                    res.render('feed', { posts })
+                    const currentuser = req.currentUser.id;
+                    console.log(currentuser);
+                    res.render('feed', { posts, currentuser })
                 })
                 .catch(err => next(err))
         })

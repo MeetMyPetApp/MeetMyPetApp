@@ -14,12 +14,15 @@
 				{{/if}}
 			</div>
 
+
 			<div class="form-group">
+
 				<label for="breed">Breed:</label>
-				<select name="breed" id="breed">
-					{{#each breeds}}
-						<option class="form-control" value="{{this}}">{{this}}</option>
-					{{/each}}
+				<select name="breed" class="browser-default custom-select">
+					<option selected>Choose breed</option>
+					{{#each breeds as |breed|}}
+						<option value="{{breed}}">{{breed}}</option>
+					{{/each}} 
 				</select>
 
 				{{#if error.breed}}

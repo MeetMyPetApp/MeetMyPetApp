@@ -1,13 +1,14 @@
+  
 html, body {
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
-  font-family: Arial, Helvetica, sans-serif;
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+	font-family: Arial, Helvetica, sans-serif;
 }
 
 #edit-profile-page-container img {
-  width: 150px;
-  height: auto;
+width: 150px;
+height: auto;
 }
 
 @media (min-width: 768px){
@@ -19,23 +20,22 @@ html, body {
     display: none;
   }
 }
- @media (max-width: 767px){
 
-  .navbar-bottom {
-    position: fixed;
-    bottom: 0;  
-  }
+@media (max-width: 767px){
 
-  .hidden-nav-part {
-	display: none;
+	.navbar-bottom {
+		position: fixed;
+		bottom: 0;  
+	}
+
+	.hidden-nav-part {
+		display: none;
+	}
+
+
+	.navbar-low {
+		display: flex;
+		flex-wrap: wrap;
+	}
+
 }
-
-
-  .navbar-low {
-    display: flex;
-    flex-wrap: wrap;
-  }
-
-}
-
-
