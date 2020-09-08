@@ -22,11 +22,17 @@
             <div class="text-muted">Published on {{ post.createdAt }}</div>
          </div>
          <div class="card-body"> {{ post.body }} </div>
+
+       {{!--   {{#ifeq post.user.name "Test"}}
+            <button>Test</button>
+         {{/ifeq}} --}}
+
          <div class="card-footer">
-            <span class="text-muted">
-               <a href="/post/{{post._id}}/like"><i class="fa fa-heart"></i></a> 
-               {{post.likes.length}} &nbsp;- 
-            </span>
+            <button type="button" class="btn-sm btn btn-outline-danger" data-like-post="{{post._id}}">
+               <i class="fa fa-heart mr-1"></i>
+               <span class="likes-count">{{post.likes.length}}</span>
+               Likes
+            </button>
             <span class="text-muted">comments: {{post.comments.length}} | </span>
             <a href="/post/{{post._id}}">Comments</a>
          </div>
