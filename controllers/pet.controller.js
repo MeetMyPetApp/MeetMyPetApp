@@ -12,11 +12,13 @@ module.exports.showAddPetPage = (req, res, next) => {
 	
 	axios.get('https://dog.ceo/api/breeds/list/all')
 		.then( allBreeds => {
-			const breeds = allBreeds.data.message;
-		/* 	console.log(breeds); 
-			const breeds = response.data.message;
-			breedsarr.push(Object.keys(breeds)); */
-			
+
+			const breedsarr = Object.keys(allBreeds.data.message);
+			const breeds = breedsarr.reduce((acc, cur) => {
+				acc[cur] = cur;
+				return acc
+			}, {})
+
 			console.log(breeds);
 			res.render('pets/addnewpet', { breeds })
 		})

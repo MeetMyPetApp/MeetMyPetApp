@@ -31,9 +31,9 @@
                     <div class="card mb-3">
                         <div class="card-header">
                             <a href="/user/{{post.user._id}}">
-                            <img class="rounded-circle" src="{{ user.avatar }}" alt="author photo">
-                            <span class="card-title">{{ user.name }}</span>
-                            <div class="text-muted">Published on {{ post.createdAt }}</div>
+                                <img class="rounded-circle" src="{{ user.avatar }}" alt="author photo">
+                                <span class="card-title">{{ post.user.name }}</span>
+                                <div class="text-muted">Published on {{ post.createdAt }}</div>
                             </a>
                         </div>
                         <div class="card-body"> {{ post.body }} </div>
@@ -46,6 +46,10 @@
                             </button>
                             <span class="text-muted">comments: {{post.comments.length}} | </span>
                             <a href="/post/{{post._id}}">Comments</a>
+                             {{#ifeq ../currentUser.id post.user._id }}
+                                <a href="" class="btn-sm btn btn-outline-danger">Edit</a>
+                                <a href="" class="btn-sm btn btn-outline-danger">Cancel</a>
+                            {{/ifeq}}
                         </div>
                     </div>
                 {{/each}}

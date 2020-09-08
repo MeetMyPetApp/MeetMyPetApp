@@ -172,9 +172,10 @@ module.exports.logout = (req, res, next) => {
 }
 
 module.exports.showUserProfilePage = (req, res, next) => {
-    const {
-        id
-    } = req.params;
+    const { id } = req.params;
+    const currentuser = req.currentUser;
+
+    console.log('currentuser', currentuser);
     User.findById(id)
         .populate({
             path: 'posts',
@@ -183,11 +184,12 @@ module.exports.showUserProfilePage = (req, res, next) => {
                     createdAt: -1
                 }
             },
-            populate: ['comments', 'likes']
+            populate: ['comments', 'likes', 'user']
         }) 
         .then(user => {
             res.render('users/user', {
-                user
+                user,
+                currentuser
             })
         })
         .catch(err => next(err))
