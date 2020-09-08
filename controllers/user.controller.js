@@ -275,3 +275,42 @@ module.exports.showExternalProfile = (req, res, next) => {
         .catch(error => console.log(error))
 }
 
+
+module.exports.showNetwork = (req, res, next) => {
+
+    Match.find({ 'users': req.currentUser.id})
+        .then(matches => {
+
+            const matchIds = matches.reduce((acc, cur) => {
+                acc.push(cur.users[0], cur.users[1])
+                return acc
+            }, []);
+
+            User.find().where('_id').nin(matchIds)
+                .then( users => {               
+                    res.render('network/generalnetwork', { users })
+                })
+                .catch(err => next(err)) 
+        })
+        .catch(err => next(err))
+}
+
+module.exports.showMatches = (req, res, next) => {
+
+    Match.find({ 'users': req.currentUser.id})
+        .then(matches => {
+
+            const matchIds = matches.reduce((acc, cur) => {
+                const filteredMatch = cur.users.filter(m => m !== req.currentUser.id)
+                acc.push(filteredMatch[0]._id)
+                return acc
+            }, []);
+
+            User.find().where('_id').in(matchIds)
+                .then( users => {               
+                    res.render('network/mynetwork', { users })
+                })
+                .catch(err => next(err)) 
+        })
+        .catch(err => next(err))
+}

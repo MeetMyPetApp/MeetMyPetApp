@@ -15,11 +15,12 @@ height: auto;
 	.form-inline .input-group {
 		width: 350px;
 		margin-left: 30px;
-	}
-	.navbar-bottom {
-		display: none;
-	}
+  }
+  .navbar-bottom {
+    display: none;
+  }
 }
+
 @media (max-width: 767px){
 
 	.navbar-bottom {

@@ -2,11 +2,11 @@
 	<div class="user-network">
 		<ul class="nav nav-tabs">
 			<li class="nav-item">
-				<a class="nav-link active" href="#">Match with people</a>
+				<a class="nav-link" href="/user/{{currentUser.id}}/network">Match with people</a>
 
 			</li>
 			<li class="nav-item">
-				<a class="nav-link" href="#">My matches</a>
+				<a class="nav-link active" href="#">My matches</a>
 			</li>
 		</ul>
 	</div>
@@ -34,11 +34,8 @@
 								</div>
 								<div class="media-body">
 									<div class="pull-right">
-										<button type="button"
-											class="btn btn-success btn-default btn-sm waves-effect waves-light"><i
-												class="icon md-check" aria-hidden="true"></i>Matching</button>
-										<button type="button" class="btn btn-info btn-sm waves-effect waves-light">View
-											Profile</button>
+										<a href="/user/{{user._id}}/profilefeed" class="btn btn-info btn-sm waves-effect waves-light">View
+											Profile</a>
 									</div>
 									<div><a class="name" href="javascript:void(0)">{{user.name}}</a></div>
 									<small>{{user.username}}</small>
