@@ -29,7 +29,7 @@ module.exports.doLogin = (req, res, next) => {
                         if (match) {
                             if (user.activation.active) {
                                 req.session.userId = user._id;
-                                res.redirect(`user/${user._id}`);
+                                res.redirect('/');
                             } else {
                                 res.render('users/login', {
                                     error: {
@@ -68,7 +68,7 @@ module.exports.loginWithSlack = (req, res, next) => {
             next(error);
         } else {
             req.session.userId = user._id;
-            res.redirect(`/user/${user._id}`);
+            res.redirect('/');
         }
     })
 
@@ -93,7 +93,7 @@ module.exports.getLoginWithGmail = (req, res, next) => {
             next(error);
         } else {
             req.session.userId = user._id;
-            res.redirect(`/user/${user._id}`);
+            res.redirect('/');
         }
     })
     passportGoogleController(req, res, next)
@@ -176,6 +176,15 @@ module.exports.showUserProfilePage = (req, res, next) => {
         id
     } = req.params;
     User.findById(id)
+        .populate({
+            path: 'posts',
+            options: {
+                sort: {
+                    createdAt: -1
+                }
+            },
+            populate: ['comments', 'likes']
+        }) 
         .then(user => {
             res.render('users/user', {
                 user

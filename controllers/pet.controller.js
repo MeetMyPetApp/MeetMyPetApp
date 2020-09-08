@@ -1,11 +1,26 @@
 const mongoose = require('mongoose');
 const User = require('../models/user.model');
 const Pets = require('../models/pet.model');
+const axios = require('axios');
+
 
 //PET PROFILE
 
 module.exports.showAddPetPage = (req, res, next) => {
-	res.render('pets/addnewpet')
+
+	const breedsarr = [];
+	
+	axios.get('https://dog.ceo/api/breeds/list/all')
+		.then( allBreeds => {
+			const breeds = allBreeds.data.message;
+		/* 	console.log(breeds); 
+			const breeds = response.data.message;
+			breedsarr.push(Object.keys(breeds)); */
+			
+			console.log(breeds);
+			res.render('pets/addnewpet', { breeds })
+		})
+	
 }
 
 module.exports.createPet = (req, res, next) => {

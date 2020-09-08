@@ -19,7 +19,6 @@ router.get('/login', sessionMiddleware.isNotAuthenticated, usersController.showL
 router.post('/login', sessionMiddleware.isNotAuthenticated, usersController.doLogin);
 router.get('/logout', sessionMiddleware.isAuthenticated, usersController.logout);
 
-//router.get('/user/:id/edit', usersController.showEditProfileForm)
 router.get('/user/:id/edit', sessionMiddleware.isAuthenticated, usersController.showEditProfileForm)
 router.post('/user/:id/edit', sessionMiddleware.isAuthenticated, upload.single('avatar'),usersController.updateUser)
 router.get('/user/:id', sessionMiddleware.isAuthenticated, usersController.showUserProfilePage)
@@ -34,16 +33,12 @@ router.get('/user/:id/pets', sessionMiddleware.isAuthenticated, petsController.s
 router.get('/pet/:id/deletePet', sessionMiddleware.isAuthenticated, petsController.deletePet)
 router.get('/pet/:id/profile', sessionMiddleware.isAuthenticated, petsController.showPetProfilePage)
 
-
-router.get('/', sessionMiddleware.isAuthenticated, postController.showFeedPage);
-
-router.get('user/:id/', sessionMiddleware.isAuthenticated, postController.showFeedPage);
-
 router.post('/post/new', sessionMiddleware.isAuthenticated, postController.createPost)
 router.get('/post/:id/like', sessionMiddleware.isAuthenticated, postController.like);
 router.post('/post/:id/comment', sessionMiddleware.isAuthenticated, postController.createNewComment)
 router.get('/post/:id', sessionMiddleware.isAuthenticated, postController.showPostDetails);
 
+router.get('/', sessionMiddleware.isAuthenticated, postController.showFeedPage);
 
 
 module.exports = router;
