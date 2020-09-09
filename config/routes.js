@@ -38,7 +38,12 @@ router.get('/pet/:id/profile', sessionMiddleware.isAuthenticated, petsController
 router.post('/post/new', sessionMiddleware.isAuthenticated, postController.createPost)
 router.get('/post/:id/like', sessionMiddleware.isAuthenticated, postController.like);
 router.post('/post/:id/comment', sessionMiddleware.isAuthenticated, postController.createNewComment)
+router.post('/post/:id/deletecomment', sessionMiddleware.isAuthenticated, postController.deleteComment);
 router.get('/post/:id', sessionMiddleware.isAuthenticated, postController.showPostDetails);
+router.get('/post/:id/editpost', sessionMiddleware.isAuthenticated, postController.showEditPost);
+router.post('/post/:id/editpost', sessionMiddleware.isAuthenticated, postController.updatePost);
+router.get('/post/:id/deletepost', sessionMiddleware.isAuthenticated, postController.deletePost);
+
 
 router.get('/', sessionMiddleware.isAuthenticated, postController.showFeedPage);
 

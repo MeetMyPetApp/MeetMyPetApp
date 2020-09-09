@@ -1,0 +1,51 @@
+<div class="col-xl-4 col-lg-4 col-md-4 col-sm-3 col-3">
+	<div class="users-container">
+		<div class="chat-search-box">
+			<div class="input-group">
+				<input class="form-control" placeholder="Search">
+				<div class="input-group-btn">
+					<button type="button" class="btn btn-info">
+						<i class="fa fa-search"></i>
+					</button>
+				</div>
+			</div>
+		</div>
+		
+		<div class="active-chats">
+			<ul class="users">
+				{{!-- missing making li section a link to private chat room by chat id --}}
+				{{#each users as |user|}}
+				<li class="person" data-chat="person1">
+					<div class="user">
+						<img src="{{user.avatar}}" alt="user avatar">
+						<span class="status busy"></span>
+					</div>
+					<p class="name-time">
+						<span class="name">{{user.name}}</span>
+						<span class="time">{{user.chat.createdAt}}</span>
+					</p>
+				</li>
+				{{/each}}
+			</ul>
+		</div>
+
+		<div class="new-chat">
+			<ul class="users">
+				{{!-- missing making li section a link to private chat room by chat id --}}
+				{{#each users as |user|}}
+				<li class="person" data-chat="person1">
+					<div class="user">
+						<img src="{{user.avatar}}" alt="user avatar">
+						<span class="status busy"></span>
+					</div>
+					<p class="name-time">
+						<span class="name">{{user.name}}</span>
+					</p>
+				</li>
+				{{/each}}
+			</ul>
+		</div>
+		
+
+	</div>
+</div>

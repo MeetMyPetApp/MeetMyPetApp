@@ -1,10 +1,14 @@
-<nav class="navbar navbar-expand-xl navbar-dark bg-dark">
+<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
     <!--Fixed Upper navbar-->
-    <a href="#" class="navbar-brand"><i class="fa fa-cube"></i>Meet My<b>Pet</b></a>
+    <div class="navbar-brand">
+        <img src="/images/logotest.png" alt="logo" />
+    </div>
+
+
     <!--<button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
         <span class="navbar-toggler-icon"></span>
     </button>-->
-    <div id="navbarCollapse" class="collapse navbar-collapse justify-content-start">
+    <div id="navbar-elements" class="collapse navbar-collapse justify-content-start">
         <form class="navbar-form form-inline">
             <div class="input-group search-box">
                 <input type="text" id="search" class="form-control" placeholder="Search here...">
@@ -16,11 +20,11 @@
 
         <!--Icon lower navbar for mobile-->
         <div class="hidden-nav-part">
-            <div class="navbar-nav ml-auto ">
+            <div class="navbar-nav ">
                 <a href="/" class="nav-item nav-link active"><i class="fa fa-home"></i><span>Home</span></a>
-                <a href="#" class="nav-item nav-link"><i class="fa fa-gears"></i><span>Network</span></a>
-                <a href="#" class="nav-item nav-link"><i class="fa fa-pie-chart"></i><span>Chats</span></a>
-                <a href="#" class="nav-item nav-link"><i class="fa fa-bell"></i><span>Notifications</span></a>
+                <a href="/user/{{currentUser._id}}/network" class="nav-item nav-link"><i
+                        class="fa fa-gears"></i><span>Network</span></a>
+                <a href="#" class="nav-item nav-link"><i class="fa fa-comment"></i><span>Chats</span></a>
             </div>
         </div>
 
@@ -28,14 +32,16 @@
 
         <!--User Dropdown-->
         <div class="nav-item dropdown">
-            <a href="#" data-toggle="dropdown" class="nav-item nav-link dropdown-toggle user-action" role="button" id="dropdownMenuLink" aria-haspopup="true" aria-expanded="false">
+            <a href="#" data-toggle="dropdown" class="nav-item nav-link dropdown-toggle user-action" role="button"
+                id="dropdownMenuLink" aria-haspopup="true" aria-expanded="false">
                 <img src="{{ currentUser.avatar }}" class="avatar" alt="Avatar">
-                {{ currentUser.name }} 
+                {{ currentUser.name }}
                 <b class="caret"></b>
             </a>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                 <a href="/user/{{currentUser.id}}" class="dropdown-item"><i class="fa fa-user-o"></i> My profile</a>
-                <a href="/user/{{currentUser.id}}/pets" class="dropdown-item"><i class="fa fa-calendar-o"></i> My pets</a>
+                <a href="/user/{{currentUser.id}}/pets" class="dropdown-item"><i class="fa fa-calendar-o"></i> My
+                    pets</a>
                 <div class="divider dropdown-divider"></div>
                 <a href="/logout" class="dropdown-item"><i class="material-icons">&#xE8AC;</i> Logout</a>
             </div>
