@@ -1,0 +1,46 @@
+<div class="container content">
+
+	<div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+		<div class="card">
+			<div class="card-header">Chat<span><a href="/" class="nav-item nav-link active"><i
+							class="fas fa-arrow-left"></i><span>Back to Chats</span></a></span></div>
+			<div id="message-container">
+				<div class="card-body height3">
+					<ul class="chat-list">
+						{{#each chat.messages as |message|}}
+						<li class="in">
+							<div class="chat-img">
+								<img alt="Avtar" src="https://bootdey.com/img/Content/avatar/avatar1.png">
+							</div>
+							<div class="chat-body">
+								<div class="chat-message">
+									<h5>{{message.user}}</h5>
+									<p>{{message.message}}</p>
+								</div>
+							</div>
+						</li>
+
+						<li class="out">
+							<div class="chat-img">
+								<img alt="Avtar" src="https://bootdey.com/img/Content/avatar/avatar6.png">
+							</div>
+							<div class="chat-body">
+								<div class="chat-message">
+									<h5>{{message.user}}</h5>
+									<p>{{message.message}}</p>
+								</div>
+							</div>
+						</li>
+						{{/each}}
+					</ul>
+				</div>
+			</div>
+			<div class="send">
+				<form id="send-container">
+					<input type="text" class="message-input">
+					<button type="submit" class="send-button">Send</button>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>

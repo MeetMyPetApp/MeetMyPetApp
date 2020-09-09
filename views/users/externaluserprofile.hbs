@@ -13,7 +13,7 @@
 				<div class="profile mr-3"><img src="{{posts.[0].user.avatar}}" alt="user avatar" width="130"
 						class="rounded mb-2 img-thumbnail">{{!-- <a href="#"
 						class="btn btn-outline-dark btn-sm btn-block">Match</a> --}}</div>
-				<div class="media-body mb-5 text-white">
+				<div class="media-body mb-5 text-black">
 					<h4 class="mt-0 mb-0">{{posts.[0].user.name}}</h4>
 					<p class="small mb-4"> <i class="fas fa-map-marker-alt mr-2"></i>{{posts.[0].user.username}}</p>
 				</div>
@@ -76,6 +76,35 @@
 					</div>
 					{{/each}}
 					{{/if}}
+
+					 {{#if posts}}
+                {{#each posts as |post|}}
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <a href="/user/{{post.user._id}}">
+                                <img class="rounded-circle" src="{{ post.user.avatar }}" alt="author photo">
+                                <span class="card-title">{{ post.user.name }}</span>
+                                <div class="text-muted">Published on {{ post.createdAt }}</div>
+                            </a>
+                        </div>
+                        <div class="card-body"> {{ post.body }} </div>
+
+                        <div class="card-footer">
+                            <button type="button" class="btn-sm btn btn-outline-danger" data-like-post="{{post._id}}">
+                                <i class="fa fa-heart mr-1"></i>
+                                <span class="likes-count">{{post.likes.length}}</span>
+                                Likes
+                            </button>
+                            <span class="text-muted">comments: {{post.comments.length}} | </span>
+                            <a href="/post/{{post._id}}">Comments</a>
+                             {{#ifeq ../currentUser.id post.user._id }}
+                                <a href="/post/{{post._id}}/editpost" class="btn-sm btn btn-outline-danger">Edit</a>
+                                <a href="/post/{{post._id}}/deletepost" class="btn-sm btn btn-outline-danger">Delete</a>
+                            {{/ifeq}}
+                        </div>
+                    </div>
+                {{/each}}
+            {{/if}}
 
 				</div>
 			</div>
