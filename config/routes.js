@@ -46,6 +46,7 @@ router.post('/post/:id/editpost', sessionMiddleware.isAuthenticated, postControl
 router.get('/post/:id/deletepost', sessionMiddleware.isAuthenticated, postController.deletePost);
 
 router.get('/chat/list', sessionMiddleware.isAuthenticated, chatController.showChatList );
+router.get('/chat/new/:userid', sessionMiddleware.isAuthenticated, chatController.createChat );
 router.get('/chat/:id', sessionMiddleware.isAuthenticated, chatController.showChat );
 
 router.get('/', sessionMiddleware.isAuthenticated, postController.showFeedPage);
