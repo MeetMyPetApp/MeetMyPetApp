@@ -8,29 +8,33 @@
 				<div class="card-body height3">
 					<ul class="chat-list">
 						{{#each chat.messages as |message|}}
-						<li class="in">
-							<div class="chat-img">
-								<img alt="Avtar" src="https://bootdey.com/img/Content/avatar/avatar1.png">
-							</div>
-							<div class="chat-body">
-								<div class="chat-message">
-									<h5>{{message.user}}</h5>
-									<p>{{message.message}}</p>
-								</div>
-							</div>
-						</li>
 
-						<li class="out">
-							<div class="chat-img">
-								<img alt="Avtar" src="https://bootdey.com/img/Content/avatar/avatar6.png">
-							</div>
-							<div class="chat-body">
-								<div class="chat-message">
-									<h5>{{message.user}}</h5>
-									<p>{{message.message}}</p>
-								</div>
-							</div>
-						</li>
+							{{#ifeq message.sender ../currentUser.id}}
+								<li class="out">
+									<div class="chat-img">
+										<img alt="Avtar" src="https://bootdey.com/img/Content/avatar/avatar6.png">
+									</div>
+									<div class="chat-body">
+										<div class="chat-message">
+											<h5>{{message.user}}</h5>
+											<p>{{message.message}}</p>
+										</div>
+									</div>
+								</li>
+							{{else}}
+								<li class="in">
+									<div class="chat-img">
+										<img alt="Avtar" src="https://bootdey.com/img/Content/avatar/avatar1.png">
+									</div>
+									<div class="chat-body">
+										<div class="chat-message">
+											<h5>{{message.user}}</h5>
+											<p>{{message.message}}</p>
+										</div>
+									</div>
+								</li>
+							{{/ifeq}}
+
 						{{/each}}
 					</ul>
 				</div>
@@ -43,4 +47,5 @@
 			</div>
 		</div>
 	</div>
+	<script src="/js/chats.js"></script>
 </div>
