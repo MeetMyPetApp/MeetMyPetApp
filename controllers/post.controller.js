@@ -83,17 +83,6 @@ module.exports.createPost = (req, res, next) => {
         })
 }
 
-module.exports.showEditPost = (req, res, next) => {
-
-    User.findById(req.params.id)
-        .then(user => {
-            res.render(`posts/editpost`, {
-                user,
-                post: req.post
-            })
-        })
-        .catch(err => next(err))
-}
 
 module.exports.showEditPost = (req, res, next) => {
     Post.findById(req.params.id)
@@ -133,7 +122,7 @@ module.exports.updatePost = (req, res, next) => {
 module.exports.deletePost = (req, res, next) => {
     Post.findByIdAndDelete(req.params.id)
         .then(() => {
-            res.redirect(`/user/${req.currentUser.id}`)
+            res.redirect(`/user/${req.currentUser.id}/profilefeed`)
         })
         .catch(err => next(err))
 }

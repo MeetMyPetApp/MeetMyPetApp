@@ -13,9 +13,10 @@
 
    <hr class="style3">
 
+
    {{#if posts }}
    {{#each posts as |post| }}
-      <div class="card mb-3">
+      <div class="card">
          <div class="card-header">
             <a href="/user/{{post.user._id}}/profilefeed">
                <img class="rounded-circle" src="{{ post.user.avatar }}" alt="author photo">
@@ -26,7 +27,7 @@
          <div class="card-body"> {{ post.body }} </div>
 
          <div class="card-footer">
-            <button type="button" class="btn-sm btn btn-outline-danger" data-like-post="{{post._id}}">
+            <button type="button" class="btn-sm btn-danger" data-like-post="{{post._id}}">
                <i class="fa fa-heart mr-1"></i>
                <span class="likes-count">{{post.likes.length}}</span>
                Likes
