@@ -19,6 +19,11 @@ const messageSchema = new mongoose.Schema(
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Chat',
         required: true,
+    },
+    status: {
+      type: String, 
+      enum: ['read','unread'],
+      default: 'unread'
     }
   },
   { timestamps: true }

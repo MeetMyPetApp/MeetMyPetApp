@@ -6,6 +6,13 @@
 							class="fas fa-arrow-left"></i><span>Back to Chats</span></a></span></div>
 			<div id="message-container">
 				<div class="card-body height3">
+					<div class="send">
+						<form action="/chat/{{chat._id}}/messages" method="POST">
+							<label for="message">New message:</label>
+							<textarea class="form-control" name="message" id="message" placeholder="Your message here..."></textarea>
+							<button type="submit" class="btn btn-primary">Send</button>
+						</form>
+					</div>
 					<ul class="chat-list">
 						{{#each chat.messages as |message|}}
 
@@ -38,12 +45,6 @@
 						{{/each}}
 					</ul>
 				</div>
-			</div>
-			<div class="send">
-				<form id="send-container">
-					<input type="text" class="message-input">
-					<button type="submit" class="send-button">Send</button>
-				</form>
 			</div>
 		</div>
 	</div>

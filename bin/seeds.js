@@ -229,6 +229,7 @@ Promise.all([
                     const match = new Match({
                         users: [ userIds[i], user._id],
                         status: 'accepted',
+                        requester: userIds[i],
                         createdAt: faker.date.past()
                     })
 
@@ -246,6 +247,7 @@ Promise.all([
                             message: faker.lorem.paragraph(),
                             sender: j % 2 === 0 ? user._id : userIds[i],
                             chat: chat._id,
+                            status: 'read',
                             createdAt: faker.date.past()
                         })
 
@@ -256,7 +258,8 @@ Promise.all([
                 for (let i = 10; i < 20; i++) {
                     const match = new Match({
                         users: [ userIds[i], user._id],
-                        status: 'accepted',
+                        status: 'pending',
+                        requester: userIds[i],
                         createdAt: faker.date.past()
                     })
 
