@@ -8,7 +8,9 @@ const Post = require('../models/post.model');
 const Like = require('../models/like.model');
 const Comment = require('../models/comment.model');
 
-const { post } = require('../config/routes');
+const {
+    post
+} = require('../config/routes');
 
 module.exports.showSignupPage = (req, res, next) => {
     res.render('users/userform')
@@ -172,7 +174,9 @@ module.exports.logout = (req, res, next) => {
 }
 
 module.exports.showUserProfilePage = (req, res, next) => {
-    const { id } = req.params;
+    const {
+        id
+    } = req.params;
     const currentuser = req.currentUser;
 
     console.log('currentuser', currentuser);
@@ -185,7 +189,7 @@ module.exports.showUserProfilePage = (req, res, next) => {
                 }
             },
             populate: ['comments', 'likes', 'user']
-        }) 
+        })
         .then(user => {
             res.render('users/user', {
                 user,
@@ -253,6 +257,8 @@ module.exports.showExternalProfile = (req, res, next) => {
             user: id
         })
         .populate('user')
+        .populate('likes')
+        .populate('comments')
         .then(posts => {
             console.log(posts);
             Like.find({
@@ -268,7 +274,7 @@ module.exports.showExternalProfile = (req, res, next) => {
                     res.render('users/externaluserprofile', {
                         posts,
                         likes
-                    }) 
+                    })
                 })
                 .catch(error => console.log(error))
         })
@@ -278,7 +284,9 @@ module.exports.showExternalProfile = (req, res, next) => {
 
 module.exports.showNetwork = (req, res, next) => {
 
-    Match.find({ 'users': req.currentUser.id})
+    Match.find({
+            'users': req.currentUser.id
+        })
         .then(matches => {
 
             const matchIds = matches.reduce((acc, cur) => {
@@ -287,17 +295,21 @@ module.exports.showNetwork = (req, res, next) => {
             }, []);
 
             User.find().where('_id').nin(matchIds)
-                .then( users => {               
-                    res.render('network/generalnetwork', { users })
+                .then(users => {
+                    res.render('network/generalnetwork', {
+                        users
+                    })
                 })
-                .catch(err => next(err)) 
+                .catch(err => next(err))
         })
         .catch(err => next(err))
 }
 
 module.exports.showMatches = (req, res, next) => {
 
-    Match.find({ 'users': req.currentUser.id})
+    Match.find({
+            'users': req.currentUser.id
+        })
         .then(matches => {
 
             const matchIds = matches.reduce((acc, cur) => {
@@ -307,10 +319,12 @@ module.exports.showMatches = (req, res, next) => {
             }, []);
 
             User.find().where('_id').in(matchIds)
-                .then( users => {               
-                    res.render('network/mynetwork', { users })
+                .then(users => {
+                    res.render('network/mynetwork', {
+                        users
+                    })
                 })
-                .catch(err => next(err)) 
+                .catch(err => next(err))
         })
         .catch(err => next(err))
 }

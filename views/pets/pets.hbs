@@ -1,26 +1,69 @@
-<div id="pet-profile-page">
-    <div class="row project-card">
-        <div class="col-sm-12 col-lg-3 project-card-left">
-            <p>Owner: {{user.username}}</p>
-            <img class="" src="{{user.avatar}}" alt="profile image"> 
-        </div>
-        <div class="col-sm-12 col-lg-9 project-card-right">
-
-			{{#if pets}}
-                {{#each pets as |pet|}}
-                    <img class="profile-image" src="{{pet.avatar}}" alt="profile image"> 
-                    <p>Name: {{pet.name}}</p>
-                    <p>Breed: {{pet.breed}}</p>
-                    <p>Availability: {{pet.available}}</p>
-                    <p>Short description of your pet:</p>
-                    <p><i>{{pet.bio}}</i></p>
-                     <a href="/pet/{{pet._id}}/editPet">Edit Pet</a>
-                     <a href="/pet/{{pet._id}}/profile">View</a>
-                     <a href="/pet/{{pet._id}}/deletePet">Delete Pet</a>
-                    <br>
-                {{/each}}
-			{{/if}}
-           
-            <div id="user-profile-btn-area">
-				<a href="/user/{{pets.[0].user}}/addNewPet">Add new Pet</a>
+<div class="row py-5 px-4">
+    <div class="col mx-auto">
+        <!-- Profile widget -->
+        <div class="bg-white shadow rounded overflow-hidden">
+            <div class="media align-items-end profile-head">
+                <div class="profile mr-3"><img src="{{user.avatar}}" alt="user avatar" width="130"
+                        class="rounded mb-2 img-thumbnail"></div>
+                <div class="media-body mb-5 text-white">
+                    <h4 class="mt-0 mb-0">{{user.name}}</h4>
+                    <p class="small mb-4"> <i class="fas fa-map-marker-alt mr-2"></i>{{user.username}}</p>
+                </div>
             </div>
+
+            <div class="bg-light p-4 d-flex justify-content-end text-center">
+                <ul class="list-inline mb-0">
+                    <li class="list-inline-item">
+                        <h5 class="font-weight-bold mb-0 d-block">{{user.posts.length}}</h5><small class="text-muted"> <i
+                                class="fas fa-image mr-1"></i>Posts</small>
+                    </li>
+                    <li class="list-inline-item">
+                        <h5 class="font-weight-bold mb-0 d-block">{{user.likes.length}}</h5><small class="text-muted"> <i
+                                class="fas fa-user mr-1"></i>Likes</small>
+                    </li>
+                    <li class="list-inline-item">
+                        <h5 class="font-weight-bold mb-0 d-block">{{user.matches.length}}</h5><small class="text-muted"> <i
+                                class="fas fa-user mr-1"></i>Matching</small>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="py-4 px-4">
+                <div class="d-flex align-items-center justify-content-between mb-3">
+                    <b><h5 class="mb-0">My pets</h5></b><a href="/user/{{user.id}}/pets" class="btn btn-link text-muted">Back
+                        to feed</a>
+                </div>
+
+                <div class="card mb-3" style="max-width: 540px;">
+                    <div class="row no-gutters">
+                        {{#if pets}}
+                        {{#each pets as |pet|}}
+                        <div class="col-md-4">
+
+                            <img src="{{ pet.avatar }}" class="card-img" alt="pet avatar">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h4 class="card-title">Name: {{ pet.name }}</h4>
+                                <h5 class="card-title">Breed: {{ pet.breed }}</h5>
+                                <h6 class="card-title">Status: {{ pet.available }}</h6>
+                                <p class="card-text">About pet: {{ pet.bio }}</p>
+                                <a href="/pet/{{pet.id}}/profile"><i class="fa fa-dog"></i>
+                                    <div>View pet profile</div>
+                                </a>
+                                <a href="/pet/{{pet._id}}/editPet">Edit Pet</a>
+
+                                <a href="/pet/{{pet._id}}/deletePet">Delete Pet</a>
+                                <br>
+
+                            </div>
+                        </div>
+                        {{/each}}
+                        {{/if}}
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

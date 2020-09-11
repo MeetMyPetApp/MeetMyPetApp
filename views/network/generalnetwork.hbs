@@ -6,7 +6,9 @@
 
 			</li>
 			<li class="nav-item">
-				<a class="nav-link" href="/user/{{ user._id }}/matches">My matches</a>
+      
+				<a class="nav-link" href="/user/{{currentUser.id}}/matches">My matches</a>
+
 			</li>
 		</ul>
 	</div>
@@ -22,7 +24,7 @@
 				</div>
 				{{#each users as |user|}}
 				<div class="panel-body">
-					<ul class="list-group list-group-dividered list-group-full">
+					<ul class="user-card list-group list-group-dividered list-group-full">
 						<li class="list-group-item">
 							<div class="media">
 								<div class="media-left">
@@ -33,8 +35,8 @@
 								</div>
 								<div class="media-body">
 									<div class="pull-right">
-										<a class="network-button" href="/user/{{user._id}}/requestmatch">Match</a>
-										<a class="network-button" href="/user/{{user._id}}/profilefeed">View Profile</a>
+										<a class="btn btn-info btn-sm waves-effec waves-light" href="/user/{{user._id}}/requestmatch">Match</a>
+										<a class="btn btn-info btn-sm waves-effec waves-light" href="/user/{{user._id}}/profilefeed">View Profile</a>
 									</div>
 									<div><a class="name" href="/user/{{user._id}}/profilefeed">{{user.name}}</a></div>
 									<small>{{user.username}}</small>

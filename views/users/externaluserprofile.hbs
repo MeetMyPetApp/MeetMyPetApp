@@ -5,8 +5,8 @@
 		</div>
 		<div class="col-sm-12 col-lg-9 project-card-right"> --}}
 
-<div class="row py-5 px-4">
-	<div class="col-md-5 mx-auto">
+<div class="row">
+	<div class="col mx-auto">
 		<!-- Profile widget -->
 		<div class="bg-white shadow rounded overflow-hidden">
 			<div class="media align-items-end profile-head">
@@ -51,62 +51,38 @@
 					<h5 class="mb-0">Recent posts</h5><a href="/user/{{posts.[0].user._id}}/pets"
 						class="btn btn-link text-muted">Show Pets</a>
 				</div>
+
+				{{#if posts}}
+				{{#each posts as |post|}}
 				<div class="row">
-					{{#if posts }}
-					{{#each posts as |post| }}
 					<div class="card mb-3">
 						<div class="card-header">
-							<img class="rounded-circle" src="{{ post.user.avatar }}" alt="author photo">
-							<span class="card-title">{{ post.user.name }}</span>
-							<div class="text-muted">Published on {{ post.createdAt }}</div>
+							<a href="/user/{{post.user._id}}">
+								<img class="rounded-circle" src="{{ post.user.avatar }}" alt="author photo">
+								<span class="card-title">{{ post.user.name }}</span>
+								<div class="text-muted">Published on {{ post.createdAt }}</div>
+							</a>
 						</div>
 						<div class="card-body"> {{ post.body }} </div>
+
 						<div class="card-footer">
-							{{#if post.likes}}
-							<span class="text-muted">
-								<a href="/post/{{post._id}}/like"><i class="fa fa-heart"></i></a>
-								{{post.likes.length}} &nbsp;-
-							</span>
-							{{/if}}
-							{{#if post.comments}}
+							<button type="button" class="btn-sm btn-danger" data-like-post="{{post._id}}">
+								<i class="fa fa-heart mr-1"></i>
+								<span class="likes-count">{{post.likes.length}}</span>
+								Likes
+							</button>
 							<span class="text-muted">comments: {{post.comments.length}} | </span>
-							<a href="/post/{{post._id}}">View comments</a>
-							{{/if}}
+							<a href="/post/{{post._id}}">Comments</a>
+							{{#ifeq ../currentUser.id post.user._id }}
+							<a href="/post/{{post._id}}/editpost" class="btn-sm btn btn-outline-danger">Edit</a>
+							<a href="/post/{{post._id}}/deletepost" class="btn-sm btn btn-outline-danger">Delete</a>
+							{{/ifeq}}
 						</div>
 					</div>
-					{{/each}}
-					{{/if}}
-
-					 {{#if posts}}
-                {{#each posts as |post|}}
-                    <div class="card mb-3">
-                        <div class="card-header">
-                            <a href="/user/{{post.user._id}}">
-                                <img class="rounded-circle" src="{{ post.user.avatar }}" alt="author photo">
-                                <span class="card-title">{{ post.user.name }}</span>
-                                <div class="text-muted">Published on {{ post.createdAt }}</div>
-                            </a>
-                        </div>
-                        <div class="card-body"> {{ post.body }} </div>
-
-                        <div class="card-footer">
-                            <button type="button" class="btn-sm btn btn-outline-danger" data-like-post="{{post._id}}">
-                                <i class="fa fa-heart mr-1"></i>
-                                <span class="likes-count">{{post.likes.length}}</span>
-                                Likes
-                            </button>
-                            <span class="text-muted">comments: {{post.comments.length}} | </span>
-                            <a href="/post/{{post._id}}">Comments</a>
-                             {{#ifeq ../currentUser.id post.user._id }}
-                                <a href="/post/{{post._id}}/editpost" class="btn-sm btn btn-outline-danger">Edit</a>
-                                <a href="/post/{{post._id}}/deletepost" class="btn-sm btn btn-outline-danger">Delete</a>
-                            {{/ifeq}}
-                        </div>
-                    </div>
-                {{/each}}
-            {{/if}}
 
 				</div>
+				{{/each}}
+				{{/if}}
 			</div>
 		</div>
 	</div>

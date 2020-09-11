@@ -1,13 +1,13 @@
 <div id="user-profile-page">
-    <div class="row project-card">
+    <div class="row project-card mx-auto">
         <div class="col-sm-12 col-lg-3 project-card-left">
-            <img class="profile-image" src="{{user.avatar}}" alt="profile image"> 
+            <img class="profile-image" src="{{user.avatar}}" alt="profile image">
         </div>
         <div class="col-sm-12 col-lg-9 project-card-right">
             <ul class="nav nav-tabs">
                 <li class="nav-item">
                     <a class="nav-link active" href="">Your profile</a>
-                    
+
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/user/{{ user._id }}/pets">Your pets</a>
@@ -26,35 +26,35 @@
                 <a href="/user/{{user._id}}/delete">Delete profile</a>
             </div>
             <h4>My posts:</h4>
-            {{#if user.posts}}
-                {{#each user.posts as |post|}}
-                    <div class="card mb-3">
-                        <div class="card-header">
-                            <a href="/user/{{post.user._id}}">
-                                <img class="rounded-circle" src="{{ user.avatar }}" alt="author photo">
-                                <span class="card-title">{{ post.user.name }}</span>
-                                <div class="text-muted">Published on {{ post.createdAt }}</div>
-                            </a>
-                        </div>
-                        <div class="card-body"> {{ post.body }} </div>
+            {{#if posts }}
+            {{#each posts as |post| }}
+            <div class="card mb-3">
+                <div class="card-header">
+                    <a href="/user/{{post.user._id}}/profilefeed">
+                        <img class="rounded-circle" src="{{ post.user.avatar }}" alt="author photo">
+                        <span class="card-title">{{ post.user.name }}</span>
+                        <div class="text-muted">Published on {{ post.createdAt }}</div>
+                    </a>
+                </div>
+                <div class="card-body"> {{ post.body }} </div>
 
-                        <div class="card-footer">
-                            <button type="button" class="btn-sm btn btn-outline-danger" data-like-post="{{post._id}}">
-                                <i class="fa fa-heart mr-1"></i>
-                                <span class="likes-count">{{post.likes.length}}</span>
-                                Likes
-                            </button>
-                            <span class="text-muted">comments: {{post.comments.length}} | </span>
-                            <a href="/post/{{post._id}}">Comments</a>
-                             {{#ifeq ../currentUser.id post.user._id }}
-                                <a href="/post/{{post._id}}/editpost" class="btn-sm btn btn-outline-danger">Edit</a>
-                                <a href="/post/{{post._id}}/deletepost" class="btn-sm btn btn-outline-danger">Delete</a>
-                            {{/ifeq}}
-                        </div>
-                    </div>
-                {{/each}}
+                <div class="card-footer">
+                    <button type="button" class="btn-sm btn btn-outline-danger" data-like-post="{{post._id}}">
+                        <i class="fa fa-heart mr-1"></i>
+                        <span class="likes-count">{{post.likes.length}}</span>
+                        Likes
+                    </button>
+                    <span class="text-muted">comments: {{post.comments.length}} | </span>
+                    <a href="/post/{{post._id}}">Comments</a>
+
+                    {{#ifeq ../currentUser.id post.user._id }}
+                    <a href="/post/{{post._id}}/editpost" class="btn-sm btn btn-outline-danger">Edit</a>
+                    <a href="/post/{{post._id}}/deletepost" class="btn-sm btn btn-outline-danger">Delete</a>
+                    {{/ifeq}}
+                </div>
+            </div>
+            {{/each}}
             {{/if}}
         </div>
     </div>
 </div>
-

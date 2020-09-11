@@ -9,9 +9,9 @@ const axios = require('axios');
 module.exports.showAddPetPage = (req, res, next) => {
 
 	const breedsarr = [];
-	
+
 	axios.get('https://dog.ceo/api/breeds/list/all')
-		.then( allBreeds => {
+		.then(allBreeds => {
 
 			const breedsarr = Object.keys(allBreeds.data.message);
 			const breeds = breedsarr.reduce((acc, cur) => {
@@ -20,9 +20,11 @@ module.exports.showAddPetPage = (req, res, next) => {
 			}, {})
 
 			console.log(breeds);
-			res.render('pets/addnewpet', { breeds })
+			res.render('pets/addnewpet', {
+				breeds
+			})
 		})
-	
+
 }
 
 module.exports.createPet = (req, res, next) => {
@@ -62,6 +64,9 @@ module.exports.showPetsList = (req, res, next) => {
 	if (id === req.currentUser.id) {
 		User.findById(id)
 			.populate("pets")
+			/* .populate('posts')
+			.populate('likes')
+			.populate('comments') */
 			.then(user => {
 				const pets = user.pets
 				res.render('pets/pets', {
@@ -73,6 +78,9 @@ module.exports.showPetsList = (req, res, next) => {
 	} else {
 		User.findById(id)
 			.populate("pets")
+			/* .populate('posts')
+			.populate('likes')
+			.populate('comments') */
 			.then(user => {
 				const pets = user.pets
 				res.render('pets/externalpets', {
@@ -97,7 +105,7 @@ module.exports.showPetProfilePage = (req, res, next) => {
 				res.render('pets/externalpetprofile', {
 					pet
 				})
-			}	
+			}
 		})
 		.catch(err => next(err))
 }
