@@ -57,3 +57,22 @@ module.exports.createChat = (req, res, next) => {
         .catch(err => next(err))
 }
 
+module.exports.createMessage = (req, res, next) => {
+    const params = {
+        message: req.body.message,
+        sender: req.currentUser.id,
+        chat: req.params.id,
+        status: 'unread'
+    }
+
+    const message = new Message(params)
+
+    message.save()
+        .then( () => {
+            res.redirect(`/chat/${req.params.id}`)
+        })
+
+    console.log('MESSAGE: ', params);
+    
+}
+

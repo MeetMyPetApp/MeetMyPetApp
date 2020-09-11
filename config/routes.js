@@ -47,6 +47,7 @@ router.get('/post/:id/deletepost', sessionMiddleware.isAuthenticated, postContro
 
 router.get('/chat/list', sessionMiddleware.isAuthenticated, chatController.showChatList );
 router.get('/chat/new/:userid', sessionMiddleware.isAuthenticated, chatController.createChat );
+router.post('/chat/:id/messages', sessionMiddleware.isAuthenticated, chatController.createMessage );
 router.get('/chat/:id', sessionMiddleware.isAuthenticated, chatController.showChat );
 
 router.get('/', sessionMiddleware.isAuthenticated, postController.showFeedPage);

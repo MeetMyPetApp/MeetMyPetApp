@@ -95,7 +95,7 @@ module.exports.showEditPost = (req, res, next) => {
         .catch(err => next(err))
 }
 
-module.exports.showEditPost = (req, res, next) => {
+/* module.exports.showEditPost = (req, res, next) => {
     Post.findById(req.params.id)
         .populate("user")
         .then(post => {
@@ -104,7 +104,7 @@ module.exports.showEditPost = (req, res, next) => {
                 post
             })
         })
-}
+} */
 
 module.exports.updatePost = (req, res, next) => {
 
