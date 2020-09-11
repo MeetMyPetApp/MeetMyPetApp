@@ -81,7 +81,7 @@ Promise.all([
         const breedsWithImages = resp[8];
         console.log('Database deleted!')
 
-        for (let i = 0; i < 20; i++) {
+        for (let i = 0; i < 30; i++) {
 
             const userStatus = ['Pet looking for pet','Owner looking for friends', 'Owner looking for soulmate', 'Owner expanding network', 'Hey, I am using MeetMyPet']
 
@@ -229,6 +229,7 @@ Promise.all([
                     const match = new Match({
                         users: [ userIds[i], user._id],
                         status: 'accepted',
+                        requester: userIds[i],
                         createdAt: faker.date.past()
                     })
 
@@ -246,11 +247,24 @@ Promise.all([
                             message: faker.lorem.paragraph(),
                             sender: j % 2 === 0 ? user._id : userIds[i],
                             chat: chat._id,
+                            status: 'read',
                             createdAt: faker.date.past()
                         })
 
                         message.save()
                     }
+                }
+
+                for (let i = 10; i < 20; i++) {
+                    const match = new Match({
+                        users: [ userIds[i], user._id],
+                        status: 'pending',
+                        requester: userIds[i],
+                        createdAt: faker.date.past()
+                    })
+
+                    match.save()
+
                 }
 
             })

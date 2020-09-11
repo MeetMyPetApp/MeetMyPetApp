@@ -1,0 +1,1 @@
+console.log('HOLA, soy el fichero chats.js');

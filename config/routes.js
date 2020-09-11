@@ -4,6 +4,7 @@ const multer = require('multer');
 const usersController = require('../controllers/user.controller');
 const petsController = require('../controllers/pet.controller');
 const postController = require('../controllers/post.controller');
+const chatController = require('../controllers/chat.controller');
 const sessionMiddleware = require('../middlewares/session.middleware');
 const upload = require('../config/multer.config');
 
@@ -44,6 +45,10 @@ router.get('/post/:id/editpost', sessionMiddleware.isAuthenticated, postControll
 router.post('/post/:id/editpost', sessionMiddleware.isAuthenticated, postController.updatePost);
 router.get('/post/:id/deletepost', sessionMiddleware.isAuthenticated, postController.deletePost);
 
+router.get('/chat/list', sessionMiddleware.isAuthenticated, chatController.showChatList );
+router.get('/chat/new/:userid', sessionMiddleware.isAuthenticated, chatController.createChat );
+router.post('/chat/:id/messages', sessionMiddleware.isAuthenticated, chatController.createMessage );
+router.get('/chat/:id', sessionMiddleware.isAuthenticated, chatController.showChat );
 
 router.get('/', sessionMiddleware.isAuthenticated, postController.showFeedPage);
 

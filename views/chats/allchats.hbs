@@ -14,34 +14,39 @@
 		<div class="active-chats">
 			<ul class="users">
 				{{!-- missing making li section a link to private chat room by chat id --}}
-				{{#each users as |user|}}
-				<li class="person" data-chat="person1">
-					<div class="user">
-						<img src="{{user.avatar}}" alt="user avatar">
-						<span class="status busy"></span>
-					</div>
-					<p class="name-time">
-						<span class="name">{{user.name}}</span>
-						<span class="time">{{user.chat.createdAt}}</span>
-					</p>
-				</li>
+				{{#each chats as |chat|}}
+					<li class="person" data-chat="person1">
+						<a href="/chat/{{chat._id}}">
+							<div class="user">
+								<img src="{{chat.members.[0].avatar}}" alt="user avatar">
+								<span class="status busy"></span>
+							</div>
+							<p class="name-time">
+								<span class="name">{{chat.members.[0].name}}</span>
+								{{!-- <span class="time">{{chat.createdAt}}</span> --}}
+							</p>
+						</a>
+					</li>
 				{{/each}}
 			</ul>
 		</div>
 
+		<hr class="style5">
+
 		<div class="new-chat">
 			<ul class="users">
 				{{!-- missing making li section a link to private chat room by chat id --}}
-				{{#each users as |user|}}
-				<li class="person" data-chat="person1">
-					<div class="user">
-						<img src="{{user.avatar}}" alt="user avatar">
-						<span class="status busy"></span>
-					</div>
-					<p class="name-time">
-						<span class="name">{{user.name}}</span>
-					</p>
-				</li>
+				{{#each matches as |match|}}
+					<li class="person" data-chat="person1">
+						<div class="user">
+							<img src="{{match.users.[0].avatar}}" alt="user avatar">
+							<span class="status busy"></span>
+						</div>
+						<p class="name-time">
+							<span class="name">{{match.users.[0].name}}</span>
+						</p>
+						<a href="/chat/new/{{match.users.[0]._id}}">Start chat</a>
+					</li>
 				{{/each}}
 			</ul>
 		</div>
