@@ -109,7 +109,7 @@ Promise.all([
                         breed: dogBreed,
                         pedigree: Math.random() < 0.5 ? 'yes' : 'no',
                         gallery: dogRandomImages,
-                        available: 'Available',
+                        available: 'available',
                         bio: faker.lorem.paragraph(),
                         createdAt: faker.date.past()
                     });
@@ -184,7 +184,7 @@ Promise.all([
                         breed: dogBreed,
                         pedigree: 'yes',
                         gallery: dogRandomImages,
-                        available: 'Available',
+                        available: 'available',
                         bio: faker.lorem.paragraph(),
                         createdAt: faker.date.past()
                     });
