@@ -3,67 +3,69 @@
         <!-- Profile widget -->
         <div class="bg-white shadow rounded overflow-hidden">
             <div class="media align-items-end profile-head">
-                <div class="profile mr-3"><img src="{{user.avatar}}" alt="user avatar" width="130"
-                        class="rounded mb-2 img-thumbnail"></div>
-                <div class="media-body mb-5 text-white">
-                    <h4 class="mt-0 mb-0">{{user.name}}</h4>
-                    <p class="small mb-4"> <i class="fas fa-map-marker-alt mr-2"></i>{{user.username}}</p>
+                <div class="left-head">
+                    <div class="profile mr-3"><img src="{{user.avatar}}" alt="user avatar" width="130"
+                            class="rounded mb-2 img-thumbnail">
+                    </div>
                 </div>
-            </div>
 
-            <div class="bg-light p-4 d-flex justify-content-end text-center">
-                <ul class="list-inline mb-0">
-                    <li class="list-inline-item">
-                        <h5 class="font-weight-bold mb-0 d-block">{{user.posts.length}}</h5><small class="text-muted"> <i
-                                class="fas fa-image mr-1"></i>Posts</small>
-                    </li>
-                    <li class="list-inline-item">
-                        <h5 class="font-weight-bold mb-0 d-block">{{user.likes.length}}</h5><small class="text-muted"> <i
-                                class="fas fa-user mr-1"></i>Likes</small>
-                    </li>
-                    <li class="list-inline-item">
-                        <h5 class="font-weight-bold mb-0 d-block">{{user.matches.length}}</h5><small class="text-muted"> <i
-                                class="fas fa-user mr-1"></i>Matching</small>
-                    </li>
-                </ul>
+                <div class="right-head">
+                    <div class="media-body text-black">
+                        <h2><b>{{user.name}}</b></h2>
+                        <h5><b>@{{user.username}}</b>
+                        </h5>
+                        <h6>Status:{{user.status}}</h6>
+                    </div>
+
+                    {{#ifeq currentUser.id user._id }}
+
+                    <div id="user-profile-btn-area">
+                        <a class="btn btn-link crud-buttons" href="/user/{{user._id}}/edit">Edit profile</a>
+                        <a class="btn btn-link crud-buttons" href="/user/{{user._id}}/delete">Delete
+                            profile</a>
+                        <a class="btn btn-link crud-buttons" href="/logout">Logout</a>
+                    </div>
+                    {{/ifeq}}
+                </div>
+
             </div>
 
             <div class="py-4 px-4">
                 <div class="d-flex align-items-center justify-content-between mb-3">
-                    <b><h5 class="mb-0">My pets</h5></b><a href="/user/{{user.id}}/pets" class="btn btn-link text-muted">Back
+                    <b>
+                        <h5 class="mb-0">My pets</h5>
+                    </b><a href="/user/{{user.id}}/profilefeed" class="btn btn-link button-text">Back
                         to feed</a>
                 </div>
 
                 <a href="/user/{{user.id}}/addNewPet">Add new pet</a>
 
-                <div class="card mb-3" style="max-width: 540px;">
-                    <div class="row no-gutters">
-                        {{#if pets}}
-                        {{#each pets as |pet|}}
-                        <div class="col-md-4">
+                {{#if pets}}
+				{{#each pets as |pet|}}
+				<div class="card" style="max-width: 767px;">
+					<div class="row no-gutters">
 
-                            <img src="{{ pet.avatar }}" class="card-img" alt="pet avatar">
-                        </div>
-                        <div class="col-md-8">
-                            <div class="card-body">
-                                <h4 class="card-title">Name: {{ pet.name }}</h4>
-                                <h5 class="card-title">Breed: {{ pet.breed }}</h5>
-                                <h6 class="card-title">Status: {{ pet.available }}</h6>
-                                <p class="card-text">About pet: {{ pet.bio }}</p>
-                                <a href="/pet/{{pet.id}}/profile"><i class="fa fa-dog"></i>
-                                    <div>View pet profile</div>
-                                </a>
-                                <a href="/pet/{{pet._id}}/editPet">Edit Pet</a>
+						<div class="col-md-4">
 
-                                <a href="/pet/{{pet._id}}/deletePet">Delete Pet</a>
-                                <br>
+							<img src="{{ pet.avatar }}" class="card-img pets-image" alt="pet avatar">
+						</div>
+						<div class="pets-card col-md-8">
+							<div class="card-body">
+								<h4 class="card-title">Name: {{ pet.name }}</h4>
+								<h5 class="card-title">Breed: {{ pet.breed }}</h5>
+								<h6 class="card-title">Status: {{ pet.available }}</h6>
+								<p class="card-text">About pet: {{ pet.bio }}</p>
+								<a class="btn btn-link button-text" href="/pet/{{pet.id}}/profile">
+									View pet profile
+								</a>
 
-                            </div>
-                        </div>
-                        {{/each}}
-                        {{/if}}
-                    </div>
-                </div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+				{{/each}}
+				{{/if}}
 
             </div>
         </div>

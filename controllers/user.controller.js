@@ -173,7 +173,7 @@ module.exports.logout = (req, res, next) => {
     res.redirect('/login')
 }
 
-module.exports.showUserProfilePage = (req, res, next) => {
+ module.exports.showUserProfilePage = (req, res, next) => {
     const {
         id
     } = req.params;

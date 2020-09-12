@@ -10,18 +10,36 @@
 		<!-- Profile widget -->
 		<div class="bg-white shadow rounded overflow-hidden">
 			<div class="media align-items-end profile-head">
-				<div class="profile mr-3"><img src="{{posts.[0].user.avatar}}" alt="user avatar" width="130"
-						class="rounded mb-2 img-thumbnail">{{!-- <a href="#"
-						class="btn btn-outline-dark btn-sm btn-block">Match</a> --}}</div>
-				<div class="media-body mb-5 text-black">
-					<h4 class="mt-0 mb-0">{{posts.[0].user.name}}</h4>
-					<p class="small mb-4"> <i class="fas fa-map-marker-alt mr-2"></i>{{posts.[0].user.username}}</p>
+				<div class="left-head">
+					<div class="profile mr-3"><img src="{{posts.[0].user.avatar}}" alt="user avatar" width="130"
+							class="rounded mb-2 img-thumbnail">
+					</div>
 				</div>
+
+				<div class="right-head">
+					<div class="media-body text-black">
+						<h2><b>{{posts.[0].user.name}}</b></h2>
+						<h5><b>@{{posts.[0].user.username}}</b>
+						</h5>
+						<h6>Status:{{posts.[0].user.status}}</h6>
+					</div>
+
+					{{#ifeq currentUser.id posts.[0].user._id }}
+
+					<div id="user-profile-btn-area">
+						<a class="btn btn-link crud-buttons" href="/user/{{posts.[0].user._id}}/edit">Edit profile</a>
+						<a class="btn btn-link crud-buttons" href="/user/{{posts.[0].user._id}}/delete">Delete profile</a>
+						<a class="btn btn-link crud-buttons" href="/logout">Logout</a>
+					</div>
+					{{/ifeq}}
+				</div>
+
 			</div>
 
 
 
 			<div class="bg-light p-4 d-flex justify-content-end text-center">
+
 				<ul class="list-inline mb-0">
 					<li class="list-inline-item">
 						<h5 class="font-weight-bold mb-0 d-block">215</h5><small class="text-muted"> <i
@@ -37,9 +55,9 @@
 					</li>
 				</ul>
 			</div>
-			<div class="px-4 py-3">
-				<h5 class="mb-0">About</h5>
-				<div class="p-4 rounded shadow-sm bg-light">
+			<div class="about-box px-4 py-3">
+				<h5 class="mb-0">About Owner</h5>
+				<div class="p-4 rounded shadow-lg bg-light">
 					<p class="font-italic mb-0">{{posts.[0].user.bio}}</p>
 				</div>
 			</div>
@@ -49,7 +67,7 @@
 			<div class="py-4 px-4">
 				<div class="d-flex align-items-center justify-content-between mb-3">
 					<h5 class="mb-0">Recent posts</h5><a href="/user/{{posts.[0].user._id}}/pets"
-						class="btn btn-link text-muted">Show Pets</a>
+						class="btn btn-link">Show Pets</a>
 				</div>
 
 				{{#if posts}}
@@ -66,7 +84,7 @@
 						<div class="card-body"> {{ post.body }} </div>
 
 						<div class="card-footer">
-							<button type="button" class="btn-sm btn-danger" data-like-post="{{post._id}}">
+							<button type="button" class="btn-sm btn-danger like-button" data-like-post="{{post._id}}">
 								<i class="fa fa-heart mr-1"></i>
 								<span class="likes-count">{{post.likes.length}}</span>
 								Likes
