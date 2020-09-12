@@ -26,7 +26,11 @@ router.get('/user/:id', sessionMiddleware.isAuthenticated, usersController.showU
 router.get('/user/:id/delete', sessionMiddleware.isAuthenticated, usersController.deleteUser)
 router.get('/user/:id/profilefeed', sessionMiddleware.isAuthenticated, usersController.showExternalProfile)
 router.get('/user/:id/network', sessionMiddleware.isAuthenticated, usersController.showNetwork )
-router.get('/user/:id/matches', sessionMiddleware.isAuthenticated, usersController.showMatches )
+
+router.get('/user/:id/matches', sessionMiddleware.isAuthenticated, usersController.showMatches );
+router.get('/user/:id/:contact/requestmatch', sessionMiddleware.isAuthenticated, usersController.createMatch );
+router.post('/match/:id/accepted', sessionMiddleware.isAuthenticated, usersController.matchAccepted );
+router.post('/match/:id/denied', sessionMiddleware.isAuthenticated, usersController.matchDenied );
 
 router.get('/user/:id/addNewPet', sessionMiddleware.isAuthenticated, petsController.showAddPetPage)
 router.post('/pets/addNewPet', sessionMiddleware.isAuthenticated, upload.single('avatar'), petsController.createPet);
