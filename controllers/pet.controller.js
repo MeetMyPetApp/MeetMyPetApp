@@ -19,7 +19,6 @@ module.exports.showAddPetPage = (req, res, next) => {
 				return acc
 			}, {})
 
-			console.log(breeds);
 			res.render('pets/addnewpet', {
 				breeds
 			})
@@ -28,21 +27,22 @@ module.exports.showAddPetPage = (req, res, next) => {
 }
 
 module.exports.createPet = (req, res, next) => {
-	const petParams = req.body;
-	petParams.user = req.currentUser.id;
-	petParams.avatar = req.file ? req.file.path : undefined;
-	const pet = new Pets(petParams);
 
-	console.log('petParams', petParams);
+	const params = {
+		name: req.body.name,
+		breed: req.body.breed,
+		pedigree: req.body.pedigree,
+		user: req.currentUser.id,
+		bio: req.body.bio,
+		available: req.body.available[0]
+	}
+	params.avatar = req.file ? req.file.path : undefined;
+
+	const pet = new Pets(params);
 
 	pet.save()
-		.then(p => {
-			console.log('Created pet', p);
-
-			res.render('pets/pets', p)
-			/* 
-			message: 'Your pet (name) has been sucessfully added!' */
-
+		.then( () => {
+			res.redirect(`/user/${req.currentUser.id}/pets`)
 		})
 		.catch((error) => {
 			if (error instanceof mongoose.Error.ValidationError) {

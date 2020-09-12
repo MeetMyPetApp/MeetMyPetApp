@@ -23,22 +23,33 @@
 				{{#each users as |user|}}
 				<div class="panel-body">
 					<ul class="user-card list-group list-group-dividered list-group-full">
-
+						
 						<li class="list-group-item">
 							<div class="media">
 								<div class="media-left">
 									<a class="avatar avatar-away" href="javascript:void(0)">
-										<img src="{{user.avatar}}" alt="">
+										<img src="{{user.data.avatar}}" alt="">
 										<i></i>
 									</a>
 								</div>
 								<div class="media-body">
 									<div class="pull-right">
-										<a href="/user/{{user._id}}/profilefeed" class="btn btn-info btn-sm waves-effect waves-light">View
+										{{#if user.showBtn}}
+											<div id="matchBtns">
+												<button data-match-status="{{user.match}}">Accept</button>
+												
+												<form action="/match/{{user.match}}/denied" method="POST">
+													<button type="submit">Denied</button>
+												</form>
+											</div>
+										{{else}}
+										<a href="/user/{{user.data._id}}/profilefeed" class="btn btn-info btn-sm waves-effect waves-light">View
 											Profile</a>
+										{{/if}}
+										
 									</div>
-									<div><a class="name" href="javascript:void(0)">{{user.name}}</a></div>
-									<small>{{user.username}}</small>
+									<div><a class="name" href="javascript:void(0)">{{user.data.name}}</a></div>
+									<small>{{user.data.username}}</small>
 								</div>
 							</div>
 						</li>

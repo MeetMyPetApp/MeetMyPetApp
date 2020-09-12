@@ -33,6 +33,38 @@
 			</div>
 
 			<div class="form-group">
+
+				<label for="pedigree">Pedigree:</label>
+				<select name="pedigree" class="browser-default custom-select">
+					<option selected> Choose pedigree</option>
+					<option value="yes">Yes</option>
+					<option value="no">No</option>
+				</select>
+
+				{{#if error.pedigree}}
+				<div class="invalid-feedback">
+					{{error.pedigree.message}}
+				</div>
+				{{/if}}
+			</div>
+
+			<div class="form-group">
+
+				<label for="available">Available:</label>
+				<select name="available" class="browser-default custom-select">
+					<option selected> Choose... </option>
+					<option value="available">Yes</option>
+					<option value="not available">No</option>
+				</select>
+
+				{{#if error.available}}
+				<div class="invalid-feedback">
+					{{error.available.message}}
+				</div>
+				{{/if}}
+			</div>
+
+			<div class="form-group">
 				<label for="avatar">Pet image:</label>
 				<input name="avatar" type="file" class="form-control {{#if error.avatar }}is-invalid{{/if}}"
 					id="avatar" placeholder="Enter pet photo" value="{{ pet.avatar }}">

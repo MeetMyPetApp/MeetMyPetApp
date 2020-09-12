@@ -12,6 +12,11 @@ const petSchema = new mongoose.Schema(
         type: String,
         lowercase: true,
     },
+    pedigree: {
+      type: String, 
+      enum: ['yes','no'],
+      default: 'no'
+    },
     avatar: {
       type: String,
       default: 'https://via.placeholder.com/150'
@@ -28,8 +33,8 @@ const petSchema = new mongoose.Schema(
     },
     available: {
       type: String, 
-      enum: ['Available','Not available'],
-      default: 'Not available'
+      enum: ['available','not available'],
+      default: 'not available'
     }
   },
   { timestamps: true }

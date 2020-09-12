@@ -284,17 +284,18 @@ module.exports.showExternalProfile = (req, res, next) => {
 
 module.exports.showNetwork = (req, res, next) => {
 
-    Match.find({
-            'users': req.currentUser.id
-        })
+    Match.find({ 'users': req.currentUser.id })
         .then(matches => {
-
+            
             const matchIds = matches.reduce((acc, cur) => {
-                acc.push(cur.users[0], cur.users[1])
+                if (!(cur.requester.toString() === req.currentUser.id.toString() && cur.status === 'pending')) {
+                    acc.push(cur.users[0], cur.users[1])
+                }
                 return acc
             }, []);
 
             User.find().where('_id').nin(matchIds)
+                .populate('matches')
                 .then(users => {
                     res.render('network/generalnetwork', {
                         users
@@ -307,24 +308,71 @@ module.exports.showNetwork = (req, res, next) => {
 
 module.exports.showMatches = (req, res, next) => {
 
-    Match.find({
-            'users': req.currentUser.id
-        })
+    Match.find({ $or: [
+            { users: { 
+                    $in: [req.currentUser.id] 
+                }, 
+                status: 'accepted' 
+            },
+            {
+                users: { $in: [req.currentUser.id] },
+                status: { $eq: 'pending' },
+                requester: { $ne: req.currentUser.id }
+            }
+        ]})
+        .populate('users')
         .then(matches => {
+            const users = matches
+                .map( m => {
+                    return {
+                        data: m.users.find(e => e._id !== req.currentUser.id),
+                        showBtn: m.status === 'pending',
+                        match: m._id
+                    }
+            })
 
-            const matchIds = matches.reduce((acc, cur) => {
-                const filteredMatch = cur.users.filter(m => m !== req.currentUser.id)
-                acc.push(filteredMatch[0]._id)
-                return acc
-            }, []);
 
-            User.find().where('_id').in(matchIds)
-                .then(users => {
-                    res.render('network/mynetwork', {
-                        users
-                    })
-                })
-                .catch(err => next(err))
+            res.render('network/mynetwork', { users })
+
         })
         .catch(err => next(err))
+}
+
+module.exports.createMatch = (req, res, next) => {
+    const params = {
+        users: [req.params.id , req.params.contact],
+        status: 'pending',
+        requester: req.params.id
+    }
+
+    const match = new Match(params)
+
+    match.save()
+        .then(() => {
+            res.redirect(`/user/${req.params.id}/network`)
+        })
+        .catch(err => next(err))
+
+}
+
+module.exports.matchAccepted = (req, res, next) => {
+    Match.findByIdAndUpdate( req.params.id, { 'status' : 'accepted'}, {
+            runValidators: true,
+            new: true
+        })
+        .then(() => {
+            res.json({ok: true})
+        })
+        .catch(err => next(err))
+}
+
+module.exports.matchDenied = (req, res, next) => {
+    Match.findByIdAndUpdate( req.params.id, { 'status' : 'denied'}, {
+        runValidators: true,
+        new: true
+    })
+    .then(() => {
+        res.redirect(`/user/${req.currentUser.id}/matches`)
+    })
+    .catch(err => next(err))
 }

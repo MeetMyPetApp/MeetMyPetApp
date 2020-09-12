@@ -5,7 +5,7 @@ const Match = require("../models/match.model");
 
 module.exports.showChatList = (req, res, next) => {
 
-    Chat.find({ 'members': req.currentUser.id })
+    Chat.find({ 'members': req.currentUser.id }).where('status').ne('denied')
         .populate({path: "members", match: {'_id': {$ne: req.currentUser.id}}})
         .then( chats => {
 

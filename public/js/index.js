@@ -7,3 +7,16 @@ document.querySelectorAll("[data-like-post]").forEach(el => {
             })
     })
   })
+
+
+document.querySelectorAll("[data-match-status]").forEach(el => {
+    el.addEventListener("click", function (event) {
+        const matchId = event.currentTarget.getAttribute("data-match-status");
+        axios.post(`/match/${matchId}/accepted`)
+            .then(() => {
+    
+                console.log('OK');
+               
+            })
+    })
+})
