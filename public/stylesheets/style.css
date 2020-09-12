@@ -17,9 +17,38 @@ height: auto;
     top: 0;
 	display: flex;
 	flex-direction: row;
+	justify-content: space-between;
 	height: 1%;
 	z-index: 999;
+	margin-bottom: 20px;
 }
+
+/* #create-post {
+	position: sticky;
+	top: 100px;
+	z-index: 1;
+} */
+
+#post-form {
+	background-color: gainsboro;
+	padding: 10px;
+}
+
+#myBtn {
+	display: none;
+	position: fixed;
+	bottom: 60px; 
+	right: 30px; 
+	z-index: 99;
+	border-radius: 3px;
+	border: none; 
+	color: white;
+	background-color: lightseagreen;
+	justify-content: center;
+	cursor: pointer;
+	margin: 0 auto; 
+	border-radius: 20px; 
+  }
 
 #input {
 	display: flex;
@@ -28,7 +57,15 @@ height: auto;
 
 .hidden-nav-part {
     display: flex;
-   flex-direction: row;
+	flex-direction: row;
+	justify-content: space-around;
+	padding: 0 50px;
+
+}
+
+.link-nav {
+	padding: 0 20px;
+	font-size: medium;
 }
 
 .avatar {
@@ -37,6 +74,7 @@ height: auto;
 	height: 50px;
 	border-radius: 50%;
   }
+
 
 .navbar-brand {
 
@@ -48,16 +86,17 @@ height: auto;
 		-webkit-box-align: center;
 		-ms-flex-align: center;
 		align-items: center;
+		margin: 0 20px;
 	  }
 	  
 	  .navbar-brand img {
-		max-width: 100%;
+		width: 120px;
 		max-height: 80px;
-		margin-left: 25px;
 	  }
 
 #navbar-elements {
 	float: right;
+	margin: 0 20px;
 }
 
 #pet-gallery {
@@ -74,21 +113,71 @@ height: auto;
 	padding: 10px;
 }
 
+.profile-head {
+	background-image: url("/images/petbackground.jpg");
+	background-size: cover;
+	background-repeat: no-repeat;
+}
+
+
+.like-button {
+	background-color: white;
+	border-color: tomato;
+	color: tomato;
+	margin-bottom: 5px;
+}
+
+.right-head {
+	color: white;
+	margin: auto 0;
+	display: flex;
+	flex-direction: column;
+}
+
+.left-head {
+	margin: 50px 20px;
+
+}
+
+#user-profile-btn-area a {
+	color: white;
+	margin: 20px 0;
+	background-color: white;
+	color: lightseagreen;
+	border-radius: 10px;
+}
+
+.pets-card a {
+	border-radius: 10px;
+}
+
+.pets-image {
+	height: 200px;
+	width: 200px;
+	margin: 30px;
+}
+
 
 @media (min-width: 768px){
 	.form-inline .input-group {
 		width: 350px;
 		margin-left: 30px;
-  }
+  	}
 
   .navbar-bottom {
-    display: none;
-  }
+    	display: none;
+  	}
 
   .pet-photo {
-	height: 300px;
-	width: 300px;
-}
+		height: 300px;
+		width: 300px;	
+	}
+
+	#myBtn {
+		bottom: 30px; 
+		right: 30px;
+		font-size: large;
+	}
 }
 
 @media (max-width: 767px){
