@@ -36,15 +36,14 @@
 									<div class="pull-right">
 										{{#if user.showBtn}}
 											<div id="matchBtns">
-												<a href="#" data-match-status="{{user.match}}" class="btn-sm btn-warning">ACCEPT</a>
+												<a href="#" data-match-btns="{{user.match}}" class="btn-sm btn-warning">ACCEPT</a>
 												
 												<form action="/match/{{user.match}}/denied" method="POST" id="match-deny-btn" data-match-matcherid="{{user.data._id}}" >
 													<button type="submit" class="btn-sm btn-warning">DENY</button>
 												</form>
 											</div>
 										{{else}}
-										<a href="/user/{{user.data._id}}/profilefeed" class="btn btn-info btn-sm waves-effect waves-light">View
-											Profile</a>
+										<a href="/user/{{user.data._id}}/profilefeed" class="btn btn-info btn-sm waves-effect waves-light">View Profile</a>
 										{{/if}}
 										
 									</div>
