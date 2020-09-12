@@ -1,47 +1,49 @@
 <div id="index-page-container">
    <h2>News feed</h2>
+   <div id="create-post">
+      <form id="post-form" action="/post/new" method="POST">
+         <div class="form-group">
+            <label for="body">Any news?</label>
+            <textarea name="body" type="text" class="form-control {{#if error.body }}is-invalid{{/if}}" id="body"
+               placeholder="Write your post..." rows="4"></textarea>
+         </div>
 
-   <form action="/post/new" method="POST">
-      <div class="form-group">
-         <label for="body">Any news?</label>
-         <textarea name="body" type="text" class="form-control {{#if error.body }}is-invalid{{/if}}" id="body"
-         placeholder="Write your post..." rows="4"></textarea>
-      </div>
+         <button type="submit" class="btn btn-primary">Submit post</button>
+      </form>
+   </div>
 
-      <button type="submit" class="btn btn-primary">Submit post</button>
-   </form>
+   <button onclick="topFunction()" id="myBtn" class="btn btn-info"><b>New Post</b></button>
 
    <hr class="style3">
 
 
    {{#if posts }}
    {{#each posts as |post| }}
-      <div class="card">
-         <div class="card-header">
-            <a href="/user/{{post.user._id}}/profilefeed">
-               <img class="rounded-circle" src="{{ post.user.avatar }}" alt="author photo">
-               <span class="card-title">{{ post.user.name }}</span>
-               <div class="text-muted">Published on {{ post.createdAt }}</div>
-            </a>
-         </div>
-         <div class="card-body"> {{ post.body }} </div>
-
-         <div class="card-footer">
-            <button type="button" class="btn-sm btn-danger" data-like-post="{{post._id}}">
-               <i class="fa fa-heart mr-1"></i>
-               <span class="likes-count">{{post.likes.length}}</span>
-               Likes
-            </button>
-            <span class="text-muted">comments: {{post.comments.length}} | </span>
-            <a href="/post/{{post._id}}">Comments</a>
-
-            {{#ifeq ../currentUser.id post.user._id }}
-               <a href= "/post/{{post._id}}/editpost" class="btn-sm btn btn-outline-danger">Edit</a>
-               <a href="/post/{{post._id}}/deletepost" class="btn-sm btn btn-outline-danger">Delete</a>
-            {{/ifeq}}
-         </div>
+   <div class="card">
+      <div class="card-header">
+         <a href="/user/{{post.user._id}}/profilefeed">
+            <img class="rounded-circle" src="{{ post.user.avatar }}" alt="author photo">
+            <span class="card-title">{{ post.user.name }}</span>
+            <div class="text-muted">Published on {{ post.createdAt }}</div>
+         </a>
       </div>
+      <div class="card-body"> {{ post.body }} </div>
+
+      <div class="card-footer">
+         <button type="button" class="btn-sm like-button" data-like-post="{{post._id}}">
+            <i class="fa fa-heart mr-1"></i>
+            <span class="likes-count">{{post.likes.length}}</span>
+            Likes
+         </button>
+         <span class="text-muted">comments: {{post.comments.length}} | </span>
+         <a href="/post/{{post._id}}">Comments</a>
+
+         {{#ifeq ../currentUser.id post.user._id }}
+         <a href="/post/{{post._id}}/editpost" class="btn-sm btn btn-outline-danger">Edit</a>
+         <a href="/post/{{post._id}}/deletepost" class="btn-sm btn btn-outline-danger">Delete</a>
+         {{/ifeq}}
+      </div>
+   </div>
    {{/each}}
    {{/if}}
 </div>
-
