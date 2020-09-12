@@ -5,14 +5,41 @@ const Match = require("../models/match.model");
 
 module.exports.showChatList = (req, res, next) => {
 
-    Chat.find({ 'members': req.currentUser.id }).where('status').ne('denied')
+    /* const chats = [];
+    const allMatchIds = [];
+
+    Match.find({'users': { $in: [req.currentUser.id]}, status: 'accepted'}) 
+        .populate({path: 'users', match: {'_id': {$ne: req.currentUser.id}}})
+        .then( matches => {
+
+            matches.forEach( m => {
+                allMatchIds.push(m.users[0]._id)
+            })
+
+            for (let i = 0 ; i < allMatchIds.length; i++) {
+                Chat.find({ 'members': { $in: allMatchIds }})
+                    .then( chat => {
+                        chats.push(chat)
+                        res.json(chats[0].length.toString())
+                    })
+            }
+            
+        })  */
+
+    
+
+
+    //5f5c9a99bcb239783fef7c4e USER TEST
+    
+    //5f5cbb4e5f803e187eff3628  CHAT
+    Chat.find({ 'members': { $in: [req.currentUser.id] }}) 
         .populate({path: "members", match: {'_id': {$ne: req.currentUser.id}}})
         .then( chats => {
 
             const userIdsWithActiveChats = [];
             chats.forEach( c => userIdsWithActiveChats.push(c.members[0]._id))
           
-            Match.find().where('users').nin(userIdsWithActiveChats)
+            Match.find({'users': { $in: [req.currentUser.id]}, status: 'accepted'}).where('users').nin(userIdsWithActiveChats)
                 .populate({path: 'users', match: {'_id': {$ne: req.currentUser.id}}})
                 .then( matches => {
 
@@ -34,23 +61,20 @@ module.exports.showChat = (req, res, next) => {
                 sort: {
                     createdAt: -1
                 }
-            }/* ,
-            populate: 'user' */
+            }
         })
         .then( chat => {
-            console.log('Viewing chat');
-            /* if (chat.users.includes(req.currentUser.id)) {
-                
-            } */
             res.render('chats/chatroom', { chat })
         })
         .catch(err => next(err))
 }
 
 module.exports.createChat = (req, res, next) => {
-    const members = [ req.params.userid, req.currentUser.id ];
+    const params = {
+        members: [ req.params.userid, req.currentUser.id ]
+    };
     
-    const chat = new Chat(members)
+    const chat = new Chat(params)
 
     chat.save()
         .then( c => res.redirect(`/chat/${c._id}`))
@@ -71,8 +95,6 @@ module.exports.createMessage = (req, res, next) => {
         .then( () => {
             res.redirect(`/chat/${req.params.id}`)
         })
-
-    console.log('MESSAGE: ', params);
-    
+        .catch(err => next(err))
 }
 

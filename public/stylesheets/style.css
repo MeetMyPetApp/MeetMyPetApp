@@ -19,7 +19,7 @@ height: auto;
 	flex-direction: row;
 	justify-content: space-between;
 	height: 1%;
-	z-index: 1;
+	z-index: 999;
 	margin-bottom: 20px;
 }
 

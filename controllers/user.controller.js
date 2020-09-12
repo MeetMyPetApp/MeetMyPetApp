@@ -284,7 +284,7 @@ module.exports.showExternalProfile = (req, res, next) => {
 
 module.exports.showNetwork = (req, res, next) => {
 
-    Match.find({ 'users': req.currentUser.id })
+    Match.find({ 'users': { $in: [req.currentUser.id] } })
         .then(matches => {
             
             const matchIds = matches.reduce((acc, cur) => {
@@ -321,6 +321,7 @@ module.exports.showMatches = (req, res, next) => {
             }
         ]})
         .populate('users')
+        .sort([['status', -1]])
         .then(matches => {
             const users = matches
                 .map( m => {

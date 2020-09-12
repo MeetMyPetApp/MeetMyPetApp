@@ -36,10 +36,10 @@
 									<div class="pull-right">
 										{{#if user.showBtn}}
 											<div id="matchBtns">
-												<button data-match-status="{{user.match}}">Accept</button>
+												<a href="#" data-match-status="{{user.match}}" class="btn-sm btn-warning">ACCEPT</a>
 												
-												<form action="/match/{{user.match}}/denied" method="POST">
-													<button type="submit">Denied</button>
+												<form action="/match/{{user.match}}/denied" method="POST" id="match-deny-btn" data-match-matcherid="{{user.data._id}}" >
+													<button type="submit" class="btn-sm btn-warning">DENY</button>
 												</form>
 											</div>
 										{{else}}

@@ -257,7 +257,7 @@ Promise.all([
                     }
                 }
 
-                for (let i = 10; i < 15; i++) {
+                for (let i = 10; i < 12; i++) {
                     const match = new Match({
                         users: [ userIds[i], user._id],
                         status: 'pending',
@@ -268,7 +268,7 @@ Promise.all([
                     match.save()
                 }
 
-                for (let i = 15; i < 20; i++) {
+                for (let i = 12; i < 20; i++) {
                     const match = new Match({
                         users: [ userIds[i], user._id],
                         status: 'pending',
