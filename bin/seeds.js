@@ -109,7 +109,7 @@ Promise.all([
                         breed: dogBreed,
                         pedigree: Math.random() < 0.5 ? 'yes' : 'no',
                         gallery: dogRandomImages,
-                        available: 'Available',
+                        available: 'available',
                         bio: faker.lorem.paragraph(),
                         createdAt: faker.date.past()
                     });
@@ -184,7 +184,7 @@ Promise.all([
                         breed: dogBreed,
                         pedigree: 'yes',
                         gallery: dogRandomImages,
-                        available: 'Available',
+                        available: 'available',
                         bio: faker.lorem.paragraph(),
                         createdAt: faker.date.past()
                     });
@@ -257,7 +257,7 @@ Promise.all([
                     }
                 }
 
-                for (let i = 10; i < 15; i++) {
+                for (let i = 10; i < 12; i++) {
                     const match = new Match({
                         users: [ userIds[i], user._id],
                         status: 'pending',
@@ -268,7 +268,7 @@ Promise.all([
                     match.save()
                 }
 
-                for (let i = 15; i < 20; i++) {
+                for (let i = 12; i < 20; i++) {
                     const match = new Match({
                         users: [ userIds[i], user._id],
                         status: 'pending',
