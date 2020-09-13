@@ -60,7 +60,6 @@ height: auto;
 	flex-direction: row;
 	justify-content: space-around;
 	padding: 0 50px;
-
 }
 
 .link-nav {
@@ -240,6 +239,7 @@ height: auto;
 	.navbar-bottom {
 		position: fixed;
 		bottom: 0;
+		z-index: 998;
 	}
 
 	.hidden-nav-part {
@@ -378,5 +378,13 @@ height: auto;
 
 .contact-list-image {
 	height: 80px;
+	width: auto;
+}
+
+/********* NETWORK AND CHAT **********/
+
+.network-profile-img {
+	margin: 0;
+	max-height: 140px;
 	width: auto;
 }

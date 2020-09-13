@@ -28,28 +28,28 @@
 						<div class="media-body">
 
 							<div class="row mt-2">
-								<div class="col-sm-12 col-md-3 mb-3 text-center">
+								<div class="col-sm-12 col-md-4 mb-3 text-center">
 									<a class="avatar avatar-online" href="javascript:void(0)">
-										<img class="img-thumbnail rounded" src="{{user.data.avatar}}" alt="profile photo">
+										<img class="network-profile-img border border-light rounded shadow" src="{{user.data.avatar}}" alt="profile photo">
 									</a>
 								</div>
 
-								<div class="col-sm-12 col-md-9 text-center">
+								<div class="col-sm-12 col-md-8 text-center">
 									<a class="name text-success" href="/user/{{user.data._id}}/profilefeed">
-										<h5 class="mt-0" style="color:lightseagreen">{{user.data.name}}</h5>
+										<h5 class="mt-0 " style="color:lightseagreen">{{user.data.name}}</h5>
 									</a>
 									<div class="text-muted"><i>{{user.data.username}}</i></div>
 									<p>{{user.data.status}}</p>
 
 
-									<div class="col-12 text-center border-top border-success mt-3 pt-2 pb-2">
+									<div class="col-12 text-center mt-3 pt-2 pb-2">
 										{{#if user.showBtn}}
 											<div id="matchBtns" class="row mb-0 mt-1">
 												<form action="/match/{{user.match}}/denied" method="POST" id="{{user.match}}" {{!-- data-match-denybtn="{{user.match}}" --}} class="col-sm-12 col-md-6 text-center" >
-													<button type="submit" class="btn btn-sm waves-effect waves-light border border-danger">DENY</button>
+													<button type="submit" class="btn btn-sm waves-effect waves-light border border-danger mt-2">DENY</button>
 												</form>
-												<div class="text-center">
-													<a href="#" data-match-status="{{user.match}}" data-matcherid="{{user.data._id}}" class="btn btn-sm waves-effect waves-light border border-danger ml-3">ACCEPT</a>
+												<div class="text-center col-sm-12 col-md-6">
+													<a href="#" data-match-status="{{user.match}}" data-matcherid="{{user.data._id}}" class="btn btn-sm waves-effect waves-light border border-danger mt-2" style="margin: auto;">ACCEPT</a>
 												</div>
 											</div>
 
