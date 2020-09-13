@@ -1,9 +1,14 @@
 <div class="edit-post-page">
     <div class="card mb-3">
-        <div class="card-header">
-            <img class="rounded-circle" src="{{ post.user.avatar }}" alt="author photo">
-            <span class="card-title">{{ post.user.name }}</span>
-            <div class="text-muted">Published on {{ post.createdAt }}</div>
+        <div class="card-header edit-post-card">
+            <div>
+                <img class="rounded-circle post-image img-thumbnail" src="{{ post.user.avatar }}" alt="author photo">
+            </div>
+            <div class="edit-post-head">
+                <span class="card-title">{{ post.user.name }}</span>
+                <div class="text-muted">Published on {{ post.createdAt }}</div>
+            </div>
+
         </div>
         <form action="/post/{{post._id}}/edit" method="POST">
             <label for="body">Edit post:</label>
@@ -12,4 +17,4 @@
         </form>
 
         <div class="card-footer"></div>
-</div>
+    </div>

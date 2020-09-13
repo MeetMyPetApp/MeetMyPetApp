@@ -55,6 +55,7 @@ height: auto;
 	flex-direction: row;
 }
 
+
 .hidden-nav-part {
 	display: flex;
 	
@@ -238,6 +239,10 @@ height: auto;
 	background-color: white;
 	border-color: lightseagreen;
 	color: lightseagreen;
+}
+
+#submit {
+	margin: 30px 0;
 }
 
 .list-inline-item {

@@ -38,7 +38,7 @@
 
       <div class="card-footer post-footer">
          <div class="like">
-            <button type="button" class="btn-sm like-button" data-like-post="{{post._id}}">
+            <button type="button" class="btn-sm like-button mr-2" data-like-post="{{post._id}}">
                <i class="fa fa-heart mr-1"></i>
                <span class="likes-count">{{post.likes.length}}</span>
                Likes
@@ -52,7 +52,7 @@
 
          {{#ifeq ../currentUser.id post.user._id }}
          <div class="user-post-btn">
-            <a href="/post/{{post._id}}/editpost" id="edit-delete" class="btn">Edit</a><span>
+            <a href="/post/{{post._id}}/editpost" id="edit-delete" class="btn mb-2">Edit</a><span>
                <a href="/post/{{post._id}}/deletepost" id="delete-edit" class="btn">Delete</a>
             </span>
 

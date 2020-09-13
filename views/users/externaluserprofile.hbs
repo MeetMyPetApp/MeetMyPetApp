@@ -9,7 +9,7 @@
 	<div class="col mx-auto">
 		<!-- Profile widget -->
 		<div class="bg-white shadow rounded overflow-hidden">
-			<div class="media align-items-end profile-head">
+			<div class="media profile-head">
 				<div class="left-head">
 					<div class="profile mr-3"><img src="{{posts.[0].user.avatar}}" alt="user avatar" width="130"
 							class="rounded mb-2 img-thumbnail">
@@ -93,7 +93,7 @@
 
 					<div class="card-footer post-footer">
 						<div class="like">
-							<button type="button" class="btn-sm like-button" data-like-post="{{post._id}}">
+							<button type="button" class="btn-sm like-button mr-2" data-like-post="{{post._id}}">
 								<i class="fa fa-heart mr-1"></i>
 								<span class="likes-count">{{post.likes.length}}</span>
 								Likes
@@ -107,7 +107,7 @@
 
 						{{#ifeq ../currentUser.id post.user._id }}
 						<div class="user-post-btn">
-							<a href="/post/{{post._id}}/editpost" id="edit" class="btn-sm btn btn-outline-danger">Edit</a><span>
+							<a href="/post/{{post._id}}/editpost" id="edit" class="btn-sm btn btn-outline-danger mb-2">Edit</a><span>
 								<a href="/post/{{post._id}}/deletepost" id="delete" class="btn-sm btn btn-outline-danger">Delete</a>
 							</span>
 
