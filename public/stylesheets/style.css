@@ -221,6 +221,10 @@ height: auto;
 	color: lightseagreen;
 }
 
+.list-inline-item {
+	font-size: x-large;
+}
+
 @media (min-width: 898px){
 	.form-inline .input-group {
 		width: 350px;
