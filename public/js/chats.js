@@ -1,13 +1,17 @@
-const chatTimer = setTimeout(() => {
+const chatTimer = setInterval(() => {
 
-    //const chatId = document.body.querySelector('[data-chat-identifier]').getAttribute('data-chat-identifier');
-    window.location.assign(`http://localhost:3000/chat/${chatId}`)
-    /* axios.get(`/chat/${chatId}`)
-        .then(response => {
-            console.log(response.data);
+    const chatId = document.body.querySelector('[data-chat-identifier]').getAttribute('data-chat-identifier');
+    axios.get(`/chat/${chatId}`)
+        .then(() => {
+            window.location.reload();
         })
         .catch(err => console.log(err)); 
-    window.location.reload(); */
-}, 3000)
+}, 4000)
 
-clearTimeout(chatTimer);
+document.getElementById('chat-message-textarea').addEventListener('input', function () {
+    clearInterval(chatTimer)
+})
+
+document.getElementById('chat-message-sendbtn').addEventListener('click', function () {
+    return chatTimer
+})

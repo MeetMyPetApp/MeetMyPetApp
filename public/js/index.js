@@ -1,34 +1,21 @@
-/* document.querySelectorAll("[data-match-status]").forEach(el => {
-    el.addEventListener("click", function (event) {
-        const matchId = event.currentTarget.getAttribute("data-match-status");
-        axios.post(`/match/${matchId}/accepted`)
-            .then(() => {
-
-                console.log('OK');
-
-            })
-    })
-})  */
-
-
 document.querySelectorAll("[data-match-status]").forEach(el => {
     el.addEventListener("click", function (event) {
         const matchBtn = event.currentTarget;
         const matchId = event.currentTarget.getAttribute("data-match-status");
+        const matcherId = event.currentTarget.getAttribute("data-matcherid");
 
-        const matcherId = event.currentTarget.getAttribute("data-match-matcherid");
-        const denyBtn = document.getElementById('match-deny-btn');
-        //const denyBtn = event.currentTarget.getAttribute("data-match-matcherid");
+        const denyBtn = document.getElementById(matchId);
+        const denyBtnParent = denyBtn.parentNode;
 
         axios.post(`/match/${matchId}/accepted`)
             .then( () => {
                 matchBtn.innerText = 'View Profile';
-                //matchBtn.classList.remove('btn-warning');
-                matchBtn.className = 'btn-sm btn btn-info waves-effect waves-light';
-
+                matchBtn.className = 'col-12 btn btn-sm btn-info waves-effect waves-light';
                 matchBtn.href = `/user/${matcherId}/profilefeed`;
 
-                denyBtn.innerHTML = '';
+                matchBtn.parentNode.className= 'text-center col-12';
+
+                denyBtnParent.removeChild(denyBtn)
             })
     })
 })

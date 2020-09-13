@@ -39,11 +39,11 @@
 
 								<div class="col-sm-12 col-md-9 text-center">
 									<a class="name text-success" href="/user/{{user._id}}/profilefeed">
-										<h4 class="mt-0">{{user.name}}</h4>
+										<h5 class="mt-0" style="color:lightseagreen">{{user.name}}</h5>
 									</a>
 									<div class="text-muted"><i>{{user.username}}</i></div>
-									<h5>{{user.status}}</h5>
-									
+									<p>{{user.status}}</p>
+
 									<div class="col-12 text-center border-top border-success mt-3 pt-2 pb-2">
 										<a class="btn btn-info btn-sm waves-effec waves-light m-1" href="/user/{{../currentUser.id}}/{{user._id}}/requestmatch">Match</a>
 										<a class="btn btn-info btn-sm waves-effec waves-light " href="/user/{{user._id}}/profilefeed">View Profile</a>
