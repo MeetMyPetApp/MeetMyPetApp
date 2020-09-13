@@ -61,7 +61,8 @@ module.exports.showChat = (req, res, next) => {
                 sort: {
                     createdAt: -1
                 }
-            }
+            },
+            populate: 'sender'
         })
         .then( chat => {
             res.render('chats/chatroom', { chat })

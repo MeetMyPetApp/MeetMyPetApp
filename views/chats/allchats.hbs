@@ -1,56 +1,46 @@
-<div class="col-xl-4 col-lg-4 col-md-4 col-sm-3 col-3">
-	<div class="users-container">
-		<div class="chat-search-box">
-			<div class="input-group">
-				<input class="form-control" placeholder="Search">
-				<div class="input-group-btn">
-					<button type="button" class="btn btn-info">
-						<i class="fa fa-search"></i>
-					</button>
-				</div>
+<div class="users-container">
+	<div class="chat-search-box">
+		<div class="input-group">
+			<input class="form-control" placeholder="Search">
+			<div class="input-group-btn">
+				<button type="button" class="btn btn-info">
+					<i class="fa fa-search"></i>
+				</button>
 			</div>
 		</div>
-		
-		<div class="active-chats">
-			<ul class="users">
-				{{!-- missing making li section a link to private chat room by chat id --}}
-				{{#each chats as |chat|}}
-					<li class="person" data-chat="person1">
-						<a href="/chat/{{chat._id}}">
-							<div class="user">
-								<img src="{{chat.members.[0].avatar}}" alt="user avatar">
-								<span class="status busy"></span>
-							</div>
-							<p class="name-time">
-								<span class="name">{{chat.members.[0].name}}</span>
-								{{!-- <span class="time">{{chat.createdAt}}</span> --}}
-							</p>
-						</a>
-					</li>
-				{{/each}}
-			</ul>
-		</div>
-
-		<hr class="style5">
-
-		<div class="new-chat">
-			<ul class="users">
-				{{!-- missing making li section a link to private chat room by chat id --}}
-				{{#each matches as |match|}}
-					<li class="person" data-chat="person1">
-						<div class="user">
-							<img src="{{match.users.[0].avatar}}" alt="user avatar">
-							<span class="status busy"></span>
-						</div>
-						<p class="name-time">
-							<span class="name">{{match.users.[0].name}}</span>
-						</p>
-						<a href="/chat/new/{{match.users.[0]._id}}">Start chat</a>
-					</li>
-				{{/each}}
-			</ul>
-		</div>
-		
-
 	</div>
+	
+	<div class="active-chats">
+		<ul class="users">
+			{{#each chats as |chat|}}
+				<li class="list-group shadow">
+					<a href="/chat/{{chat._id}}" class="list-group-item list-group-item-action rounded">
+						<div >
+							<img src="{{chat.members.[0].avatar}}" class="contact-list-image img-thumbnail rounded-circle" alt="user avatar">
+							<span class="name ml-3"><big>{{chat.members.[0].name}}</big></span>
+						</div>
+					</a>
+				</li>
+			{{/each}}
+		</ul>
+	</div>
+
+	<hr class="style5">
+
+	<div class="new-chat">
+		<ul class="users">
+			{{#each matches as |match|}}
+				<li class="list-group">
+					<a href="/chat/new/{{match.users.[0]._id}}" class="list-group-item list-group-item-action shadow" >
+						<div class="user">
+							<img src="{{match.users.[0].avatar}}" class="contact-list-image img-thumbnail rounded-circle" alt="user avatar">
+							<span class="name"><big>{{match.users.[0].name}}</big></span><span class="text-info ml-3">Start to chat</span>
+						</div>
+					</a>
+				</li>
+			{{/each}}
+		</ul>
+	</div>
+	
+
 </div>
