@@ -12,51 +12,63 @@
 	</div>
 
 	<div class="row bootstrap snippets bootdey">
-		<div class="col-md-8 col-xs-12">
-			<div class="panel" id="followers">
-				<div class="panel-heading">
-					<h3 class="panel-title">
-						<i class="icon md-check" aria-hidden="true"></i> Current Matches
-					</h3>
-				</div>
 
+		<div class="panel" id="followers">
+			<div class="panel-heading">
+				<h4 class="panel-title">
+					Current Matches
+				</h4>
+			</div>
+
+			<ul class="user-card list-group list-group-dividered list-group-full">
 				{{#each users as |user|}}
-				<div class="panel-body">
-					<ul class="user-card list-group list-group-dividered list-group-full">
+				<li class="list-group-item mb-3 rounded shadow">
+					<div class="media">
 						
-						<li class="list-group-item">
-							<div class="media">
-								<div class="media-left">
-									<a class="avatar avatar-away" href="javascript:void(0)">
-										<img src="{{user.data.avatar}}" alt="">
-										<i></i>
+						<div class="media-body">
+
+							<div class="row mt-2">
+								<div class="col-sm-12 col-md-3 mb-3 text-center">
+									<a class="avatar avatar-online" href="javascript:void(0)">
+										<img class="img-thumbnail rounded" src="{{user.data.avatar}}" alt="profile photo">
 									</a>
 								</div>
-								<div class="media-body">
-									<div class="pull-right">
+
+								<div class="col-sm-12 col-md-9 text-center">
+									<a class="name text-success" href="/user/{{user.data._id}}/profilefeed">
+										<h4 class="mt-0">{{user.data.name}}</h4>
+									</a>
+									<div class="text-muted"><i>{{user.data.username}}</i></div>
+									<h5>{{user.data.status}}</h5>
+
+
+									<div class="col-12 text-center border-top border-success mt-3 pt-2 pb-2">
 										{{#if user.showBtn}}
-											<div id="matchBtns">
-												<button data-match-status="{{user.match}}">Accept</button>
-												
-												<form action="/match/{{user.match}}/denied" method="POST">
-													<button type="submit">Denied</button>
+											<div id="matchBtns" class="row mb-0 mt-1">
+												<form action="/match/{{user.match}}/denied" method="POST" id="match-deny-btn" data-match-matcherid="{{user.data._id}}" class="col-sm-12 col-md-6 text-center" >
+													<button type="submit" class="btn btn-sm waves-effect waves-light border border-danger">DENY</button>
 												</form>
+												<div class="col-sm-12 col-md-6 text-center">
+													<a href="{{!-- /match/{{user.match}}/accepted --}}" data-match-status="{{user.match}}" class="btn btn-sm waves-effect waves-light border border-danger">ACCEPT</a>
+												</div>
 											</div>
+
 										{{else}}
-										<a href="/user/{{user.data._id}}/profilefeed" class="btn btn-info btn-sm waves-effect waves-light">View
-											Profile</a>
+											<a href="/user/{{user.data._id}}/profilefeed" class="btn btn-info btn-sm waves-effect waves-light mt-1">View Profile</a>
 										{{/if}}
-										
 									</div>
-									<div><a class="name" href="javascript:void(0)">{{user.data.name}}</a></div>
-									<small>{{user.data.username}}</small>
 								</div>
+
+
+
 							</div>
-						</li>
-					</ul>
-				</div>
+						</div>
+					</div>
+				</li>
 				{{/each}}
-			</div>
+			</ul>
+			
 		</div>
+		
 	</div>
 </div>
