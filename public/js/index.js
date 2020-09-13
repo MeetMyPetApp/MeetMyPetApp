@@ -20,7 +20,7 @@ document.querySelectorAll("[data-match-status]").forEach(el => {
     })
 })
 
-//Scroll Button
+//Scroll Button in feedview to write posts
 mybutton = document.getElementById("myBtn");
 
 window.onscroll = function() {scrollFunction()};

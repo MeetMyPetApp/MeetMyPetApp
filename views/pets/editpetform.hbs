@@ -51,9 +51,26 @@
                     <div>Pet status: {{ pet.available }} </div>
 
                     <label for="available">Change your pet status:</label>
-                    <select name="available" id="available">
-                        <option class="form-control" value="Available">Available</option>
-                        <option class="form-control" value="Not available">Not available</option>
+                    <select name="available" class="browser-default custom-select" id="available">
+                        <option class="form-control" value="available">Available</option>
+                        <option class="form-control" value="not available">Not available</option>
+                    </select>
+
+
+                    {{#if error.status}}
+                    <div class="invalid-feedback">
+                        {{error.status.message}}
+                    </div>
+                    {{/if}}
+                </div>
+
+                <div class="form-group">
+                    <div>pedigree: {{ pet.pedigree }} </div>
+
+                    <label for="pedigree">Change pedigree option:</label>
+                    <select name="pedigree" class="browser-default custom-select" id="pedigree">
+                        <option class="form-control" value="yes">Yes</option>
+                        <option class="form-control" value="no">No</option>
                     </select>
 
 
