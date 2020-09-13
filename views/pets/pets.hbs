@@ -42,7 +42,7 @@
 
                 {{#if pets}}
 				{{#each pets as |pet|}}
-				<div class="card" style="max-width: 767px;">
+				<div class="card">
 					<div class="row no-gutters">
 
 						<div class="col-md-4">
@@ -51,9 +51,9 @@
 						</div>
 						<div class="pets-card col-md-8">
 							<div class="card-body">
-								<h4 class="card-title">Name: {{ pet.name }}</h4>
-								<h5 class="card-title">Breed: {{ pet.breed }}</h5>
-								<h6 class="card-title">Status: {{ pet.available }}</h6>
+								<b><h3 style="color:lightseagreen">Name: {{ pet.name }}</h3></b>
+								<h4>Breed: {{ pet.breed }}</h4>
+								<b><h6 id="pet-status" style="color:lightseagreen">Status: {{ pet.available }}</h6></b>
 								<p class="card-text">About pet: {{ pet.bio }}</p>
 								<a class="btn btn-link button-text" href="/pet/{{pet.id}}/profile">
 									View pet profile

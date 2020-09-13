@@ -44,16 +44,16 @@
 
 			<div class="py-4 px-4">
 				<div class="d-flex align-items-center justify-content-between mb-3">
-					<h5 class="mb-0">Pet Gallery</h5><a href="/user/{{pet.user._id}}/pets"
-						class="btn btn-link">Back to Pets</a>
+					<h5 class="mb-0">Pet Gallery</h5><a href="/user/{{pet.user._id}}/pets" class="btn btn-link">Back to
+						Pets</a>
 				</div>
 
-				<div id="pet-gallery" class="row align-items-center justify-content-between">
+				<div id="pet-gallery" class="row">
 					<div id="photo-gallery" class="col">
 						{{#each pet.gallery as |image|}}
-
-						<img class="pet-photo" src="{{image}}">
-
+						
+							<img class="pet-photo shadow" src="{{image}}">
+					
 						{{/each}}
 					</div>
 
