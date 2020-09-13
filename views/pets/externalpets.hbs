@@ -41,19 +41,20 @@
 				<div class="card">
 					<div class="row no-gutters">
 
-						<div class="col-md-4">
+						<div class="col-xl-4 col-lg-12">
 
 							<img src="{{ pet.avatar }}" class="card-img pets-image" alt="pet avatar">
 						</div>
-						<div class="pets-card col-md-8">
+						<div class="pets-card col-xl-8 col-lg-12">
 							<div class="card-body">
-								<b><h3 style="color:lightseagreen">Name: {{ pet.name }}</h3></b>
-								<h4>Breed: {{ pet.breed }}</h4>
+								<b><h4 style="color:lightseagreen">Name: {{ pet.name }}</h4></b>
+								<h5>Breed: {{ pet.breed }}</h5>
 								<b><h6 id="pet-status" style="color:lightseagreen">Status: {{ pet.available }}</h6></b>
 								<p class="card-text">About pet: {{ pet.bio }}</p>
 								<a class="btn btn-link button-text" href="/pet/{{pet.id}}/profile">
 									View pet profile
 								</a>
+
 
 							</div>
 						</div>

@@ -56,15 +56,14 @@ height: auto;
 }
 
 .hidden-nav-part {
-    display: flex;
-	flex-direction: row;
-	justify-content: space-around;
-	padding: 0 50px;
+	display: flex;
+	
 }
 
 .link-nav {
-	padding: 0 20px;
 	font-size: medium;
+	padding: 0 80px;
+	font-size: xx-large;
 }
 
 .avatar {
@@ -134,6 +133,10 @@ height: auto;
 	margin-bottom: 5px;
 }
 
+.login-btn {
+	margin: 20px 0;
+}
+
 .right-head {
 	color: white;
 	margin: auto 0;
@@ -194,6 +197,23 @@ height: auto;
 	justify-content: space-between;
 }
 
+.edit-post-card {
+	display: flex;
+	padding: 20px;
+}
+
+.edit-post-head {
+	margin: 20px;
+}
+
+.edit-post-form {
+	margin: 20px;
+}
+
+#edit-save {
+	margin: 20px 0;
+}
+
 #edit-delete {
 	background-color: white;
 	border-color: lightseagreen;
@@ -252,6 +272,7 @@ height: auto;
 		position: fixed;
 		bottom: 0;
 		z-index: 998;
+		padding-bottom: 80px;
 	}
 
 	.hidden-nav-part {
@@ -263,6 +284,10 @@ height: auto;
 		display: flex;
 		flex-wrap: nowrap;
 		justify-content: space-around;
+	}
+
+	.low-navbar {
+		font-size: x-large;
 	}
 
 	.nav {

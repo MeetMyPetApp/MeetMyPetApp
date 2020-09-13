@@ -1,6 +1,6 @@
 <div id="login-page-container">
 
-    <h2>Login</h2>
+    <h2 style="color:lightseagreen">Login</h2>
 
     {{#if message}}
         <div class="alert alert-primary" role="alert">
@@ -38,7 +38,7 @@
         </div>
 
         <div id="login-btn-area">
-            <button type="submit">Log in</button>
+            <button class="btn-sm btn btn-outline-danger login-btn" type="submit">Log in</button>
             <div id="social-login-btns">
                 <a href="/auth/slack"><i class="fa fa-slack"></i> Log in with Slack</a>
                 <a href="/auth/google"><i class="fa fa-google"></i> Log in with Google</a>

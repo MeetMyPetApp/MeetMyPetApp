@@ -4,34 +4,18 @@
         <img src="/images/logotest.png" alt="logo" />
     </div>
 
-
-    <!--<button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
-        <span class="navbar-toggler-icon"></span>
-    </button>-->
-    {{!-- <div id="search">
-        <form class="navbar-form form-inline">
-            <div id="input" class="input-group search-box">
-                <div>
-                    <input type="text" id="search" class="form-control" placeholder="Search here...">
-                </div>
-                <span class="input-group-addon"><i class="material-icons">&#xE8B6;</i></span>
-            </div>
-        </form>
-    </div> --}}
-
-
     <!--Icon lower navbar for mobile-->
     {{#if currentUser}}
     <div class="hidden-nav-part">
         <div class="link-nav">
-            <a href="/" class="nav-item nav-link active"><i class="fa fa-home"></i><span>Home</span></a>
+            <a href="/" class="nav-item nav-link active"><i class="fa fa-home"></i></a>
         </div>
         <div class="link-nav">
             <a href="/user/{{currentUser._id}}/network" class="nav-item nav-link"><i
-                    class="fa fa-gears"></i><span>Network</span></a>
+                    class="fa fa-users"></i></a>
         </div>
         <div class="link-nav">
-            <a href="/chat/list" class="nav-item nav-link"><i class="fa fa-comment"></i><span>Chats</span></a>
+            <a href="/chat/list" class="nav-item nav-link"><i class="fa fa-comment"></i></a>
         </div>
 
     </div>

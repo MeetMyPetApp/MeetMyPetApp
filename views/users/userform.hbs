@@ -1,5 +1,5 @@
 <div id="signup-page-container">
-    <h2>Sign up</h2>
+    <h2 style="color:lightseagreen">Sign up</h2>
     <p>Create your account, so that you can submit your own project or vote for others.</p>
 
     {{#if user }}
@@ -81,9 +81,9 @@
 
         <div id="signup-btn-area">
             {{#if user }}
-                <button type="submit"> Save </button>
+                <button class="btn-sm btn btn-outline-danger login-btn" type="submit"> Save </button>
             {{else}}
-                <button type="submit"> Sign up </button>
+                <button class="btn-sm btn btn-outline-danger login-btn" type="submit"> Sign up </button>
             {{/if}}
         </div>
 

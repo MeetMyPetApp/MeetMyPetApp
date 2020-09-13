@@ -38,7 +38,7 @@
                         to feed</a>
                 </div>
 
-                <a href="/user/{{user.id}}/addNewPet">Add new pet</a>
+                <a class="btn btn-link button-text" href="/user/{{user.id}}/addNewPet">Add new pet</a>
 
                 {{#if pets}}
 				{{#each pets as |pet|}}
@@ -51,8 +51,8 @@
 						</div>
 						<div class="pets-card col-md-8">
 							<div class="card-body">
-								<b><h3 style="color:lightseagreen">Name: {{ pet.name }}</h3></b>
-								<h4>Breed: {{ pet.breed }}</h4>
+								<b><h4 style="color:lightseagreen">Name: {{ pet.name }}</h4></b>
+								<h5>Breed: {{ pet.breed }}</h5>
 								<b><h6 id="pet-status" style="color:lightseagreen">Status: {{ pet.available }}</h6></b>
 								<p class="card-text">About pet: {{ pet.bio }}</p>
 								<a class="btn btn-link button-text" href="/pet/{{pet.id}}/profile">
