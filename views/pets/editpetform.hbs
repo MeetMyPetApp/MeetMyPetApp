@@ -1,20 +1,22 @@
- <form action="/pet/{{ pet._id }}/editPet" method="POST" enctype="multipart/form-data">
+<div id="edit-profile-page-container">
+
+    <form class="user-edit" action="/pet/{{ pet._id }}/editPet" method="POST" enctype="multipart/form-data">
         <div class="row">
 
-            <div class="col-md-3 form-group">
+            <div class="col-md-3 form-group edit-image">
                 {{#if pet.avatar}}
-                    <img src="{{ pet.avatar }}" class="rounded-circle" alt="profile image">
+                <img src="{{ pet.avatar }}" class="rounded-circle" alt="profile image">
                 {{else}}
-                    <img src="https://via.placeholder.com/150" class="rounded-circle" alt="pet image">
+                <img src="https://via.placeholder.com/150" class="rounded-circle" alt="profile image">
                 {{/if}}
                 <label for="avatar">Upload a new photo...</label>
                 <input name="avatar" type="file" class="form-control {{#if error.avatar }}is-invalid{{/if}}" id="avatar"
-                placeholder="Enter pet photo" value="{{ pet.avatar }}">
-            
+                    placeholder="Enter profile foto" value="{{ pet.avatar }}">
+
                 {{#if error.avatar}}
-                    <div class="invalid-feedback">
-                        {{error.avatar.message}}
-                    </div>
+                <div class="invalid-feedback">
+                    {{error.avatar.message}}
+                </div>
                 {{/if}}
             </div>
 
@@ -24,63 +26,65 @@
                 <div class="form-group">
                     <label for="name">Name:</label>
                     <input name="name" type="text" class="form-control {{#if error.name }}is-invalid{{/if}}" id="name"
-                    placeholder="Enter pet name" value="{{ pet.name }}">
+                        placeholder="Enter name" value="{{ pet.name }}">
 
                     {{#if error.name}}
-                        <div class="invalid-feedback">
-                            {{error.name.message}}
-                        </div>
+                    <div class="invalid-feedback">
+                        {{error.name.message}}
+                    </div>
                     {{/if}}
                 </div>
 
                 <div class="form-group">
-                    <label for="breed">Breed:</label>
-                    <input name="breed" type="text" class="form-control {{#if error.breed }}is-invalid{{/if}}" id="breed"
-                    placeholder="Enter pet breed" value="{{ pet.breed }}">
+                    <label for="username">Breed:</label>
+                    <input name="username" type="text" class="form-control {{#if error.breed }}is-invalid{{/if}}"
+                        id="username" placeholder="Enter username" value="{{ pet.breed }}">
 
                     {{#if error.breed}}
-                        <div class="invalid-feedback">
-                            {{error.breed.message}}
-                        </div>
+                    <div class="invalid-feedback">
+                        {{error.breed.message}}
+                    </div>
                     {{/if}}
                 </div>
 
                 <div class="form-group">
                     <div>Pet status: {{ pet.available }} </div>
-                    
+
                     <label for="available">Change your pet status:</label>
-                     <select name="available" id="available">
+                    <select name="available" id="available">
                         <option class="form-control" value="Available">Available</option>
                         <option class="form-control" value="Not available">Not available</option>
                     </select>
 
 
                     {{#if error.status}}
-                        <div class="invalid-feedback">
-                            {{error.status.message}}
-                        </div>
+                    <div class="invalid-feedback">
+                        {{error.status.message}}
+                    </div>
                     {{/if}}
                 </div>
 
                 <div class="form-group">
                     <label for="bio">Tell the community something about your pet:</label>
-                    <textarea name="bio" type="text" class="form-control {{#if error.bio }}is-invalid{{/if}}" id="pet-bio"
-                    placeholder="Enter description" value="{{ pet.bio }}" rows="4">{{ pet.bio }}</textarea>
+                    <textarea name="bio" type="text" class="form-control {{#if error.bio }}is-invalid{{/if}}"
+                        id="pet-bio" placeholder="Enter description" value="{{ pet.bio }}"
+                        rows="4">{{ pet.bio }}</textarea>
 
                     {{#if error.petBio}}
-                        <div class="invalid-feedback">
-                            {{error.bio.message}}
-                        </div>
+                    <div class="invalid-feedback">
+                        {{error.bio.message}}
+                    </div>
                     {{/if}}
                 </div>
 
                 <div id="finish">
-                        <button type="submit"> Save changes</button>
-                        <form action="/" method="GET">
-                            <button type="submit">Cancel</button>
-                        </form>
+                    <button class="btn-sm btn btn-outline-danger" type="submit"> Save changes</button>
+                    <form action="/" method="GET">
+                        <button class="btn-sm btn btn-outline-danger" type="submit">Cancel</button>
+                    </form>
                 </div>
             </div>
         </div>
 
     </form>
+</div>

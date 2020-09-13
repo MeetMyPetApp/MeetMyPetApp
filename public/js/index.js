@@ -38,3 +38,9 @@ function topFunction() {
   document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
 }
 
+availableChange = document.getElementById("pet-status");
+
+
+if (availableChange.innerHTML === "not available") {
+    availableChange.style.color = "red";
+}

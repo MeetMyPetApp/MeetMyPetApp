@@ -9,38 +9,45 @@
 			</div>
 		</div>
 	</div> --}}
-	
+	<b>
+		<h4 style="color:lightseagreen">Active chats</h4>
+	</b>
 	<div class="active-chats">
 		<ul class="users">
 			{{#each chats as |chat|}}
-				<li class="list-group shadow">
-					<a href="/chat/{{chat._id}}" class="list-group-item list-group-item-action rounded">
-						<div >
-							<img src="{{chat.members.[0].avatar}}" class="contact-list-image img-thumbnail rounded-circle" alt="user avatar">
-							<span class="name ml-3"><big>{{chat.members.[0].name}}</big></span>
-						</div>
-					</a>
-				</li>
+			<li class="list-group shadow">
+				<a href="/chat/{{chat._id}}" class="list-group-item list-group-item-action rounded">
+					<div>
+						<img src="{{chat.members.[0].avatar}}" class="contact-list-image img-thumbnail rounded-circle"
+							alt="user avatar">
+						<span class="name ml-3"><big>{{chat.members.[0].name}}</big></span>
+					</div>
+				</a>
+			</li>
 			{{/each}}
 		</ul>
 	</div>
 
 	<hr class="style5">
-
+	<b>
+		<h4 style="color:lightseagreen">Start new chat</h4>
+	</b>
 	<div class="new-chat">
 		<ul class="users">
 			{{#each matches as |match|}}
-				<li class="list-group">
-					<a href="/chat/new/{{match.users.[0]._id}}" class="list-group-item list-group-item-action shadow" >
-						<div class="user">
-							<img src="{{match.users.[0].avatar}}" class="contact-list-image img-thumbnail rounded-circle" alt="user avatar">
-							<span class="name"><big>{{match.users.[0].name}}</big></span><span class="text-info ml-3">Start to chat</span>
-						</div>
-					</a>
-				</li>
+			<li class="list-group">
+				<a href="/chat/new/{{match.users.[0]._id}}" class="list-group-item list-group-item-action shadow">
+					<div class="user">
+						<img src="{{match.users.[0].avatar}}" class="contact-list-image img-thumbnail rounded-circle"
+							alt="user avatar">
+						<span class="name"><big>{{match.users.[0].name}}</big></span><span class="text-info ml-3">Start
+							to chat</span>
+					</div>
+				</a>
+			</li>
 			{{/each}}
 		</ul>
 	</div>
-	
+
 
 </div>

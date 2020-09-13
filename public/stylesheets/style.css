@@ -102,10 +102,18 @@ height: auto;
 	display: flex;
 	flex-wrap: wrap;
 	margin: 0 auto;
+	text-align: center;
+}
+
+#photo-gallery {
+	padding: 20px;
+	margin: 0 auto;
+	width: 100%;
 }
 
 .pet-photo {
-	padding: 5px;
+	padding: 10px;
+	border-radius: 5px;
 }
 
 .user-card {
@@ -140,7 +148,7 @@ height: auto;
 
 #user-profile-btn-area a {
 	color: white;
-	margin: 20px 0;
+	margin: 10px 0;
 	background-color: white;
 	color: lightseagreen;
 	border-radius: 10px;
@@ -153,7 +161,7 @@ height: auto;
 .pets-image {
 	height: 200px;
 	width: 200px;
-	margin: 30px;
+	margin: 50px;
 }
 
 
@@ -210,6 +218,10 @@ height: auto;
 	background-color: white;
 	border-color: lightseagreen;
 	color: lightseagreen;
+}
+
+.list-inline-item {
+	font-size: x-large;
 }
 
 @media (min-width: 898px){
