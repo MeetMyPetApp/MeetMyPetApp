@@ -90,7 +90,7 @@ height: auto;
 	  }
 	  
 	  .navbar-brand img {
-		width: 120px;
+		width: 100px;
 		max-height: 80px;
 	  }
 
@@ -158,7 +158,62 @@ height: auto;
 }
 
 
-@media (min-width: 768px){
+#form-buttons {
+	display:flex;
+	flex-direction: row;
+	justify-content: space-around;
+}
+
+.save {
+	margin-top: 20px;
+	margin-bottom: 70px;
+}
+
+.post-head {
+	display: flex;
+}
+
+.post-info {
+	margin-left: 20px;
+}
+
+.post-image {
+	max-width: 100px;
+	max-height: 100px;
+}
+
+.post-footer {
+	display: flex;
+	justify-content: space-between;
+}
+
+#edit-delete {
+	background-color: white;
+	border-color: lightseagreen;
+	border: 5px;
+	color: lightseagreen;
+}
+
+#delete-edit {
+	background-color: white;
+	border-color: lightseagreen;
+	color: lightseagreen;
+}
+
+#edit {
+	background-color: white;
+	border-color: lightseagreen;
+	border: 5px;
+	color: lightseagreen;
+}
+
+#delete {
+	background-color: white;
+	border-color: lightseagreen;
+	color: lightseagreen;
+}
+
+@media (min-width: 898px){
 	.form-inline .input-group {
 		width: 350px;
 		margin-left: 30px;
@@ -180,7 +235,7 @@ height: auto;
 	}
 }
 
-@media (max-width: 767px){
+@media (max-width: 897px){
 
 	.navbar-bottom {
 		position: fixed;

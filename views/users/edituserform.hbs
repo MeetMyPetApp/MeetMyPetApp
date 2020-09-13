@@ -1,37 +1,39 @@
 <div id="edit-profile-page-container">
     {{#if message}}
-        <div class="alert alert-danger" role="alert">
-            {{message}}
-        </div>
+    <div class="alert alert-danger" role="alert">
+        {{message}}
+    </div>
     {{/if}}
+    <div class="edit-tabs">
+        <ul class="nav nav-tabs">
+            <li class="nav-item">
+                <a class="nav-link active" href="#">Your profile</a>
 
-    <ul class="nav nav-tabs">
-        <li class="nav-item">
-            <a class="nav-link active" href="#">Your profile</a>
-            
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="/user/{{ user._id }}/pets">Your pets</a>
-        </li>
-    </ul>
-    
-    <form action="/user/{{ user._id }}/edit" method="POST" enctype="multipart/form-data">
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/user/{{ user._id }}/pets">Your pets</a>
+            </li>
+        </ul>
+    </div>
+
+
+    <form class="user-edit" action="/user/{{ user._id }}/edit" method="POST" enctype="multipart/form-data">
         <div class="row">
 
-            <div class="col-md-3 form-group">
+            <div class="col-md-3 form-group edit-image">
                 {{#if user.avatar}}
-                    <img src="{{ user.avatar }}" class="rounded-circle" alt="profile image">
+                <img src="{{ user.avatar }}" class="rounded-circle" alt="profile image">
                 {{else}}
-                    <img src="https://via.placeholder.com/150" class="rounded-circle" alt="profile image">
+                <img src="https://via.placeholder.com/150" class="rounded-circle" alt="profile image">
                 {{/if}}
                 <label for="avatar">Upload a new photo...</label>
                 <input name="avatar" type="file" class="form-control {{#if error.avatar }}is-invalid{{/if}}" id="avatar"
-                placeholder="Enter profile foto" value="{{ user.avatar }}">
-            
+                    placeholder="Enter profile foto" value="{{ user.avatar }}">
+
                 {{#if error.avatar}}
-                    <div class="invalid-feedback">
-                        {{error.avatar.message}}
-                    </div>
+                <div class="invalid-feedback">
+                    {{error.avatar.message}}
+                </div>
                 {{/if}}
             </div>
 
@@ -41,28 +43,28 @@
                 <div class="form-group">
                     <label for="name">Name:</label>
                     <input name="name" type="text" class="form-control {{#if error.name }}is-invalid{{/if}}" id="name"
-                    placeholder="Enter name" value="{{ user.name }}">
+                        placeholder="Enter name" value="{{ user.name }}">
 
                     {{#if error.name}}
-                        <div class="invalid-feedback">
-                            {{error.name.message}}
-                        </div>
+                    <div class="invalid-feedback">
+                        {{error.name.message}}
+                    </div>
                     {{/if}}
                 </div>
 
                 <div class="form-group">
                     <label for="username">Username:</label>
-                    <input name="username" type="text" class="form-control {{#if error.username }}is-invalid{{/if}}" id="username"
-                    placeholder="Enter username" value="{{ user.username }}">
+                    <input name="username" type="text" class="form-control {{#if error.username }}is-invalid{{/if}}"
+                        id="username" placeholder="Enter username" value="{{ user.username }}">
 
                     {{#if error.username}}
-                        <div class="invalid-feedback">
-                            {{error.username.message}}
-                        </div>
+                    <div class="invalid-feedback">
+                        {{error.username.message}}
+                    </div>
                     {{/if}}
                 </div>
 
-{{!--                 <div class="form-group">
+                {{!--                 <div class="form-group">
                     <label for="email">E-mail:</label>
                     <input name="email" type="email" class="form-control {{#if error.email }}is-invalid{{/if}}" id="email"
                     placeholder="Enter email" value="{{ user.email }}">
@@ -78,45 +80,47 @@
 
                 <div class="form-group">
                     <div>Your current status: {{ user.status }} </div>
-                    
+
                     <label for="status">Change your status:</label>
-                     <select class="browser-default custom-select" name="status" id="status">
+                    <select class="browser-default custom-select" name="status" id="status">
                         <option class="form-control" value="Pet looking for pet">Pet looking for pet</option>
-                        <option class="form-control" value="Owner looking for friends">Owner looking for friends</option>
+                        <option class="form-control" value="Owner looking for friends">Owner looking for friends
+                        </option>
                         <option class="form-control" value="Owner expanding network">Owner expanding network</option>
                     </select>
 
 
                     {{#if error.status}}
-                        <div class="invalid-feedback">
-                            {{error.status.message}}
-                        </div>
+                    <div class="invalid-feedback">
+                        {{error.status.message}}
+                    </div>
                     {{/if}}
                 </div>
 
                 <div class="form-group">
                     <label for="bio">Tell the community something about yourself:</label>
                     <textarea name="bio" type="text" class="form-control {{#if error.bio }}is-invalid{{/if}}" id="bio"
-                    placeholder="Enter description" value="{{ user.bio }}" rows="4">{{ user.bio }}</textarea>
+                        placeholder="Enter description" value="{{ user.bio }}" rows="4">{{ user.bio }}</textarea>
 
                     {{#if error.bio}}
-                        <div class="invalid-feedback">
-                            {{error.bio.message}}
-                        </div>
+                    <div class="invalid-feedback">
+                        {{error.bio.message}}
+                    </div>
                     {{/if}}
                 </div>
 
-                <button type="submit"> Save changes</button>
-                
-                <form action="/user/{{user._id}}/addNewPet" method="GET">
-                    <button type="submit">+ add pet</button>
-                </form>
+                <div id="form-buttons">
 
-                <div id="">
-                        {{!-- <button type="submit"> Save changes</button> --}}
-                        <form action="/" method="GET">
-                            <button type="submit">Cancel</button>
-                        </form>
+                    <button class="btn-sm btn btn-outline-danger save" type="submit"> Save changes</button>
+
+                    <form action="/user/{{user._id}}/addNewPet" method="GET">
+                        <button class="btn-sm btn btn-outline-danger save" type="submit">+ add pet</button>
+                    </form>
+
+                    <form action="/" method="GET">
+                        <button class="btn-sm btn btn-outline-danger save" type="submit">Cancel</button>
+                    </form>
+
                 </div>
             </div>
         </div>
