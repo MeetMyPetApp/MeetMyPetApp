@@ -10,10 +10,10 @@
 		<div id="message-container">
 			<div class="card-body height3">
 				<div class="send">
-					<form action="/chat/{{chat._id}}/messages" method="POST">
+					<form action="/chat/{{chat._id}}/messages" method="POST" >
 						<label for="message">New message:</label>
-						<textarea class="form-control" name="message" id="message" placeholder="Your message here..."></textarea>
-						<button type="submit" class="btn bg-info">Send</button>
+						<textarea class="form-control" name="message" id="chat-message-textarea" placeholder="Your message here..."></textarea>
+						<button class="btn bg-info" id="chat-message-sendbtn" type="submit">Send</button>
 					</form>
 				</div>
 				<ul class="chat-list">

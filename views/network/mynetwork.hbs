@@ -36,25 +36,27 @@
 
 								<div class="col-sm-12 col-md-9 text-center">
 									<a class="name text-success" href="/user/{{user.data._id}}/profilefeed">
-										<h4 class="mt-0">{{user.data.name}}</h4>
+										<h5 class="mt-0" style="color:lightseagreen">{{user.data.name}}</h5>
 									</a>
 									<div class="text-muted"><i>{{user.data.username}}</i></div>
-									<h5>{{user.data.status}}</h5>
+									<p>{{user.data.status}}</p>
 
 
 									<div class="col-12 text-center border-top border-success mt-3 pt-2 pb-2">
 										{{#if user.showBtn}}
 											<div id="matchBtns" class="row mb-0 mt-1">
-												<form action="/match/{{user.match}}/denied" method="POST" id="match-deny-btn" data-match-matcherid="{{user.data._id}}" class="col-sm-12 col-md-6 text-center" >
+												<form action="/match/{{user.match}}/denied" method="POST" id="{{user.match}}" {{!-- data-match-denybtn="{{user.match}}" --}} class="col-sm-12 col-md-6 text-center" >
 													<button type="submit" class="btn btn-sm waves-effect waves-light border border-danger">DENY</button>
 												</form>
-												<div class="col-sm-12 col-md-6 text-center">
-													<a href="{{!-- /match/{{user.match}}/accepted --}}" data-match-status="{{user.match}}" class="btn btn-sm waves-effect waves-light border border-danger">ACCEPT</a>
+												<div class="text-center">
+													<a href="#" data-match-status="{{user.match}}" data-matcherid="{{user.data._id}}" class="btn btn-sm waves-effect waves-light border border-danger ml-3">ACCEPT</a>
 												</div>
 											</div>
 
 										{{else}}
-											<a href="/user/{{user.data._id}}/profilefeed" class="btn btn-info btn-sm waves-effect waves-light mt-1">View Profile</a>
+											<div class="col-12">
+												<a href="/user/{{user.data._id}}/profilefeed" class="btn btn-info btn-sm waves-effect waves-light mt-1 col-12">View Profile</a>
+											</div>
 										{{/if}}
 									</div>
 								</div>
