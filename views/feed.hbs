@@ -22,25 +22,41 @@
    <div class="card">
       <div class="card-header">
          <a href="/user/{{post.user._id}}/profilefeed">
-            <img class="rounded-circle" src="{{ post.user.avatar }}" alt="author photo">
-            <span class="card-title">{{ post.user.name }}</span>
-            <div class="text-muted">Published on {{ post.createdAt }}</div>
+            <div class="post-head">
+               <div class="top-post">
+                  <img class="rounded-circle post-image" src="{{ post.user.avatar }}" alt="author photo">
+               </div>
+
+               <div class="post-info">
+                  <span class="card-title">{{ post.user.name }}</span>
+                  <div class="text-muted">Published on {{ post.createdAt }}</div>
+               </div>
+            </div>
          </a>
       </div>
       <div class="card-body"> {{ post.body }} </div>
 
-      <div class="card-footer">
-         <button type="button" class="btn-sm like-button" data-like-post="{{post._id}}">
-            <i class="fa fa-heart mr-1"></i>
-            <span class="likes-count">{{post.likes.length}}</span>
-            Likes
-         </button>
-         <span class="text-muted">comments: {{post.comments.length}} | </span>
-         <a href="/post/{{post._id}}">Comments</a>
+      <div class="card-footer post-footer">
+         <div class="like">
+            <button type="button" class="btn-sm like-button" data-like-post="{{post._id}}">
+               <i class="fa fa-heart mr-1"></i>
+               <span class="likes-count">{{post.likes.length}}</span>
+               Likes
+            </button>
+         </div>
+         <div class="comments">
+            <span class="text-muted">comments: {{post.comments.length}} | </span>
+            <a href="/post/{{post._id}}">Comments</a>
+         </div>
+
 
          {{#ifeq ../currentUser.id post.user._id }}
-         <a href="/post/{{post._id}}/editpost" class="btn-sm btn btn-outline-danger">Edit</a>
-         <a href="/post/{{post._id}}/deletepost" class="btn-sm btn btn-outline-danger">Delete</a>
+         <div class="user-post-btn">
+            <a href="/post/{{post._id}}/editpost" id="edit-delete" class="btn">Edit</a><span>
+               <a href="/post/{{post._id}}/deletepost" id="delete-edit" class="btn">Delete</a>
+            </span>
+
+         </div>
          {{/ifeq}}
       </div>
    </div>

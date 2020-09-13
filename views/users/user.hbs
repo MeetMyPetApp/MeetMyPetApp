@@ -1,4 +1,4 @@
-<div id="user-profile-page">
+{{!-- <div id="user-profile-page">
     <div class="row project-card mx-auto">
         <div class="col-sm-12 col-lg-3 project-card-left">
             <img class="profile-image" src="{{user.avatar}}" alt="profile image">
@@ -57,4 +57,101 @@
             {{/if}}
         </div>
     </div>
+</div> --}}
+
+<div class="row">
+	<div class="col mx-auto">
+		<!-- Profile widget -->
+		<div class="bg-white shadow rounded overflow-hidden">
+			<div class="media align-items-end profile-head">
+				<div class="left-head">
+					<div class="profile mr-3"><img src="{{user.avatar}}" alt="user avatar" width="130"
+							class="rounded mb-2 img-thumbnail">
+					</div>
+				</div>
+
+				<div class="right-head">
+					<div class="media-body text-black">
+						<h2><b>{{user.name}}</b></h2>
+						<h5><b>@{{user.username}}</b>
+						</h5>
+						<h6>Status:{{user.status}}</h6>
+					</div>
+
+					<div id="user-profile-btn-area">
+						<a class="btn btn-link crud-buttons" href="/user/{{user._id}}/edit">Edit profile</a>
+						<a class="btn btn-link crud-buttons" href="/user/{{user._id}}/delete">Delete profile</a>
+						<a class="btn btn-link crud-buttons" href="/logout">Logout</a>
+					</div>
+				</div>
+
+			</div>
+
+
+			<div class="bg-light p-4 d-flex justify-content-end text-center">
+
+				<ul class="list-inline mb-0">
+					<li class="list-inline-item">
+						<h5 class="font-weight-bold mb-0 d-block">215</h5><small class="text-muted"> <i
+								class="fas fa-image mr-1"></i>Posts</small>
+					</li>
+					<li class="list-inline-item">
+						<h5 class="font-weight-bold mb-0 d-block">745</h5><small class="text-muted"> <i
+								class="fas fa-user mr-1"></i>Likes</small>
+					</li>
+					<li class="list-inline-item">
+						<h5 class="font-weight-bold mb-0 d-block">340</h5><small class="text-muted"> <i
+								class="fas fa-user mr-1"></i>Matching</small>
+					</li>
+				</ul>
+			</div>
+			<div class="about-box px-4 py-3">
+				<h5 class="mb-0">About Owner</h5>
+				<div class="p-4 rounded shadow-lg bg-light">
+					<p class="font-italic mb-0">{{user.bio}}</p>
+				</div>
+			</div>
+
+
+
+			<div class="py-4 px-4">
+				<div class="d-flex align-items-center justify-content-between mb-3">
+					<h5 class="mb-0">Recent posts</h5><a href="/user/{{user._id}}/pets"
+						class="btn btn-link">Show Pets</a>
+				</div>
+
+				{{#if posts}}
+				{{#each posts as |post|}}
+				<div class="row">
+					<div class="card mb-3">
+						<div class="card-header">
+							<a href="/user/{{post.user._id}}">
+								<img class="rounded-circle" src="{{ post.user.avatar }}" alt="author photo">
+								<span class="card-title">{{ post.user.name }}</span>
+								<div class="text-muted">Published on {{ post.createdAt }}</div>
+							</a>
+						</div>
+						<div class="card-body"> {{ post.body }} </div>
+
+						<div class="card-footer">
+							<button type="button" class="btn-sm btn-danger like-button" data-like-post="{{post._id}}">
+								<i class="fa fa-heart mr-1"></i>
+								<span class="likes-count">{{post.likes.length}}</span>
+								Likes
+							</button>
+							<span class="text-muted">comments: {{post.comments.length}} | </span>
+							<a href="/post/{{post._id}}">Comments</a>
+							{{#ifeq ../currentUser.id post.user._id }}
+							<a href="/post/{{post._id}}/editpost" class="btn-sm btn btn-outline-danger">Edit</a>
+							<a href="/post/{{post._id}}/deletepost" class="btn-sm btn btn-outline-danger">Delete</a>
+							{{/ifeq}}
+						</div>
+					</div>
+
+				</div>
+				{{/each}}
+				{{/if}}
+			</div>
+		</div>
+	</div>
 </div>

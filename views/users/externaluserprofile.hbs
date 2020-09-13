@@ -28,7 +28,8 @@
 
 					<div id="user-profile-btn-area">
 						<a class="btn btn-link crud-buttons" href="/user/{{posts.[0].user._id}}/edit">Edit profile</a>
-						<a class="btn btn-link crud-buttons" href="/user/{{posts.[0].user._id}}/delete">Delete profile</a>
+						<a class="btn btn-link crud-buttons" href="/user/{{posts.[0].user._id}}/delete">Delete
+							profile</a>
 						<a class="btn btn-link crud-buttons" href="/logout">Logout</a>
 					</div>
 					{{/ifeq}}
@@ -42,16 +43,16 @@
 
 				<ul class="list-inline mb-0">
 					<li class="list-inline-item">
-						<h5 class="font-weight-bold mb-0 d-block">215</h5><small class="text-muted"> <i
-								class="fas fa-image mr-1"></i>Posts</small>
+						<h5 class="font-weight-bold mb-0 d-block">{{posts.length}}</h5><small class="text-muted"> <i
+								class="fa fa-image mr-1"></i>Posts</small>
 					</li>
 					<li class="list-inline-item">
-						<h5 class="font-weight-bold mb-0 d-block">745</h5><small class="text-muted"> <i
-								class="fas fa-user mr-1"></i>Likes</small>
+						<h5 class="font-weight-bold mb-0 d-block">{{likes.length}}</h5><small class="text-muted"> <i
+								class="fa fa-heart mr-1"></i>Likes</small>
 					</li>
 					<li class="list-inline-item">
-						<h5 class="font-weight-bold mb-0 d-block">340</h5><small class="text-muted"> <i
-								class="fas fa-user mr-1"></i>Matching</small>
+						<h5 class="font-weight-bold mb-0 d-block">{{matches.length}}</h5><small class="text-muted"> <i
+								class="fa fa-user mr-1"></i>Matching</small>
 					</li>
 				</ul>
 			</div>
@@ -70,34 +71,49 @@
 						class="btn btn-link">Show Pets</a>
 				</div>
 
-				{{#if posts}}
-				{{#each posts as |post|}}
-				<div class="row">
-					<div class="card mb-3">
-						<div class="card-header">
-							<a href="/user/{{post.user._id}}">
-								<img class="rounded-circle" src="{{ post.user.avatar }}" alt="author photo">
-								<span class="card-title">{{ post.user.name }}</span>
-								<div class="text-muted">Published on {{ post.createdAt }}</div>
-							</a>
-						</div>
-						<div class="card-body"> {{ post.body }} </div>
+				{{#if posts }}
+				{{#each posts as |post| }}
+				<div class="card profile-post">
+					<div class="card-header">
+						<a href="/user/{{post.user._id}}/profilefeed">
+							<div class="post-head">
+								<div class="top-post">
+									<img class="rounded-circle post-image" src="{{ post.user.avatar }}"
+										alt="author photo">
+								</div>
 
-						<div class="card-footer">
-							<button type="button" class="btn-sm btn-danger like-button" data-like-post="{{post._id}}">
+								<div class="post-info">
+									<span class="card-title">{{ post.user.name }}</span>
+									<div class="text-muted">Published on {{ post.createdAt }}</div>
+								</div>
+							</div>
+						</a>
+					</div>
+					<div class="card-body"> {{ post.body }} </div>
+
+					<div class="card-footer post-footer">
+						<div class="like">
+							<button type="button" class="btn-sm like-button" data-like-post="{{post._id}}">
 								<i class="fa fa-heart mr-1"></i>
 								<span class="likes-count">{{post.likes.length}}</span>
 								Likes
 							</button>
+						</div>
+						<div class="comments">
 							<span class="text-muted">comments: {{post.comments.length}} | </span>
 							<a href="/post/{{post._id}}">Comments</a>
-							{{#ifeq ../currentUser.id post.user._id }}
-							<a href="/post/{{post._id}}/editpost" class="btn-sm btn btn-outline-danger">Edit</a>
-							<a href="/post/{{post._id}}/deletepost" class="btn-sm btn btn-outline-danger">Delete</a>
-							{{/ifeq}}
 						</div>
-					</div>
 
+
+						{{#ifeq ../currentUser.id post.user._id }}
+						<div class="user-post-btn">
+							<a href="/post/{{post._id}}/editpost" id="edit" class="btn-sm btn btn-outline-danger">Edit</a><span>
+								<a href="/post/{{post._id}}/deletepost" id="delete" class="btn-sm btn btn-outline-danger">Delete</a>
+							</span>
+
+						</div>
+						{{/ifeq}}
+					</div>
 				</div>
 				{{/each}}
 				{{/if}}

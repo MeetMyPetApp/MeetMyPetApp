@@ -173,7 +173,7 @@ module.exports.logout = (req, res, next) => {
     res.redirect('/login')
 }
 
- module.exports.showUserProfilePage = (req, res, next) => {
+module.exports.showUserProfilePage = (req, res, next) => {
     const {
         id
     } = req.params;
@@ -271,10 +271,20 @@ module.exports.showExternalProfile = (req, res, next) => {
                     }
                 })
                 .then(likes => {
-                    res.render('users/externaluserprofile', {
-                        posts,
-                        likes
+                    Match.find({
+                        "users": {
+                            $in: [id]
+                        },
+                        status: "accepted"
                     })
+                    .then(matches => {
+                         res.render('users/externaluserprofile', {
+                            posts,
+                            likes,
+                            matches
+                        })
+                    })
+                    
                 })
                 .catch(error => console.log(error))
         })
@@ -284,9 +294,10 @@ module.exports.showExternalProfile = (req, res, next) => {
 
 module.exports.showNetwork = (req, res, next) => {
 
+
     Match.find({ 'users': { $in: [req.currentUser.id] } })
         .then(matches => {
-            
+
             const matchIds = matches.reduce((acc, cur) => {
                 if (!(cur.requester.toString() === req.currentUser.id.toString() && cur.status === 'pending')) {
                     acc.push(cur.users[0], cur.users[1])
@@ -308,32 +319,42 @@ module.exports.showNetwork = (req, res, next) => {
 
 module.exports.showMatches = (req, res, next) => {
 
-    Match.find({ $or: [
-            { users: { 
-                    $in: [req.currentUser.id] 
-                }, 
-                status: 'accepted' 
-            },
-            {
-                users: { $in: [req.currentUser.id] },
-                status: { $eq: 'pending' },
-                requester: { $ne: req.currentUser.id }
-            }
-        ]})
+    Match.find({
+            $or: [{
+                    users: {
+                        $in: [req.currentUser.id]
+                    },
+                    status: 'accepted'
+                },
+                {
+                    users: {
+                        $in: [req.currentUser.id]
+                    },
+                    status: {
+                        $eq: 'pending'
+                    },
+                    requester: {
+                        $ne: req.currentUser.id
+                    }
+                }
+            ]
+        })
         .populate('users')
         .sort([['status', -1]])
         .then(matches => {
             const users = matches
-                .map( m => {
+                .map(m => {
                     return {
                         data: m.users.find(e => e._id !== req.currentUser.id),
                         showBtn: m.status === 'pending',
                         match: m._id
                     }
+                })
+
+
+            res.render('network/mynetwork', {
+                users
             })
-
-
-            res.render('network/mynetwork', { users })
 
         })
         .catch(err => next(err))
@@ -341,7 +362,7 @@ module.exports.showMatches = (req, res, next) => {
 
 module.exports.createMatch = (req, res, next) => {
     const params = {
-        users: [req.params.id , req.params.contact],
+        users: [req.params.id, req.params.contact],
         status: 'pending',
         requester: req.params.id
     }
@@ -357,23 +378,29 @@ module.exports.createMatch = (req, res, next) => {
 }
 
 module.exports.matchAccepted = (req, res, next) => {
-    Match.findByIdAndUpdate( req.params.id, { 'status' : 'accepted'}, {
+    Match.findByIdAndUpdate(req.params.id, {
+            'status': 'accepted'
+        }, {
             runValidators: true,
             new: true
         })
         .then(() => {
-            res.json({ok: true})
+            res.json({
+                ok: true
+            })
         })
         .catch(err => next(err))
 }
 
 module.exports.matchDenied = (req, res, next) => {
-    Match.findByIdAndUpdate( req.params.id, { 'status' : 'denied'}, {
-        runValidators: true,
-        new: true
-    })
-    .then(() => {
-        res.redirect(`/user/${req.currentUser.id}/matches`)
-    })
-    .catch(err => next(err))
+    Match.findByIdAndUpdate(req.params.id, {
+            'status': 'denied'
+        }, {
+            runValidators: true,
+            new: true
+        })
+        .then(() => {
+            res.redirect(`/user/${req.currentUser.id}/matches`)
+        })
+        .catch(err => next(err))
 }
