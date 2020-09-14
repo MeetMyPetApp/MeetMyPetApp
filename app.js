@@ -28,5 +28,5 @@ const router = require('./config/routes.js');
 app.use('/', router);
 
 app.listen(process.env.PORT || 3000, () => {
-  console.log('Ready!!!');
+  console.log('Ready!!');
 });
