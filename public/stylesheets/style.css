@@ -196,6 +196,9 @@ height: auto;
 .post-footer {
 	display: flex;
 	justify-content: space-between;
+}
+
+#footer-post {
 	margin-bottom: 70px;
 }
 
