@@ -189,8 +189,8 @@ height: auto;
 }
 
 .post-image {
-	max-width: 100px;
-	max-height: 100px;
+	width: 90px;
+	height: 90px;
 }
 
 .post-footer {
@@ -440,6 +440,6 @@ height: auto;
 
 .network-profile-img {
 	margin: 0;
-	max-height: 140px;
-	width: auto;
+	width: 140px;
+	height: auto;
 }
