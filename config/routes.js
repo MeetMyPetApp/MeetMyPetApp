@@ -35,7 +35,7 @@ router.post('/match/:id/denied', sessionMiddleware.isAuthenticated, usersControl
 router.get('/user/:id/addNewPet', sessionMiddleware.isAuthenticated, petsController.showAddPetPage)
 router.post('/pets/addNewPet', sessionMiddleware.isAuthenticated, upload.single('avatar'), petsController.createPet);
 router.get('/pet/:id/editPet', sessionMiddleware.isAuthenticated, petsController.showEditPetForm)
-router.post('/pet/:id/editPet', sessionMiddleware.isAuthenticated, upload.single('avatar'),  petsController.updatePet)
+router.post('/pet/:id/editPet', sessionMiddleware.isAuthenticated, upload.single('avatar'), petsController.updatePet)
 router.get('/user/:id/pets', sessionMiddleware.isAuthenticated, petsController.showPetsList)
 router.get('/pet/:id/deletePet', sessionMiddleware.isAuthenticated, petsController.deletePet)
 router.get('/pet/:id/profile', sessionMiddleware.isAuthenticated, petsController.showPetProfilePage)
