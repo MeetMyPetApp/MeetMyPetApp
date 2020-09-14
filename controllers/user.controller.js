@@ -342,7 +342,7 @@ module.exports.showMatches = (req, res, next) => {
             const users = matches
                 .map(m => {
                     return {
-                        data: m.users.find(e => e._id !== req.currentUser.id),
+                        data: m.users.find(e => e._id.toString() !== req.currentUser.id.toString()),
                         showBtn: m.status === 'pending',
                         match: m._id
                     }
