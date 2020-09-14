@@ -46,7 +46,6 @@ height: auto;
 	background-color: lightseagreen;
 	justify-content: center;
 	cursor: pointer;
-	margin: 0 auto; 
 	border-radius: 20px; 
   }
 
@@ -305,6 +304,15 @@ height: auto;
 	.pet-photo {
 		height: 200px;
 		width: 200px;
+	}
+
+	#myBtn {
+		margin-bottom: 60px; 
+		right: 30px;
+	}
+
+	#finish {
+		margin-bottom: 100px;
 	}
 
 }
