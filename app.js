@@ -6,6 +6,7 @@ const cookieParser = require('cookie-parser')
 
 require('./config/db.config')
 require('./config/hbs.config');
+/* require('./bin/seeds'); */
 
 const passport = require('./config/passport.config');
 const session = require('./config/session.config');

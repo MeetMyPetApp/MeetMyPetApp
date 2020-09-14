@@ -20,6 +20,17 @@ document.querySelectorAll("[data-match-status]").forEach(el => {
     })
 })
 
+
+
+document.querySelectorAll("[data-match-requestbtn]").forEach(el => {
+    el.addEventListener("click", function (event) {
+        const matchRequestBtn = event.currentTarget;
+        console.log(matchRequestBtn);
+        const btnParent = matchRequestBtn.parentNode;
+        btnParent.removeChild(matchRequestBtn);
+    })
+})
+
 //Scroll Button in feedview to write posts
 mybutton = document.getElementById("myBtn");
 

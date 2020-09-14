@@ -294,14 +294,11 @@ module.exports.showExternalProfile = (req, res, next) => {
 
 module.exports.showNetwork = (req, res, next) => {
 
-
     Match.find({ 'users': { $in: [req.currentUser.id] } })
         .then(matches => {
 
             const matchIds = matches.reduce((acc, cur) => {
-                if (!(cur.requester.toString() === req.currentUser.id.toString() && cur.status === 'pending')) {
-                    acc.push(cur.users[0], cur.users[1])
-                }
+                acc.push(cur.users[0], cur.users[1])
                 return acc
             }, []);
 
